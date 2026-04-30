@@ -188,7 +188,7 @@ footer{border-top:0.5px solid var(--border);padding:2rem 2.5rem;display:flex;ali
   </div>
 </nav>
 
-<section class="hero">
+<section class="hero" id="hero">
   <div class="hero-glow"></div>
   <div class="hero-grid"></div>
   <div class="hero-tag">The festival ticket marketplace</div>
@@ -440,6 +440,16 @@ footer{border-top:0.5px solid var(--border);padding:2rem 2.5rem;display:flex;ali
   <div class="footer-copy">© 2025 Passexplorer. Coming soon.</div>
 </footer>
 
+<!-- FLOATING NAV BUTTONS -->
+<div id="float-nav" style="position:fixed;right:1.5rem;bottom:1.75rem;z-index:200;display:flex;flex-direction:column;gap:0.6rem;opacity:0;transition:opacity 0.3s">
+  <button onclick="scrollNext()" id="btn-next" title="Next section" style="width:44px;height:44px;border-radius:50%;background:rgba(16,16,26,0.92);border:0.5px solid rgba(232,184,75,0.3);color:var(--gold);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;backdrop-filter:blur(10px)">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 3v10M3 9l5 5 5-5" stroke="#E8B84B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+  <button onclick="goToTop()" id="btn-top" title="Back to top" style="width:44px;height:44px;border-radius:50%;background:rgba(232,184,75,0.9);border:none;color:#080810;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;opacity:0;pointer-events:none">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 13V3M3 7l5-5 5 5" stroke="#080810" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+</div>
+
 <script>
 function handleSubmit(){
   const input=document.getElementById('email-input');
@@ -455,6 +465,71 @@ function handleSubmit(){
 }
 document.getElementById('email-input').addEventListener('keydown',function(e){
   if(e.key==='Enter') handleSubmit();
+});
+
+// Sections for next/prev navigation
+const sections = ['hero','pillars','how-it-works','marketplace','for-organizers','waitlist'];
+
+function getCurrentSectionIndex(){
+  const mid = window.innerHeight / 2;
+  let closest = 0;
+  let closestDist = Infinity;
+  sections.forEach((id, i) => {
+    const el = document.getElementById(id) || document.querySelector('.'+id);
+    if(!el) return;
+    const rect = el.getBoundingClientRect();
+    const dist = Math.abs(rect.top + rect.height/2 - mid);
+    if(dist < closestDist){ closestDist = dist; closest = i; }
+  });
+  return closest;
+}
+
+function scrollNext(){
+  const idx = getCurrentSectionIndex();
+  const nextId = sections[Math.min(idx+1, sections.length-1)];
+  const el = document.getElementById(nextId) || document.querySelector('.'+nextId);
+  if(el) el.scrollIntoView({behavior:'smooth'});
+}
+
+function goToTop(){
+  window.scrollTo({top:0,left:0,behavior:'smooth'});
+}
+
+// Show/hide floating buttons based on scroll
+const floatNav = document.getElementById('float-nav');
+const btnTop = document.getElementById('btn-top');
+const btnNext = document.getElementById('btn-next');
+
+window.addEventListener('scroll', function(){
+  const scrollY = window.scrollY;
+  const maxScroll = document.body.scrollHeight - window.innerHeight;
+
+  // Show float nav after scrolling 200px
+  floatNav.style.opacity = scrollY > 200 ? '1' : '0';
+
+  // Show back to top when scrolled down enough
+  if(scrollY > 400){
+    btnTop.style.opacity='1';
+    btnTop.style.pointerEvents='auto';
+  } else {
+    btnTop.style.opacity='0';
+    btnTop.style.pointerEvents='none';
+  }
+
+  // Hide next button when near bottom
+  if(scrollY > maxScroll - 100){
+    btnNext.style.opacity='0';
+    btnNext.style.pointerEvents='none';
+  } else {
+    btnNext.style.opacity='1';
+    btnNext.style.pointerEvents='auto';
+  }
+});
+
+// Hover effects
+[btnTop, btnNext].forEach(btn => {
+  btn.addEventListener('mouseenter', function(){ this.style.transform='scale(1.1)'; });
+  btn.addEventListener('mouseleave', function(){ this.style.transform='scale(1)'; });
 });
 </script>
 </body>
