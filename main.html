@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Passexplorer — Festival Ticket Marketplace</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --gold:#E8B84B;--gold-dim:#C49A2E;--gold-pale:rgba(232,184,75,0.12);
+  --night:#080810;--night-mid:#10101A;--night-soft:#181825;--night-card:#1A1A28;
+  --text-bright:#F2EDE4;--text-muted:rgba(242,237,228,0.55);--text-dim:rgba(242,237,228,0.28);
+  --green:#4EC990;--green-dim:rgba(78,201,144,0.12);
+  --purple:#9B7FE8;--purple-dim:rgba(155,127,232,0.12);
+  --border:rgba(255,255,255,0.06);--border-gold:rgba(232,184,75,0.18);
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--night);color:var(--text-bright);overflow-x:hidden;line-height:1.6}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.1rem 2.5rem;background:rgba(8,8,16,0.9);backdrop-filter:blur(16px);border-bottom:0.5px solid var(--border-gold)}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:0.1em;color:var(--text-bright)}
+.logo span{color:var(--gold)}
+.nav-r{display:flex;align-items:center;gap:2rem}
+.nav-link{font-size:0.8rem;font-weight:400;color:var(--text-muted);text-decoration:none;letter-spacing:0.06em;text-transform:uppercase;transition:color 0.2s}
+.nav-link:hover{color:var(--gold)}
+.btn-nav{background:var(--gold);color:var(--night);padding:0.45rem 1.2rem;border:none;border-radius:2px;font-family:'DM Sans',sans-serif;font-size:0.8rem;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;cursor:pointer;transition:background 0.2s;text-decoration:none;display:inline-block}
+.btn-nav:hover{background:var(--gold-dim)}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:8rem 2rem 5rem;text-align:center}
+.hero-glow{position:absolute;inset:0;background:radial-gradient(ellipse 90% 70% at 50% -10%,rgba(232,184,75,0.1) 0%,transparent 60%),radial-gradient(ellipse 50% 40% at 15% 90%,rgba(155,127,232,0.06) 0%,transparent 55%),radial-gradient(ellipse 40% 35% at 85% 80%,rgba(78,201,144,0.06) 0%,transparent 55%)}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(232,184,75,0.035) 1px,transparent 1px),linear-gradient(90deg,rgba(232,184,75,0.035) 1px,transparent 1px);background-size:72px 72px;-webkit-mask-image:radial-gradient(ellipse 90% 90% at 50% 30%,black 0%,transparent 75%);mask-image:radial-gradient(ellipse 90% 90% at 50% 30%,black 0%,transparent 75%)}
+.hero-tag{font-size:0.7rem;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;display:flex;align-items:center;gap:0.75rem;position:relative;justify-content:center;animation:fadeUp 0.6s ease 0.1s both}
+.hero-tag::before,.hero-tag::after{content:'';display:block;width:2.5rem;height:0.5px;background:linear-gradient(90deg,transparent,var(--gold))}
+.hero-tag::after{transform:scaleX(-1)}
+.hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(3.8rem,11vw,8.5rem);line-height:0.88;letter-spacing:0.025em;margin-bottom:1.75rem;position:relative;animation:fadeUp 0.7s ease 0.2s both}
+.hero-title .t1{color:var(--text-bright)}
+.hero-title .t2{color:var(--gold)}
+.hero-title .t3{-webkit-text-stroke:1.5px rgba(242,237,228,0.25);color:transparent}
+.hero-desc{font-size:1.05rem;font-weight:300;color:var(--text-muted);max-width:520px;margin:0 auto 2.5rem;line-height:1.75;position:relative;animation:fadeUp 0.7s ease 0.35s both}
+.hero-desc strong{color:var(--text-bright);font-weight:400}
+.hero-pills{display:flex;gap:0.75rem;flex-wrap:wrap;justify-content:center;margin-bottom:2.5rem;position:relative;animation:fadeUp 0.7s ease 0.45s both}
+.pill{display:flex;align-items:center;gap:0.5rem;padding:0.45rem 1rem;border:0.5px solid var(--border);border-radius:100px;font-size:0.78rem;color:var(--text-muted);background:var(--night-mid)}
+.pill-dot{width:6px;height:6px;border-radius:50%}
+.pill-dot.gold{background:var(--gold)}
+.pill-dot.green{background:var(--green)}
+.pill-dot.purple{background:var(--purple)}
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;position:relative;animation:fadeUp 0.7s ease 0.55s both}
+.btn-primary{background:var(--gold);color:var(--night);padding:0.9rem 2.5rem;font-family:'DM Sans',sans-serif;font-size:0.88rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;border:none;border-radius:2px;cursor:pointer;transition:all 0.2s;text-decoration:none;display:inline-block}
+.btn-primary:hover{background:var(--gold-dim);transform:translateY(-2px)}
+.btn-ghost{background:transparent;color:var(--text-bright);padding:0.9rem 2.5rem;font-family:'DM Sans',sans-serif;font-size:0.88rem;font-weight:400;letter-spacing:0.08em;text-transform:uppercase;border:0.5px solid rgba(242,237,228,0.2);border-radius:2px;cursor:pointer;transition:all 0.2s;text-decoration:none;display:inline-block}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+.scroll-cue{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:0.4rem;color:var(--text-dim);font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;animation:bob 2.2s ease-in-out infinite}
+.scroll-line{width:0.5px;height:2.5rem;background:linear-gradient(to bottom,transparent,var(--gold))}
+@keyframes bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(7px)}}
+
+/* THREE PILLARS */
+.pillars{padding:6rem 2rem;position:relative}
+.pillars-inner{max-width:1100px;margin:0 auto}
+.section-eyebrow{font-size:0.68rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);text-align:center;margin-bottom:0.75rem}
+.section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.2rem,5vw,3.8rem);letter-spacing:0.04em;text-align:center;line-height:1;margin-bottom:1rem}
+.section-sub{font-size:0.95rem;color:var(--text-muted);text-align:center;max-width:480px;margin:0 auto 4rem;font-weight:300;line-height:1.7}
+.pillars-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2px}
+.pillar{background:var(--night-card);border:0.5px solid var(--border);padding:3rem 2.5rem;position:relative;overflow:hidden;transition:all 0.3s;border-radius:2px}
+.pillar::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;transition:opacity 0.3s;opacity:0}
+.pillar.buy::after{background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.pillar.sell::after{background:linear-gradient(90deg,transparent,var(--green),transparent)}
+.pillar.org::after{background:linear-gradient(90deg,transparent,var(--purple),transparent)}
+.pillar:hover{transform:translateY(-4px)}
+.pillar:hover::after{opacity:1}
+.pillar-icon{width:48px;height:48px;border-radius:2px;display:flex;align-items:center;justify-content:center;margin-bottom:2rem;font-size:1.4rem}
+.pillar-icon.buy-icon{background:var(--gold-pale);border:0.5px solid rgba(232,184,75,0.2)}
+.pillar-icon.sell-icon{background:var(--green-dim);border:0.5px solid rgba(78,201,144,0.2)}
+.pillar-icon.org-icon{background:var(--purple-dim);border:0.5px solid rgba(155,127,232,0.2)}
+.pillar-label{font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;margin-bottom:0.75rem;font-weight:500}
+.pillar-label.buy-c{color:var(--gold)}
+.pillar-label.sell-c{color:var(--green)}
+.pillar-label.org-c{color:var(--purple)}
+.pillar-title{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:0.04em;margin-bottom:1rem;line-height:1}
+.pillar-desc{font-size:0.88rem;color:var(--text-muted);line-height:1.7;margin-bottom:1.75rem}
+.pillar-features{list-style:none;display:flex;flex-direction:column;gap:0.6rem}
+.pillar-features li{font-size:0.82rem;color:var(--text-muted);display:flex;align-items:flex-start;gap:0.6rem}
+.feat-dot{width:4px;height:4px;border-radius:50%;margin-top:0.45rem;flex-shrink:0}
+.feat-dot.gold{background:var(--gold)}
+.feat-dot.green{background:var(--green)}
+.feat-dot.purple{background:var(--purple)}
+
+/* HOW IT FLOWS */
+.flow-section{padding:6rem 2rem;background:var(--night-mid);border-top:0.5px solid var(--border);border-bottom:0.5px solid var(--border)}
+.flow-inner{max-width:1000px;margin:0 auto}
+.flow-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:0;margin-top:4rem;position:relative}
+.flow-step{padding:2rem 1.75rem;position:relative;border-right:0.5px solid var(--border)}
+.flow-step:last-child{border-right:none}
+.flow-num{font-family:'Bebas Neue',sans-serif;font-size:3.5rem;line-height:1;margin-bottom:1rem;letter-spacing:0.04em}
+.flow-num.n1{color:rgba(232,184,75,0.2)}
+.flow-num.n2{color:rgba(232,184,75,0.35)}
+.flow-num.n3{color:rgba(232,184,75,0.55)}
+.flow-num.n4{color:rgba(232,184,75,0.75)}
+.flow-num.n5{color:var(--gold)}
+.flow-step-title{font-size:0.88rem;font-weight:500;color:var(--text-bright);margin-bottom:0.4rem}
+.flow-step-desc{font-size:0.78rem;color:var(--text-muted);line-height:1.6}
+
+/* MARKETPLACE PREVIEW */
+.preview-section{padding:6rem 2rem}
+.preview-inner{max-width:1100px;margin:0 auto}
+.preview-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:2px;margin-top:4rem}
+.ticket{background:var(--night-card);border:0.5px solid var(--border);padding:1.75rem;position:relative;overflow:hidden;cursor:pointer;transition:all 0.25s;border-radius:2px}
+.ticket:hover{border-color:var(--border-gold);transform:translateY(-3px)}
+.ticket-notch{position:absolute;top:50%;right:-8px;width:16px;height:16px;background:var(--night);border-radius:50%;border:0.5px solid var(--border)}
+.ticket-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:1.25rem}
+.ticket-genre{font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);padding:0.3rem 0.6rem;background:var(--gold-pale);border-radius:2px}
+.ticket-badge{font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.3rem 0.6rem;border-radius:2px}
+.badge-sell{color:var(--green);background:var(--green-dim)}
+.badge-buy{color:var(--gold);background:var(--gold-pale)}
+.ticket-name{font-family:'Bebas Neue',sans-serif;font-size:1.75rem;letter-spacing:0.04em;line-height:1;margin-bottom:0.2rem}
+.ticket-loc{font-size:0.75rem;color:var(--text-muted);margin-bottom:1.25rem}
+.ticket-divider{border:none;border-top:0.5px dashed rgba(255,255,255,0.08);margin-bottom:1.25rem}
+.ticket-bottom{display:flex;align-items:flex-end;justify-content:space-between}
+.ticket-meta{display:flex;flex-direction:column;gap:0.2rem}
+.ticket-date{font-size:0.72rem;color:var(--text-dim)}
+.ticket-type{font-size:0.72rem;color:var(--text-muted)}
+.ticket-price{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--gold);letter-spacing:0.04em}
+.ticket-seller{font-size:0.62rem;color:var(--text-dim);text-align:right}
+
+/* DUAL BENEFIT */
+.dual-section{padding:6rem 2rem;position:relative;overflow:hidden}
+.dual-bg{position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(155,127,232,0.05) 0%,transparent 65%)}
+.dual-inner{max-width:960px;margin:0 auto}
+.dual-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:4rem}
+.dual-card{padding:3rem 2.5rem;border:0.5px solid var(--border);border-radius:2px}
+.dual-card.fan{background:var(--night-mid)}
+.dual-card.org{background:var(--night-card)}
+.dual-icon{font-size:2rem;margin-bottom:1.5rem}
+.dual-who{font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:0.5rem;font-weight:500}
+.dual-who.fan-c{color:var(--gold)}
+.dual-who.org-c{color:var(--purple)}
+.dual-title{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:0.04em;margin-bottom:1rem;line-height:1}
+.dual-desc{font-size:0.85rem;color:var(--text-muted);line-height:1.7;margin-bottom:1.75rem}
+.benefit-list{list-style:none;display:flex;flex-direction:column;gap:0.7rem}
+.benefit-list li{font-size:0.82rem;color:var(--text-muted);display:flex;align-items:flex-start;gap:0.75rem}
+.check{width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:0.1rem;font-size:0.55rem}
+.check.gold-c{background:var(--gold-pale);color:var(--gold)}
+.check.purple-c{background:var(--purple-dim);color:var(--purple)}
+@media(max-width:600px){.dual-grid{grid-template-columns:1fr}.flow-steps{grid-template-columns:1fr}.flow-step{border-right:none;border-bottom:0.5px solid var(--border)}.flow-step:last-child{border-bottom:none}}
+
+/* STATS */
+.stats{background:var(--night-mid);border-top:0.5px solid var(--border-gold);border-bottom:0.5px solid var(--border-gold);padding:4rem 2rem}
+.stats-inner{max-width:900px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:2rem;text-align:center}
+.stat-n{font-family:'Bebas Neue',sans-serif;font-size:3.2rem;color:var(--gold);letter-spacing:0.04em;line-height:1;margin-bottom:0.4rem}
+.stat-l{font-size:0.75rem;color:var(--text-muted);letter-spacing:0.1em;text-transform:uppercase}
+
+/* WAITLIST */
+.waitlist{padding:8rem 2rem;text-align:center;position:relative;overflow:hidden}
+.waitlist-glow{position:absolute;inset:0;background:radial-gradient(ellipse 70% 70% at 50% 50%,rgba(232,184,75,0.08) 0%,transparent 65%)}
+.waitlist-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,7vw,5.5rem);letter-spacing:0.04em;line-height:0.95;margin-bottom:1.25rem;position:relative}
+.waitlist-title span{color:var(--gold)}
+.waitlist-sub{font-size:0.95rem;color:var(--text-muted);max-width:420px;margin:0 auto 2.5rem;font-weight:300;line-height:1.7;position:relative}
+.form-wrap{display:flex;max-width:460px;margin:0 auto 0.85rem;border:0.5px solid var(--border-gold);border-radius:2px;overflow:hidden;position:relative}
+.form-input{flex:1;background:var(--night-mid);border:none;padding:1rem 1.5rem;font-family:'DM Sans',sans-serif;font-size:0.88rem;color:var(--text-bright);outline:none}
+.form-input::placeholder{color:var(--text-dim)}
+.form-btn{background:var(--gold);color:var(--night);border:none;padding:1rem 1.75rem;font-family:'DM Sans',sans-serif;font-size:0.82rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;transition:background 0.2s;white-space:nowrap}
+.form-btn:hover{background:var(--gold-dim)}
+.form-note{font-size:0.72rem;color:var(--text-dim);position:relative}
+.success{display:none;font-size:0.88rem;color:var(--green);padding:1rem 1.5rem;border:0.5px solid rgba(78,201,144,0.25);border-radius:2px;max-width:460px;margin:0 auto 0.85rem;background:var(--green-dim)}
+
+/* FOOTER */
+footer{border-top:0.5px solid var(--border);padding:2rem 2.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.footer-logo{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:0.1em;color:var(--text-muted)}
+.footer-logo span{color:var(--gold)}
+.footer-links{display:flex;gap:1.5rem}
+.footer-links a{font-size:0.72rem;color:var(--text-dim);text-decoration:none;letter-spacing:0.08em;text-transform:uppercase;transition:color 0.2s}
+.footer-links a:hover{color:var(--gold)}
+.footer-copy{font-size:0.72rem;color:var(--text-dim)}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">Pass<span>Explorer</span></div>
+  <div class="nav-r">
+    <a href="#how-it-works" class="nav-link">How it works</a>
+    <a href="#for-organizers" class="nav-link">Organizers</a>
+    <a href="#waitlist" class="btn-nav">Join waitlist</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-tag">The festival ticket marketplace</div>
+  <h1 class="hero-title">
+    <div class="t1">Find.</div>
+    <div class="t2">Experience.</div>
+    <div class="t3">Trade.</div>
+  </h1>
+  <p class="hero-desc">
+    The marketplace where fans <strong>discover and buy</strong> festival passes, <strong>sell</strong> the ones they can't use — and organizers <strong>profit every time</strong>.
+  </p>
+  <div class="hero-pills">
+    <div class="pill"><div class="pill-dot gold"></div>Explore festivals worldwide</div>
+    <div class="pill"><div class="pill-dot green"></div>Buy &amp; sell passes</div>
+    <div class="pill"><div class="pill-dot purple"></div>Organizers earn on resales</div>
+  </div>
+  <div class="hero-actions">
+    <a href="#waitlist" class="btn-primary">Get early access</a>
+    <a href="#how-it-works" class="btn-ghost">See how it works</a>
+  </div>
+  <div class="scroll-cue">
+    <span>Explore</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<section class="pillars" id="pillars">
+  <div class="pillars-inner">
+    <div class="section-eyebrow">What Passexplorer does</div>
+    <h2 class="section-title">One platform. Three sides.</h2>
+    <p class="section-sub">Built for fans who want in, fans who need out, and organizers who deserve more.</p>
+    <div class="pillars-grid">
+      <div class="pillar buy">
+        <div class="pillar-icon buy-icon">🔍</div>
+        <div class="pillar-label buy-c">For fans</div>
+        <div class="pillar-title">Explore &amp; Buy</div>
+        <p class="pillar-desc">Discover thousands of festivals and secure your pass — from the official sale or the secondary market.</p>
+        <ul class="pillar-features">
+          <li><div class="feat-dot gold"></div>Search by genre, location and date</li>
+          <li><div class="feat-dot gold"></div>Compare passes across sellers</li>
+          <li><div class="feat-dot gold"></div>Every ticket verified before purchase</li>
+          <li><div class="feat-dot gold"></div>Instant digital delivery</li>
+        </ul>
+      </div>
+      <div class="pillar sell">
+        <div class="pillar-icon sell-icon">💸</div>
+        <div class="pillar-label sell-c">For pass holders</div>
+        <div class="pillar-title">List &amp; Sell</div>
+        <p class="pillar-desc">Can't make it? Sell your pass safely on the marketplace. Set your price, reach thousands of buyers.</p>
+        <ul class="pillar-features">
+          <li><div class="feat-dot green"></div>List in under 2 minutes</li>
+          <li><div class="feat-dot green"></div>Fair pricing tools built in</li>
+          <li><div class="feat-dot green"></div>Secure payment, instant payout</li>
+          <li><div class="feat-dot green"></div>Buyer protection on every sale</li>
+        </ul>
+      </div>
+      <div class="pillar org">
+        <div class="pillar-icon org-icon">🎪</div>
+        <div class="pillar-label org-c">For organizers</div>
+        <div class="pillar-title">Control &amp; Earn</div>
+        <p class="pillar-desc">Unlike other secondary markets — you get a cut of every resale. Plus full visibility into who holds your passes.</p>
+        <ul class="pillar-features">
+          <li><div class="feat-dot purple"></div>Earn royalties on every resale</li>
+          <li><div class="feat-dot purple"></div>Set resale price caps if needed</li>
+          <li><div class="feat-dot purple"></div>Real-time attendee insights</li>
+          <li><div class="feat-dot purple"></div>Reduce scalping and fraud</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="flow-section" id="how-it-works">
+  <div class="flow-inner">
+    <div class="section-eyebrow">The experience</div>
+    <h2 class="section-title" style="text-align:center">How it works</h2>
+    <div class="flow-steps">
+      <div class="flow-step">
+        <div class="flow-num n1">01</div>
+        <div class="flow-step-title">Explore</div>
+        <div class="flow-step-desc">Browse thousands of festivals. Filter by genre, location or budget.</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num n2">02</div>
+        <div class="flow-step-title">Find your pass</div>
+        <div class="flow-step-desc">Official releases and resale passes — all in one place, all verified.</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num n3">03</div>
+        <div class="flow-step-title">Buy or sell</div>
+        <div class="flow-step-desc">Secure checkout for buyers. Instant listing tools for sellers.</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num n4">04</div>
+        <div class="flow-step-title">Everyone earns</div>
+        <div class="flow-step-desc">Sellers get paid. Organizers get their royalty. Buyers get their pass.</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num n5">05</div>
+        <div class="flow-step-title">Live it</div>
+        <div class="flow-step-desc">Show up, scan in. That's it.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="preview-section" id="marketplace">
+  <div class="preview-inner">
+    <div class="section-eyebrow">Live marketplace</div>
+    <h2 class="section-title" style="text-align:center">Passes available now</h2>
+    <p class="section-sub" style="text-align:center;margin:0.75rem auto 0">From official releases to fan resales — all in one feed.</p>
+    <div class="preview-grid">
+      <div class="ticket">
+        <div class="ticket-notch"></div>
+        <div class="ticket-top"><div class="ticket-genre">Electronic</div><div class="ticket-badge badge-buy">Official</div></div>
+        <div class="ticket-name">Tomorrowland</div>
+        <div class="ticket-loc">Boom, Belgium</div>
+        <hr class="ticket-divider">
+        <div class="ticket-bottom">
+          <div class="ticket-meta"><div class="ticket-date">18 – 27 Jul 2025</div><div class="ticket-type">Weekend pass</div></div>
+          <div style="text-align:right"><div class="ticket-price">€289</div><div class="ticket-seller">Official release</div></div>
+        </div>
+      </div>
+      <div class="ticket">
+        <div class="ticket-notch"></div>
+        <div class="ticket-top"><div class="ticket-genre">Multi-genre</div><div class="ticket-badge badge-sell">Resale</div></div>
+        <div class="ticket-name">Glastonbury</div>
+        <div class="ticket-loc">Somerset, UK</div>
+        <hr class="ticket-divider">
+        <div class="ticket-bottom">
+          <div class="ticket-meta"><div class="ticket-date">25 – 29 Jun 2025</div><div class="ticket-type">Full festival</div></div>
+          <div style="text-align:right"><div class="ticket-price">£390</div><div class="ticket-seller">Verified seller</div></div>
+        </div>
+      </div>
+      <div class="ticket">
+        <div class="ticket-notch"></div>
+        <div class="ticket-top"><div class="ticket-genre">Rock &amp; indie</div><div class="ticket-badge badge-sell">Resale</div></div>
+        <div class="ticket-name">Primavera</div>
+        <div class="ticket-loc">Barcelona, Spain</div>
+        <hr class="ticket-divider">
+        <div class="ticket-bottom">
+          <div class="ticket-meta"><div class="ticket-date">5 – 7 Jun 2025</div><div class="ticket-type">3-day pass</div></div>
+          <div style="text-align:right"><div class="ticket-price">€210</div><div class="ticket-seller">Verified seller</div></div>
+        </div>
+      </div>
+      <div class="ticket">
+        <div class="ticket-notch"></div>
+        <div class="ticket-top"><div class="ticket-genre">Electronic</div><div class="ticket-badge badge-buy">Official</div></div>
+        <div class="ticket-name">Coachella</div>
+        <div class="ticket-loc">California, USA</div>
+        <hr class="ticket-divider">
+        <div class="ticket-bottom">
+          <div class="ticket-meta"><div class="ticket-date">11 – 20 Apr 2025</div><div class="ticket-type">Weekend 2</div></div>
+          <div style="text-align:right"><div class="ticket-price">$549</div><div class="ticket-seller">Official release</div></div>
+        </div>
+      </div>
+      <div class="ticket">
+        <div class="ticket-notch"></div>
+        <div class="ticket-top"><div class="ticket-genre">Hip-hop</div><div class="ticket-badge badge-sell">Resale</div></div>
+        <div class="ticket-name">Rolling Loud</div>
+        <div class="ticket-loc">Miami, USA</div>
+        <hr class="ticket-divider">
+        <div class="ticket-bottom">
+          <div class="ticket-meta"><div class="ticket-date">18 – 20 Jul 2025</div><div class="ticket-type">VIP pass</div></div>
+          <div style="text-align:right"><div class="ticket-price">$420</div><div class="ticket-seller">Verified seller</div></div>
+        </div>
+      </div>
+      <div class="ticket">
+        <div class="ticket-notch"></div>
+        <div class="ticket-top"><div class="ticket-genre">World music</div><div class="ticket-badge badge-buy">Official</div></div>
+        <div class="ticket-name">Rock in Rio</div>
+        <div class="ticket-loc">Rio de Janeiro, BR</div>
+        <hr class="ticket-divider">
+        <div class="ticket-bottom">
+          <div class="ticket-meta"><div class="ticket-date">13 – 21 Sep 2025</div><div class="ticket-type">Full pass</div></div>
+          <div style="text-align:right"><div class="ticket-price">R$790</div><div class="ticket-seller">Official release</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="dual-section" id="for-organizers">
+  <div class="dual-bg"></div>
+  <div class="dual-inner">
+    <div class="section-eyebrow">Built for both sides</div>
+    <h2 class="section-title" style="text-align:center">Fans win. Organizers win.</h2>
+    <p class="section-sub" style="text-align:center;margin:0.75rem auto 0">The first secondary market built to benefit the people who make the festivals happen.</p>
+    <div class="dual-grid">
+      <div class="dual-card fan">
+        <div class="dual-icon">🎟️</div>
+        <div class="dual-who fan-c">For festival fans</div>
+        <div class="dual-title">Your pass. Your terms.</div>
+        <p class="dual-desc">Find any festival pass you want. If plans change, sell it safely and get your money back. No stress, no loss.</p>
+        <ul class="benefit-list">
+          <li><div class="check gold-c">✓</div>Discover festivals you didn't know existed</li>
+          <li><div class="check gold-c">✓</div>Buy sold-out passes from verified sellers</li>
+          <li><div class="check gold-c">✓</div>Sell instantly if you can't attend</li>
+          <li><div class="check gold-c">✓</div>Fair prices, no hidden fees</li>
+          <li><div class="check gold-c">✓</div>Buyer protection on every transaction</li>
+        </ul>
+      </div>
+      <div class="dual-card org">
+        <div class="dual-icon">🎪</div>
+        <div class="dual-who org-c">For organizers</div>
+        <div class="dual-title">Earn beyond the gate.</div>
+        <p class="dual-desc">Every resale on Passexplorer generates a royalty for you. Finally, a secondary market that works with organizers — not against them.</p>
+        <ul class="benefit-list">
+          <li><div class="check purple-c">✓</div>Earn a royalty on every resale transaction</li>
+          <li><div class="check purple-c">✓</div>Set price caps to prevent scalping</li>
+          <li><div class="check purple-c">✓</div>Know who holds your passes in real time</li>
+          <li><div class="check purple-c">✓</div>Reduce fraud with verified transfers</li>
+          <li><div class="check purple-c">✓</div>List your festival for free</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="stats">
+  <div class="stats-inner">
+    <div><div class="stat-n">2,400+</div><div class="stat-l">Festivals listed</div></div>
+    <div><div class="stat-n">180+</div><div class="stat-l">Countries</div></div>
+    <div><div class="stat-n">50K+</div><div class="stat-l">Passes available</div></div>
+    <div><div class="stat-n">100%</div><div class="stat-l">Verified sellers</div></div>
+    <div><div class="stat-n">0%</div><div class="stat-l">Scalping tolerance</div></div>
+  </div>
+</div>
+
+<section class="waitlist" id="waitlist">
+  <div class="waitlist-glow"></div>
+  <h2 class="waitlist-title">Ready to<br><span>Explore?</span></h2>
+  <p class="waitlist-sub">Join the waitlist. Be the first in — whether you're a fan, a seller or a festival organizer.</p>
+  <div class="form-wrap" id="form-wrap">
+    <input class="form-input" type="email" placeholder="your@email.com" id="email-input">
+    <button class="form-btn" onclick="handleSubmit()">Join waitlist</button>
+  </div>
+  <div class="success" id="success">You're on the list. We'll reach out before launch. 🎟️</div>
+  <div class="form-note">No spam. Early access only. Unsubscribe anytime.</div>
+</section>
+
+<footer>
+  <div class="footer-logo">Pass<span>Explorer</span></div>
+  <div class="footer-links">
+    <a href="#pillars">Features</a>
+    <a href="#for-organizers">Organizers</a>
+    <a href="#waitlist">Early access</a>
+  </div>
+  <div class="footer-copy">© 2025 Passexplorer. Coming soon.</div>
+</footer>
+
+<script>
+function handleSubmit(){
+  const input=document.getElementById('email-input');
+  const form=document.getElementById('form-wrap');
+  const success=document.getElementById('success');
+  if(input.value&&input.value.includes('@')){
+    form.style.display='none';
+    success.style.display='block';
+  } else {
+    input.style.outline='1px solid rgba(232,184,75,0.6)';
+    input.placeholder='Enter a valid email';
+  }
+}
+document.getElementById('email-input').addEventListener('keydown',function(e){
+  if(e.key==='Enter') handleSubmit();
+});
+</script>
+</body>
+</html>
