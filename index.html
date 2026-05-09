@@ -423,8 +423,8 @@ footer{border-top:0.5px solid var(--border);padding:2rem 2.5rem;display:flex;ali
   <h2 class="waitlist-title">Ready to<br><span>Explore?</span></h2>
   <p class="waitlist-sub">Join the waitlist. Be the first in — whether you're a fan, a seller or a festival organizer.</p>
   <div class="form-wrap" id="form-wrap">
-    <input class="form-input" type="email" placeholder="your@email.com" id="email-input">
-    <button class="form-btn" onclick="handleSubmit()">Join waitlist</button>
+    <input class="form-input" type="email" placeholder="your@email.com" id="email-input" required>
+    <button class="form-btn" id="form-btn" onclick="handleSubmit()">Join waitlist</button>
   </div>
   <div class="success" id="success">You're on the list. We'll reach out before launch. 🎟️</div>
   <div class="form-note">No spam. Early access only. Unsubscribe anytime.</div>
@@ -453,15 +453,43 @@ footer{border-top:0.5px solid var(--border);padding:2rem 2.5rem;display:flex;ali
 <script>
 function handleSubmit(){
   const input=document.getElementById('email-input');
+  const btn=document.getElementById('form-btn');
   const form=document.getElementById('form-wrap');
   const success=document.getElementById('success');
-  if(input.value&&input.value.includes('@')){
-    form.style.display='none';
-    success.style.display='block';
-  } else {
-    input.style.outline='1px solid rgba(232,184,75,0.6)';
+  const email=input.value.trim();
+
+  if(!email||!email.includes('@')){
+    input.style.outline='1px solid rgba(232,184,75,0.8)';
     input.placeholder='Enter a valid email';
+    return;
   }
+
+  btn.textContent='Sending...';
+  btn.style.opacity='0.7';
+  btn.style.pointerEvents='none';
+
+  fetch('https://formspree.io/f/mbdwzndo',{
+    method:'POST',
+    headers:{'Content-Type':'application/json','Accept':'application/json'},
+    body:JSON.stringify({email:email})
+  })
+  .then(function(res){
+    if(res.ok){
+      form.style.display='none';
+      success.style.display='block';
+    } else {
+      btn.textContent='Try again';
+      btn.style.opacity='1';
+      btn.style.pointerEvents='auto';
+      input.style.outline='1px solid rgba(232,184,75,0.8)';
+    }
+  })
+  .catch(function(){
+    btn.textContent='Try again';
+    btn.style.opacity='1';
+    btn.style.pointerEvents='auto';
+    input.style.outline='1px solid rgba(232,184,75,0.8)';
+  });
 }
 document.getElementById('email-input').addEventListener('keydown',function(e){
   if(e.key==='Enter') handleSubmit();
