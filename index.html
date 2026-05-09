@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" id="html-root">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -175,6 +175,12 @@ footer{border-top:0.5px solid var(--border);padding:2rem 2.5rem;display:flex;ali
 .footer-copy{font-size:0.72rem;color:var(--text-dim)}
 
 @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+/* LANG TOGGLE */
+.lang-toggle{display:flex;align-items:center;gap:0.25rem;background:rgba(255,255,255,0.05);border:0.5px solid var(--border);border-radius:4px;padding:0.2rem;margin-left:0.5rem}
+.lang-btn{background:none;border:none;cursor:pointer;font-size:1.1rem;padding:0.2rem 0.35rem;border-radius:3px;line-height:1;transition:background 0.15s;opacity:0.45;filter:grayscale(60%)}
+.lang-btn:hover{background:rgba(255,255,255,0.07);opacity:0.8}
+.lang-btn.active{background:rgba(232,184,75,0.12);opacity:1;filter:grayscale(0%)}
 </style>
 </head>
 <body>
@@ -182,79 +188,83 @@ footer{border-top:0.5px solid var(--border);padding:2rem 2.5rem;display:flex;ali
 <nav>
   <div class="logo">Pass<span>Explorer</span></div>
   <div class="nav-r">
-    <a href="#how-it-works" class="nav-link">How it works</a>
-    <a href="#for-organizers" class="nav-link">Organizers</a>
-    <a href="#waitlist" class="btn-nav">Join waitlist</a>
+    <a href="#how-it-works" class="nav-link" data-en="How it works" data-pt="Como funciona">How it works</a>
+    <a href="#for-organizers" class="nav-link" data-en="Organizers" data-pt="Organizadores">Organizers</a>
+    <a href="#waitlist" class="btn-nav" data-en="Join waitlist" data-pt="Lista de espera">Join waitlist</a>
+    <div class="lang-toggle">
+      <button class="lang-btn active" id="lang-en" onclick="setLang('en')" title="English">🇬🇧</button>
+      <button class="lang-btn" id="lang-pt" onclick="setLang('pt')" title="Português">🇧🇷</button>
+    </div>
   </div>
 </nav>
 
 <section class="hero" id="hero">
   <div class="hero-glow"></div>
   <div class="hero-grid"></div>
-  <div class="hero-tag">The festival ticket marketplace</div>
+  <div class="hero-tag" data-en="The festival ticket marketplace" data-pt="O marketplace de ingressos para festivais">The festival ticket marketplace</div>
   <h1 class="hero-title">
-    <div class="t1">Find.</div>
-    <div class="t2">Experience.</div>
-    <div class="t3">Trade.</div>
+    <div class="t1" data-en="Find." data-pt="Encontre.">Find.</div>
+    <div class="t2" data-en="Experience." data-pt="Vivencie.">Experience.</div>
+    <div class="t3" data-en="Trade." data-pt="Negocie.">Trade.</div>
   </h1>
-  <p class="hero-desc">
+  <p class="hero-desc" data-en="The marketplace where fans <strong>discover and buy</strong> festival passes, <strong>sell</strong> the ones they can't use — and organizers <strong>profit every time</strong>." data-pt="O marketplace onde fãs <strong>descobrem e compram</strong> passes para festivais, <strong>vendem</strong> os que não vão usar — e organizadores <strong>lucram em cada revenda</strong>.">
     The marketplace where fans <strong>discover and buy</strong> festival passes, <strong>sell</strong> the ones they can't use — and organizers <strong>profit every time</strong>.
   </p>
   <div class="hero-pills">
-    <div class="pill"><div class="pill-dot gold"></div>Explore festivals worldwide</div>
-    <div class="pill"><div class="pill-dot green"></div>Buy &amp; sell passes</div>
-    <div class="pill"><div class="pill-dot purple"></div>Organizers earn on resales</div>
+    <div class="pill"><div class="pill-dot gold"></div><span data-en="Explore festivals worldwide" data-pt="Explore festivais pelo mundo">Explore festivals worldwide</span></div>
+    <div class="pill"><div class="pill-dot green"></div><span data-en="Buy &amp; sell passes" data-pt="Compre e venda passes">Buy &amp; sell passes</span></div>
+    <div class="pill"><div class="pill-dot purple"></div><span data-en="Organizers earn on resales" data-pt="Organizadores ganham nas revendas">Organizers earn on resales</span></div>
   </div>
   <div class="hero-actions">
-    <a href="#waitlist" class="btn-primary">Get early access</a>
-    <a href="#how-it-works" class="btn-ghost">See how it works</a>
+    <a href="#waitlist" class="btn-primary" data-en="Get early access" data-pt="Acesso antecipado">Get early access</a>
+    <a href="#how-it-works" class="btn-ghost" data-en="See how it works" data-pt="Veja como funciona">See how it works</a>
   </div>
   <div class="scroll-cue">
-    <span>Explore</span>
+    <span data-en="Explore" data-pt="Explorar">Explore</span>
     <div class="scroll-line"></div>
   </div>
 </section>
 
 <section class="pillars" id="pillars">
   <div class="pillars-inner">
-    <div class="section-eyebrow">What Passexplorer does</div>
-    <h2 class="section-title">One platform. Three sides.</h2>
-    <p class="section-sub">Built for fans who want in, fans who need out, and organizers who deserve more.</p>
+    <div class="section-eyebrow" data-en="What Passexplorer does" data-pt="O que o Passexplorer faz">What Passexplorer does</div>
+    <h2 class="section-title" data-en="One platform. Three sides." data-pt="Uma plataforma. Três lados.">One platform. Three sides.</h2>
+    <p class="section-sub" data-en="Built for fans who want in, fans who need out, and organizers who deserve more." data-pt="Feito para fãs que querem entrar, fãs que precisam sair, e organizadores que merecem mais.">Built for fans who want in, fans who need out, and organizers who deserve more.</p>
     <div class="pillars-grid">
       <div class="pillar buy">
         <div class="pillar-icon buy-icon">🔍</div>
-        <div class="pillar-label buy-c">For fans</div>
-        <div class="pillar-title">Explore &amp; Buy</div>
-        <p class="pillar-desc">Discover thousands of festivals and secure your pass — from the official sale or the secondary market.</p>
+        <div class="pillar-label buy-c" data-en="For fans" data-pt="Para fãs">For fans</div>
+        <div class="pillar-title" data-en="Explore &amp; Buy" data-pt="Explore e Compre">Explore &amp; Buy</div>
+        <p class="pillar-desc" data-en="Discover thousands of festivals and secure your pass — from the official sale or the secondary market." data-pt="Descubra milhares de festivais e garanta seu passe — na venda oficial ou no mercado secundário.">Discover thousands of festivals and secure your pass — from the official sale or the secondary market.</p>
         <ul class="pillar-features">
-          <li><div class="feat-dot gold"></div>Search by genre, location and date</li>
-          <li><div class="feat-dot gold"></div>Compare passes across sellers</li>
-          <li><div class="feat-dot gold"></div>Every ticket verified before purchase</li>
-          <li><div class="feat-dot gold"></div>Instant digital delivery</li>
+          <li><div class="feat-dot gold"></div><span data-en="Search by genre, location and date" data-pt="Pesquise por gênero, localização e data">Search by genre, location and date</span></li>
+          <li><div class="feat-dot gold"></div><span data-en="Compare passes across sellers" data-pt="Compare passes entre vendedores">Compare passes across sellers</span></li>
+          <li><div class="feat-dot gold"></div><span data-en="Every ticket verified before purchase" data-pt="Todos os ingressos verificados antes da compra">Every ticket verified before purchase</span></li>
+          <li><div class="feat-dot gold"></div><span data-en="Instant digital delivery" data-pt="Entrega digital instantânea">Instant digital delivery</span></li>
         </ul>
       </div>
       <div class="pillar sell">
         <div class="pillar-icon sell-icon">💸</div>
-        <div class="pillar-label sell-c">For pass holders</div>
-        <div class="pillar-title">List &amp; Sell</div>
-        <p class="pillar-desc">Can't make it? Sell your pass safely on the marketplace. Set your price, reach thousands of buyers.</p>
+        <div class="pillar-label sell-c" data-en="For pass holders" data-pt="Para detentores de passe">For pass holders</div>
+        <div class="pillar-title" data-en="List &amp; Sell" data-pt="Anuncie e Venda">List &amp; Sell</div>
+        <p class="pillar-desc" data-en="Can't make it? Sell your pass safely on the marketplace. Set your price, reach thousands of buyers." data-pt="Não vai conseguir ir? Venda seu passe com segurança no marketplace. Defina seu preço e alcance milhares de compradores.">Can't make it? Sell your pass safely on the marketplace. Set your price, reach thousands of buyers.</p>
         <ul class="pillar-features">
-          <li><div class="feat-dot green"></div>List in under 2 minutes</li>
-          <li><div class="feat-dot green"></div>Fair pricing tools built in</li>
-          <li><div class="feat-dot green"></div>Secure payment, instant payout</li>
-          <li><div class="feat-dot green"></div>Buyer protection on every sale</li>
+          <li><div class="feat-dot green"></div><span data-en="List in under 2 minutes" data-pt="Anuncie em menos de 2 minutos">List in under 2 minutes</span></li>
+          <li><div class="feat-dot green"></div><span data-en="Fair pricing tools built in" data-pt="Ferramentas de precificação justa incluídas">Fair pricing tools built in</span></li>
+          <li><div class="feat-dot green"></div><span data-en="Secure payment, instant payout" data-pt="Pagamento seguro, repasse imediato">Secure payment, instant payout</span></li>
+          <li><div class="feat-dot green"></div><span data-en="Buyer protection on every sale" data-pt="Proteção ao comprador em toda venda">Buyer protection on every sale</span></li>
         </ul>
       </div>
       <div class="pillar org">
         <div class="pillar-icon org-icon">🎪</div>
-        <div class="pillar-label org-c">For organizers</div>
-        <div class="pillar-title">Control &amp; Earn</div>
-        <p class="pillar-desc">Unlike other secondary markets — you get a cut of every resale. Plus full visibility into who holds your passes.</p>
+        <div class="pillar-label org-c" data-en="For organizers" data-pt="Para organizadores">For organizers</div>
+        <div class="pillar-title" data-en="Control &amp; Earn" data-pt="Controle e Lucre">Control &amp; Earn</div>
+        <p class="pillar-desc" data-en="Unlike other secondary markets — you get a cut of every resale. Plus full visibility into who holds your passes." data-pt="Diferente de outros mercados secundários — você recebe parte de cada revenda. Com visibilidade total de quem tem seus passes.">Unlike other secondary markets — you get a cut of every resale. Plus full visibility into who holds your passes.</p>
         <ul class="pillar-features">
-          <li><div class="feat-dot purple"></div>Earn royalties on every resale</li>
-          <li><div class="feat-dot purple"></div>Set resale price caps if needed</li>
-          <li><div class="feat-dot purple"></div>Real-time attendee insights</li>
-          <li><div class="feat-dot purple"></div>Reduce scalping and fraud</li>
+          <li><div class="feat-dot purple"></div><span data-en="Earn royalties on every resale" data-pt="Receba royalties em cada revenda">Earn royalties on every resale</span></li>
+          <li><div class="feat-dot purple"></div><span data-en="Set resale price caps if needed" data-pt="Defina limites de preço de revenda se necessário">Set resale price caps if needed</span></li>
+          <li><div class="feat-dot purple"></div><span data-en="Real-time attendee insights" data-pt="Dados dos participantes em tempo real">Real-time attendee insights</span></li>
+          <li><div class="feat-dot purple"></div><span data-en="Reduce scalping and fraud" data-pt="Reduza cambismo e fraudes">Reduce scalping and fraud</span></li>
         </ul>
       </div>
     </div>
@@ -263,33 +273,33 @@ footer{border-top:0.5px solid var(--border);padding:2rem 2.5rem;display:flex;ali
 
 <section class="flow-section" id="how-it-works">
   <div class="flow-inner">
-    <div class="section-eyebrow">The experience</div>
-    <h2 class="section-title" style="text-align:center">How it works</h2>
+    <div class="section-eyebrow" data-en="The experience" data-pt="A experiência">The experience</div>
+    <h2 class="section-title" style="text-align:center" data-en="How it works" data-pt="Como funciona">How it works</h2>
     <div class="flow-steps">
       <div class="flow-step">
         <div class="flow-num n1">01</div>
-        <div class="flow-step-title">Explore</div>
-        <div class="flow-step-desc">Browse thousands of festivals. Filter by genre, location or budget.</div>
+        <div class="flow-step-title" data-en="Explore" data-pt="Explore">Explore</div>
+        <div class="flow-step-desc" data-en="Browse thousands of festivals. Filter by genre, location or budget." data-pt="Navegue por milhares de festivais. Filtre por gênero, localização ou orçamento.">Browse thousands of festivals. Filter by genre, location or budget.</div>
       </div>
       <div class="flow-step">
         <div class="flow-num n2">02</div>
-        <div class="flow-step-title">Find your pass</div>
-        <div class="flow-step-desc">Official releases and resale passes — all in one place, all verified.</div>
+        <div class="flow-step-title" data-en="Find your pass" data-pt="Encontre seu passe">Find your pass</div>
+        <div class="flow-step-desc" data-en="Official releases and resale passes — all in one place, all verified." data-pt="Lançamentos oficiais e passes revendidos — tudo em um só lugar, tudo verificado.">Official releases and resale passes — all in one place, all verified.</div>
       </div>
       <div class="flow-step">
         <div class="flow-num n3">03</div>
-        <div class="flow-step-title">Buy or sell</div>
-        <div class="flow-step-desc">Secure checkout for buyers. Instant listing tools for sellers.</div>
+        <div class="flow-step-title" data-en="Buy or sell" data-pt="Compre ou venda">Buy or sell</div>
+        <div class="flow-step-desc" data-en="Secure checkout for buyers. Instant listing tools for sellers." data-pt="Checkout seguro para compradores. Ferramentas de anúncio instantâneo para vendedores.">Secure checkout for buyers. Instant listing tools for sellers.</div>
       </div>
       <div class="flow-step">
         <div class="flow-num n4">04</div>
-        <div class="flow-step-title">Everyone earns</div>
-        <div class="flow-step-desc">Sellers get paid. Organizers get their royalty. Buyers get their pass.</div>
+        <div class="flow-step-title" data-en="Everyone earns" data-pt="Todos ganham">Everyone earns</div>
+        <div class="flow-step-desc" data-en="Sellers get paid. Organizers get their royalty. Buyers get their pass." data-pt="Vendedores recebem. Organizadores recebem seus royalties. Compradores recebem seu passe.">Sellers get paid. Organizers get their royalty. Buyers get their pass.</div>
       </div>
       <div class="flow-step">
         <div class="flow-num n5">05</div>
-        <div class="flow-step-title">Live it</div>
-        <div class="flow-step-desc">Show up, scan in. That's it.</div>
+        <div class="flow-step-title" data-en="Live it" data-pt="Viva">Live it</div>
+        <div class="flow-step-desc" data-en="Show up, scan in. That's it." data-pt="Chegue, escaneie. Só isso.">Show up, scan in. That's it.</div>
       </div>
     </div>
   </div>
@@ -297,74 +307,74 @@ footer{border-top:0.5px solid var(--border);padding:2rem 2.5rem;display:flex;ali
 
 <section class="preview-section" id="marketplace">
   <div class="preview-inner">
-    <div class="section-eyebrow">Live marketplace</div>
-    <h2 class="section-title" style="text-align:center">Passes available now</h2>
-    <p class="section-sub" style="text-align:center;margin:0.75rem auto 0">From official releases to fan resales — all in one feed.</p>
+    <div class="section-eyebrow" data-en="Live marketplace" data-pt="Marketplace ao vivo">Live marketplace</div>
+    <h2 class="section-title" style="text-align:center" data-en="Passes available now" data-pt="Passes disponíveis agora">Passes available now</h2>
+    <p class="section-sub" style="text-align:center;margin:0.75rem auto 0" data-en="From official releases to fan resales — all in one feed." data-pt="De lançamentos oficiais a revendas de fãs — tudo em um único feed.">From official releases to fan resales — all in one feed.</p>
     <div class="preview-grid">
       <div class="ticket">
         <div class="ticket-notch"></div>
-        <div class="ticket-top"><div class="ticket-genre">Electronic</div><div class="ticket-badge badge-buy">Official</div></div>
+        <div class="ticket-top"><div class="ticket-genre" data-en="Electronic" data-pt="Eletrônica">Electronic</div><div class="ticket-badge badge-buy" data-en="Official" data-pt="Oficial">Official</div></div>
         <div class="ticket-name">Tomorrowland</div>
         <div class="ticket-loc">Boom, Belgium</div>
         <hr class="ticket-divider">
         <div class="ticket-bottom">
-          <div class="ticket-meta"><div class="ticket-date">18 – 27 Jul 2025</div><div class="ticket-type">Weekend pass</div></div>
-          <div style="text-align:right"><div class="ticket-price">€289</div><div class="ticket-seller">Official release</div></div>
+          <div class="ticket-meta"><div class="ticket-date">18 – 27 Jul 2025</div><div class="ticket-type" data-en="Weekend pass" data-pt="Passe de fim de semana">Weekend pass</div></div>
+          <div style="text-align:right"><div class="ticket-price">€289</div><div class="ticket-seller" data-en="Official release" data-pt="Lançamento oficial">Official release</div></div>
         </div>
       </div>
       <div class="ticket">
         <div class="ticket-notch"></div>
-        <div class="ticket-top"><div class="ticket-genre">Multi-genre</div><div class="ticket-badge badge-sell">Resale</div></div>
+        <div class="ticket-top"><div class="ticket-genre" data-en="Multi-genre" data-pt="Múltiplos gêneros">Multi-genre</div><div class="ticket-badge badge-sell" data-en="Resale" data-pt="Revenda">Resale</div></div>
         <div class="ticket-name">Glastonbury</div>
         <div class="ticket-loc">Somerset, UK</div>
         <hr class="ticket-divider">
         <div class="ticket-bottom">
-          <div class="ticket-meta"><div class="ticket-date">25 – 29 Jun 2025</div><div class="ticket-type">Full festival</div></div>
-          <div style="text-align:right"><div class="ticket-price">£390</div><div class="ticket-seller">Verified seller</div></div>
+          <div class="ticket-meta"><div class="ticket-date">25 – 29 Jun 2025</div><div class="ticket-type" data-en="Full festival" data-pt="Festival completo">Full festival</div></div>
+          <div style="text-align:right"><div class="ticket-price">£390</div><div class="ticket-seller" data-en="Verified seller" data-pt="Vendedor verificado">Verified seller</div></div>
         </div>
       </div>
       <div class="ticket">
         <div class="ticket-notch"></div>
-        <div class="ticket-top"><div class="ticket-genre">Rock &amp; indie</div><div class="ticket-badge badge-sell">Resale</div></div>
+        <div class="ticket-top"><div class="ticket-genre" data-en="Rock &amp; indie" data-pt="Rock e indie">Rock &amp; indie</div><div class="ticket-badge badge-sell" data-en="Resale" data-pt="Revenda">Resale</div></div>
         <div class="ticket-name">Primavera</div>
         <div class="ticket-loc">Barcelona, Spain</div>
         <hr class="ticket-divider">
         <div class="ticket-bottom">
-          <div class="ticket-meta"><div class="ticket-date">5 – 7 Jun 2025</div><div class="ticket-type">3-day pass</div></div>
-          <div style="text-align:right"><div class="ticket-price">€210</div><div class="ticket-seller">Verified seller</div></div>
+          <div class="ticket-meta"><div class="ticket-date">5 – 7 Jun 2025</div><div class="ticket-type" data-en="3-day pass" data-pt="Passe 3 dias">3-day pass</div></div>
+          <div style="text-align:right"><div class="ticket-price">€210</div><div class="ticket-seller" data-en="Verified seller" data-pt="Vendedor verificado">Verified seller</div></div>
         </div>
       </div>
       <div class="ticket">
         <div class="ticket-notch"></div>
-        <div class="ticket-top"><div class="ticket-genre">Electronic</div><div class="ticket-badge badge-buy">Official</div></div>
+        <div class="ticket-top"><div class="ticket-genre" data-en="Electronic" data-pt="Eletrônica">Electronic</div><div class="ticket-badge badge-buy" data-en="Official" data-pt="Oficial">Official</div></div>
         <div class="ticket-name">Coachella</div>
         <div class="ticket-loc">California, USA</div>
         <hr class="ticket-divider">
         <div class="ticket-bottom">
-          <div class="ticket-meta"><div class="ticket-date">11 – 20 Apr 2025</div><div class="ticket-type">Weekend 2</div></div>
-          <div style="text-align:right"><div class="ticket-price">$549</div><div class="ticket-seller">Official release</div></div>
+          <div class="ticket-meta"><div class="ticket-date">11 – 20 Apr 2025</div><div class="ticket-type" data-en="Weekend 2" data-pt="Fim de semana 2">Weekend 2</div></div>
+          <div style="text-align:right"><div class="ticket-price">$549</div><div class="ticket-seller" data-en="Official release" data-pt="Lançamento oficial">Official release</div></div>
         </div>
       </div>
       <div class="ticket">
         <div class="ticket-notch"></div>
-        <div class="ticket-top"><div class="ticket-genre">Hip-hop</div><div class="ticket-badge badge-sell">Resale</div></div>
+        <div class="ticket-top"><div class="ticket-genre" data-en="Hip-hop" data-pt="Hip-hop">Hip-hop</div><div class="ticket-badge badge-sell" data-en="Resale" data-pt="Revenda">Resale</div></div>
         <div class="ticket-name">Rolling Loud</div>
         <div class="ticket-loc">Miami, USA</div>
         <hr class="ticket-divider">
         <div class="ticket-bottom">
-          <div class="ticket-meta"><div class="ticket-date">18 – 20 Jul 2025</div><div class="ticket-type">VIP pass</div></div>
-          <div style="text-align:right"><div class="ticket-price">$420</div><div class="ticket-seller">Verified seller</div></div>
+          <div class="ticket-meta"><div class="ticket-date">18 – 20 Jul 2025</div><div class="ticket-type" data-en="VIP pass" data-pt="Passe VIP">VIP pass</div></div>
+          <div style="text-align:right"><div class="ticket-price">$420</div><div class="ticket-seller" data-en="Verified seller" data-pt="Vendedor verificado">Verified seller</div></div>
         </div>
       </div>
       <div class="ticket">
         <div class="ticket-notch"></div>
-        <div class="ticket-top"><div class="ticket-genre">World music</div><div class="ticket-badge badge-buy">Official</div></div>
+        <div class="ticket-top"><div class="ticket-genre" data-en="World music" data-pt="Música do mundo">World music</div><div class="ticket-badge badge-buy" data-en="Official" data-pt="Oficial">Official</div></div>
         <div class="ticket-name">Rock in Rio</div>
         <div class="ticket-loc">Rio de Janeiro, BR</div>
         <hr class="ticket-divider">
         <div class="ticket-bottom">
-          <div class="ticket-meta"><div class="ticket-date">13 – 21 Sep 2025</div><div class="ticket-type">Full pass</div></div>
-          <div style="text-align:right"><div class="ticket-price">R$790</div><div class="ticket-seller">Official release</div></div>
+          <div class="ticket-meta"><div class="ticket-date">13 – 21 Sep 2025</div><div class="ticket-type" data-en="Full pass" data-pt="Passe completo">Full pass</div></div>
+          <div style="text-align:right"><div class="ticket-price">R$790</div><div class="ticket-seller" data-en="Official release" data-pt="Lançamento oficial">Official release</div></div>
         </div>
       </div>
     </div>
@@ -374,34 +384,34 @@ footer{border-top:0.5px solid var(--border);padding:2rem 2.5rem;display:flex;ali
 <section class="dual-section" id="for-organizers">
   <div class="dual-bg"></div>
   <div class="dual-inner">
-    <div class="section-eyebrow">Built for both sides</div>
-    <h2 class="section-title" style="text-align:center">Fans win. Organizers win.</h2>
-    <p class="section-sub" style="text-align:center;margin:0.75rem auto 0">The first secondary market built to benefit the people who make the festivals happen.</p>
+    <div class="section-eyebrow" data-en="Built for both sides" data-pt="Feito para os dois lados">Built for both sides</div>
+    <h2 class="section-title" style="text-align:center" data-en="Fans win. Organizers win." data-pt="Fãs ganham. Organizadores ganham.">Fans win. Organizers win.</h2>
+    <p class="section-sub" style="text-align:center;margin:0.75rem auto 0" data-en="The first secondary market built to benefit the people who make the festivals happen." data-pt="O primeiro mercado secundário feito para beneficiar quem faz os festivais acontecerem.">The first secondary market built to benefit the people who make the festivals happen.</p>
     <div class="dual-grid">
       <div class="dual-card fan">
         <div class="dual-icon">🎟️</div>
-        <div class="dual-who fan-c">For festival fans</div>
-        <div class="dual-title">Your pass. Your terms.</div>
-        <p class="dual-desc">Find any festival pass you want. If plans change, sell it safely and get your money back. No stress, no loss.</p>
+        <div class="dual-who fan-c" data-en="For festival fans" data-pt="Para fãs de festivais">For festival fans</div>
+        <div class="dual-title" data-en="Your pass. Your terms." data-pt="Seu passe. Suas regras.">Your pass. Your terms.</div>
+        <p class="dual-desc" data-en="Find any festival pass you want. If plans change, sell it safely and get your money back. No stress, no loss." data-pt="Encontre qualquer passe de festival que quiser. Se os planos mudarem, venda com segurança e recupere seu dinheiro. Sem estresse, sem prejuízo.">Find any festival pass you want. If plans change, sell it safely and get your money back. No stress, no loss.</p>
         <ul class="benefit-list">
-          <li><div class="check gold-c">✓</div>Discover festivals you didn't know existed</li>
-          <li><div class="check gold-c">✓</div>Buy sold-out passes from verified sellers</li>
-          <li><div class="check gold-c">✓</div>Sell instantly if you can't attend</li>
-          <li><div class="check gold-c">✓</div>Fair prices, no hidden fees</li>
-          <li><div class="check gold-c">✓</div>Buyer protection on every transaction</li>
+          <li><div class="check gold-c">✓</div><span data-en="Discover festivals you didn't know existed" data-pt="Descubra festivais que você não sabia que existiam">Discover festivals you didn't know existed</span></li>
+          <li><div class="check gold-c">✓</div><span data-en="Buy sold-out passes from verified sellers" data-pt="Compre passes esgotados de vendedores verificados">Buy sold-out passes from verified sellers</span></li>
+          <li><div class="check gold-c">✓</div><span data-en="Sell instantly if you can't attend" data-pt="Venda instantaneamente se não puder comparecer">Sell instantly if you can't attend</span></li>
+          <li><div class="check gold-c">✓</div><span data-en="Fair prices, no hidden fees" data-pt="Preços justos, sem taxas ocultas">Fair prices, no hidden fees</span></li>
+          <li><div class="check gold-c">✓</div><span data-en="Buyer protection on every transaction" data-pt="Proteção ao comprador em cada transação">Buyer protection on every transaction</span></li>
         </ul>
       </div>
       <div class="dual-card org">
         <div class="dual-icon">🎪</div>
-        <div class="dual-who org-c">For organizers</div>
-        <div class="dual-title">Earn beyond the gate.</div>
-        <p class="dual-desc">Every resale on Passexplorer generates a royalty for you. Finally, a secondary market that works with organizers — not against them.</p>
+        <div class="dual-who org-c" data-en="For organizers" data-pt="Para organizadores">For organizers</div>
+        <div class="dual-title" data-en="Earn beyond the gate." data-pt="Lucre além das bilheterias.">Earn beyond the gate.</div>
+        <p class="dual-desc" data-en="Every resale on Passexplorer generates a royalty for you. Finally, a secondary market that works with organizers — not against them." data-pt="Cada revenda no Passexplorer gera royalties para você. Finalmente, um mercado secundário que trabalha com os organizadores — e não contra eles.">Every resale on Passexplorer generates a royalty for you. Finally, a secondary market that works with organizers — not against them.</p>
         <ul class="benefit-list">
-          <li><div class="check purple-c">✓</div>Earn a royalty on every resale transaction</li>
-          <li><div class="check purple-c">✓</div>Set price caps to prevent scalping</li>
-          <li><div class="check purple-c">✓</div>Know who holds your passes in real time</li>
-          <li><div class="check purple-c">✓</div>Reduce fraud with verified transfers</li>
-          <li><div class="check purple-c">✓</div>List your festival for free</li>
+          <li><div class="check purple-c">✓</div><span data-en="Earn a royalty on every resale transaction" data-pt="Receba royalties em cada transação de revenda">Earn a royalty on every resale transaction</span></li>
+          <li><div class="check purple-c">✓</div><span data-en="Set price caps to prevent scalping" data-pt="Defina tetos de preço para evitar cambismo">Set price caps to prevent scalping</span></li>
+          <li><div class="check purple-c">✓</div><span data-en="Know who holds your passes in real time" data-pt="Saiba quem tem seus passes em tempo real">Know who holds your passes in real time</span></li>
+          <li><div class="check purple-c">✓</div><span data-en="Reduce fraud with verified transfers" data-pt="Reduza fraudes com transferências verificadas">Reduce fraud with verified transfers</span></li>
+          <li><div class="check purple-c">✓</div><span data-en="List your festival for free" data-pt="Liste seu festival gratuitamente">List your festival for free</span></li>
         </ul>
       </div>
     </div>
@@ -410,34 +420,34 @@ footer{border-top:0.5px solid var(--border);padding:2rem 2.5rem;display:flex;ali
 
 <div class="stats">
   <div class="stats-inner">
-    <div><div class="stat-n">2,400+</div><div class="stat-l">Festivals listed</div></div>
-    <div><div class="stat-n">180+</div><div class="stat-l">Countries</div></div>
-    <div><div class="stat-n">50K+</div><div class="stat-l">Passes available</div></div>
-    <div><div class="stat-n">100%</div><div class="stat-l">Verified sellers</div></div>
-    <div><div class="stat-n">0%</div><div class="stat-l">Scalping tolerance</div></div>
+    <div><div class="stat-n">2,400+</div><div class="stat-l" data-en="Festivals listed" data-pt="Festivais listados">Festivals listed</div></div>
+    <div><div class="stat-n">180+</div><div class="stat-l" data-en="Countries" data-pt="Países">Countries</div></div>
+    <div><div class="stat-n">50K+</div><div class="stat-l" data-en="Passes available" data-pt="Passes disponíveis">Passes available</div></div>
+    <div><div class="stat-n">100%</div><div class="stat-l" data-en="Verified sellers" data-pt="Vendedores verificados">Verified sellers</div></div>
+    <div><div class="stat-n">0%</div><div class="stat-l" data-en="Scalping tolerance" data-pt="Tolerância a cambismo">Scalping tolerance</div></div>
   </div>
 </div>
 
 <section class="waitlist" id="waitlist">
   <div class="waitlist-glow"></div>
-  <h2 class="waitlist-title">Ready to<br><span>Explore?</span></h2>
-  <p class="waitlist-sub">Join the waitlist. Be the first in — whether you're a fan, a seller or a festival organizer.</p>
+  <h2 class="waitlist-title" data-en="Ready to<br><span>Explore?</span>" data-pt="Pronto para<br><span>Explorar?</span>">Ready to<br><span>Explore?</span></h2>
+  <p class="waitlist-sub" data-en="Join the waitlist. Be the first in — whether you're a fan, a seller or a festival organizer." data-pt="Entre na lista de espera. Seja o primeiro — seja você fã, vendedor ou organizador de festivais.">Join the waitlist. Be the first in — whether you're a fan, a seller or a festival organizer.</p>
   <div class="form-wrap" id="form-wrap">
-    <input class="form-input" type="email" placeholder="your@email.com" id="email-input" required>
-    <button class="form-btn" id="form-btn" onclick="handleSubmit()">Join waitlist</button>
+    <input class="form-input" type="email" placeholder="your@email.com" id="email-input" data-placeholder-en="your@email.com" data-placeholder-pt="seu@email.com" required>
+    <button class="form-btn" id="form-btn" onclick="handleSubmit()" data-en="Join waitlist" data-pt="Lista de espera">Join waitlist</button>
   </div>
-  <div class="success" id="success">You're on the list. We'll reach out before launch. 🎟️</div>
-  <div class="form-note">No spam. Early access only. Unsubscribe anytime.</div>
+  <div class="success" id="success" data-en="You're on the list. We'll reach out before launch. 🎟️" data-pt="Você está na lista. Entraremos em contato antes do lançamento. 🎟️">You're on the list. We'll reach out before launch. 🎟️</div>
+  <div class="form-note" data-en="No spam. Early access only. Unsubscribe anytime." data-pt="Sem spam. Somente acesso antecipado. Cancele quando quiser.">No spam. Early access only. Unsubscribe anytime.</div>
 </section>
 
 <footer>
   <div class="footer-logo">Pass<span>Explorer</span></div>
   <div class="footer-links">
-    <a href="#pillars">Features</a>
-    <a href="#for-organizers">Organizers</a>
-    <a href="#waitlist">Early access</a>
+    <a href="#pillars" data-en="Features" data-pt="Funcionalidades">Features</a>
+    <a href="#for-organizers" data-en="Organizers" data-pt="Organizadores">Organizers</a>
+    <a href="#waitlist" data-en="Early access" data-pt="Acesso antecipado">Early access</a>
   </div>
-  <div class="footer-copy">© 2025 Passexplorer. Coming soon.</div>
+  <div class="footer-copy" data-en="© 2025 Passexplorer. Coming soon." data-pt="© 2025 Passexplorer. Em breve.">© 2025 Passexplorer. Coming soon.</div>
 </footer>
 
 <!-- FLOATING NAV BUTTONS -->
@@ -559,6 +569,43 @@ window.addEventListener('scroll', function(){
   btn.addEventListener('mouseenter', function(){ this.style.transform='scale(1.1)'; });
   btn.addEventListener('mouseleave', function(){ this.style.transform='scale(1)'; });
 });
+
+// ── LANGUAGE TOGGLE ──
+function setLang(lang) {
+  // Update all standard text elements
+  document.querySelectorAll('[data-en]').forEach(function(el) {
+    var text = lang === 'pt' ? el.dataset.pt : el.dataset.en;
+    if (!text) return;
+    // Elements with innerHTML (contain <br>, <strong>, <span> etc.)
+    if (text.includes('<')) {
+      el.innerHTML = text;
+    } else {
+      el.textContent = text;
+    }
+  });
+
+  // Update input placeholders
+  document.querySelectorAll('[data-placeholder-en]').forEach(function(el) {
+    el.placeholder = lang === 'pt' ? el.dataset.placeholderPt : el.dataset.placeholderEn;
+  });
+
+  // Update active flag button
+  document.getElementById('lang-en').classList.toggle('active', lang === 'en');
+  document.getElementById('lang-pt').classList.toggle('active', lang === 'pt');
+
+  // Update <html lang> attribute
+  document.getElementById('html-root').setAttribute('lang', lang === 'pt' ? 'pt-BR' : 'en');
+
+  // Persist preference
+  localStorage.setItem('px-lang', lang);
+}
+
+// Init on load
+(function() {
+  var saved = localStorage.getItem('px-lang');
+  // Default to 'en'; use saved preference if present
+  setLang(saved === 'pt' ? 'pt' : 'en');
+})();
 </script>
 </body>
 </html>
