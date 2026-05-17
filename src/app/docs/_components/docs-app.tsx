@@ -4,19 +4,16 @@ import * as React from "react";
 import Link from "next/link";
 
 import { Icon, Wordmark } from "@/components/primitives";
+import { docsDict } from "@/lib/i18n/dicts/docs";
+import { useT } from "@/lib/i18n";
 
 /**
  * DocsApp — single-page docs site with sidebar nav and content swap.
  *
- * Ported from temp/PassExplorer (1) PageDocs: sticky header with gold
- * "Docs" pill + search input + apply CTA, left sidebar grouped by topic
- * (Get started / Event / Revenue / Operations) with active gold border,
- * center content well with DocHero + sections, right TOC rail. 8
- * sections: getting-started / apply / deploy-event / pricing-cap /
- * royalty / checkin / refund / tax.
- *
- * Pragmatic single-route implementation — state-driven switching, no
- * per-section URL (yet). Add per-section routes in v2 if SEO requires.
+ * Sticky header (Wordmark + gold "Docs" pill + search input + apply CTA),
+ * left sidebar grouped by topic (Get started / Event / Revenue /
+ * Operations) with active gold border, center content well, right TOC
+ * rail. 8 sections, all bilingual via useT(docsDict).
  */
 
 type Section =
@@ -29,48 +26,15 @@ type Section =
   | "refund"
   | "tax";
 
-interface NavGroup {
-  title: string;
-  items: { id: Section; label: string }[];
-}
-
-const NAV: NavGroup[] = [
-  {
-    title: "Get started",
-    items: [
-      { id: "getting-started", label: "Overview" },
-      { id: "apply",           label: "Apply as organizer" },
-    ],
-  },
-  {
-    title: "Event",
-    items: [
-      { id: "deploy-event", label: "Deploy event" },
-      { id: "pricing-cap",  label: "Price & resale cap" },
-    ],
-  },
-  {
-    title: "Revenue",
-    items: [
-      { id: "royalty", label: "Royalty automation" },
-      { id: "refund",  label: "Refund & cancel" },
-    ],
-  },
-  {
-    title: "Operations",
-    items: [
-      { id: "checkin", label: "Gate check-in" },
-      { id: "tax",     label: "Brazilian tax" },
-    ],
-  },
-];
+type T = (k: keyof (typeof docsDict)["en"]) => string;
 
 export function DocsApp() {
+  const t = useT(docsDict);
   const [section, setSection] = React.useState<Section>("getting-started");
 
   return (
     <div className="bg-night text-ink font-body min-h-dvh">
-      <Header />
+      <Header t={t} />
       <div
         className="mx-auto grid"
         style={{
@@ -79,18 +43,18 @@ export function DocsApp() {
           minHeight: "calc(100vh - 64px)",
         }}
       >
-        <Sidebar active={section} onPick={setSection} />
+        <Sidebar t={t} active={section} onPick={setSection} />
         <main className="min-w-0 px-14 py-15" style={{ padding: "60px 56px" }}>
-          {section === "getting-started" && <DocGettingStarted />}
-          {section === "apply" && <DocApply />}
-          {section === "deploy-event" && <DocDeployEvent />}
-          {section === "pricing-cap" && <DocPricingCap />}
-          {section === "royalty" && <DocRoyalty />}
-          {section === "checkin" && <DocCheckin />}
-          {section === "refund" && <DocRefund />}
-          {section === "tax" && <DocTax />}
+          {section === "getting-started" && <DocGettingStarted t={t} />}
+          {section === "apply"            && <DocApply t={t} />}
+          {section === "deploy-event"     && <DocDeployEvent t={t} />}
+          {section === "pricing-cap"      && <DocPricingCap t={t} />}
+          {section === "royalty"          && <DocRoyalty t={t} />}
+          {section === "checkin"          && <DocCheckin t={t} />}
+          {section === "refund"           && <DocRefund t={t} />}
+          {section === "tax"              && <DocTax t={t} />}
         </main>
-        <TOC />
+        <TOC t={t} />
       </div>
     </div>
   );
@@ -98,7 +62,7 @@ export function DocsApp() {
 
 // ─── Chrome ──────────────────────────────────────────────────────────
 
-function Header() {
+function Header({ t }: { t: T }) {
   return (
     <header
       className="sticky top-0 z-30 flex items-center justify-between border-b backdrop-blur-md"
@@ -124,7 +88,7 @@ function Header() {
             borderRadius: 999,
           }}
         >
-          Docs
+          {t("pill")}
         </span>
       </div>
       <div className="flex items-center gap-3.5">
@@ -142,7 +106,7 @@ function Header() {
           }}
         >
           <Icon name="search" size={14} />
-          <span className="flex-1">Search docs…</span>
+          <span className="flex-1">{t("search")}</span>
           <span
             className="font-mono"
             style={{
@@ -156,7 +120,7 @@ function Header() {
           </span>
         </div>
         <Link href="/faq" style={{ fontSize: 12, color: "var(--ink-dim)" }}>
-          FAQ
+          {t("nav_faq")}
         </Link>
         <Link
           href="/#waitlist"
@@ -171,7 +135,7 @@ function Header() {
             letterSpacing: "0.04em",
           }}
         >
-          Apply
+          {t("nav_apply")}
         </Link>
       </div>
     </header>
@@ -179,12 +143,45 @@ function Header() {
 }
 
 function Sidebar({
+  t,
   active,
   onPick,
 }: {
+  t: T;
   active: Section;
   onPick: (s: Section) => void;
 }) {
+  const groups: { title: string; items: { id: Section; label: string }[] }[] = [
+    {
+      title: t("g_start"),
+      items: [
+        { id: "getting-started", label: t("s_overview") },
+        { id: "apply",           label: t("s_apply")    },
+      ],
+    },
+    {
+      title: t("g_event"),
+      items: [
+        { id: "deploy-event", label: t("s_deploy")  },
+        { id: "pricing-cap",  label: t("s_pricing") },
+      ],
+    },
+    {
+      title: t("g_revenue"),
+      items: [
+        { id: "royalty", label: t("s_royalty") },
+        { id: "refund",  label: t("s_refund")  },
+      ],
+    },
+    {
+      title: t("g_ops"),
+      items: [
+        { id: "checkin", label: t("s_checkin") },
+        { id: "tax",     label: t("s_tax")     },
+      ],
+    },
+  ];
+
   return (
     <aside
       className="sticky self-start overflow-y-auto"
@@ -195,7 +192,7 @@ function Sidebar({
         height: "calc(100vh - 64px)",
       }}
     >
-      {NAV.map((g) => (
+      {groups.map((g) => (
         <div key={g.title} className="mb-7">
           <p
             className="font-bold uppercase mb-2.5"
@@ -237,7 +234,14 @@ function Sidebar({
   );
 }
 
-function TOC() {
+function TOC({ t }: { t: T }) {
+  const links = [
+    t("toc_intro"),
+    t("toc_prereq"),
+    t("toc_steps"),
+    t("toc_edge"),
+    t("toc_next"),
+  ];
   return (
     <aside
       className="sticky self-start overflow-y-auto"
@@ -255,28 +259,26 @@ function TOC() {
           letterSpacing: "0.18em",
         }}
       >
-        On this page
+        {t("toc_title")}
       </p>
       <nav
         className="flex flex-col gap-1.5"
         style={{ borderLeft: "1px solid var(--line)" }}
       >
-        {["Introduction", "Prerequisites", "Steps", "Edge cases", "Next"].map(
-          (l) => (
-            <a
-              key={l}
-              href="#"
-              className="text-left"
-              style={{
-                padding: "4px 12px",
-                fontSize: 12,
-                color: "var(--ink-muted)",
-              }}
-            >
-              {l}
-            </a>
-          ),
-        )}
+        {links.map((l) => (
+          <a
+            key={l}
+            href="#"
+            className="text-left"
+            style={{
+              padding: "4px 12px",
+              fontSize: 12,
+              color: "var(--ink-muted)",
+            }}
+          >
+            {l}
+          </a>
+        ))}
       </nav>
     </aside>
   );
@@ -494,85 +496,63 @@ function Steps({
 
 // ─── Doc sections ────────────────────────────────────────────────────
 
-function DocGettingStarted() {
+function DocGettingStarted({ t }: { t: T }) {
   return (
     <article>
-      <DocHero
-        eyebrow="Get started"
-        title="Pass Explorer in 5 minutes."
-        lead="The first secondary marketplace where organizers earn royalties on every resale. Built on Stellar, atomic-split payments, on-chain price caps."
-      />
-      <H2>What you get</H2>
-      <P>
-        Three things a regular secondary market can&apos;t give you: a royalty
-        on every resale (default 5%), a hard cap on resale prices enforced
-        by the smart contract, and instant settlement in ~3 seconds with
-        sub-cent fees on Stellar.
-      </P>
-      <Callout tone="gold" title="No web3 jargon needed">
-        Buyers log in with Google, Apple, or email via Privy. Their Stellar
-        wallet is provisioned behind the scenes — no seed phrase, no plugins.
+      <DocHero eyebrow={t("gs_eyebrow")} title={t("gs_title")} lead={t("gs_lead")} />
+      <H2>{t("gs_h1")}</H2>
+      <P>{t("gs_p1")}</P>
+      <Callout tone="gold" title={t("gs_call_t")}>
+        {t("gs_call_b")}
       </Callout>
-      <H2>How long to onboard</H2>
+      <H2>{t("gs_h2")}</H2>
       <Steps
         items={[
-          { title: "Apply", body: "3-step KYC form. ~5 minutes." },
-          { title: "Wait for approval", body: "Our admin reviews within 5 business days. You get email." },
-          { title: "Deploy event", body: "4-step wizard, real Stellar tx. ~2 minutes." },
-          { title: "Mint tickets", body: "Batch mint to any wallet. Live the moment the tx settles." },
+          { title: t("gs_st1_t"), body: t("gs_st1_b") },
+          { title: t("gs_st2_t"), body: t("gs_st2_b") },
+          { title: t("gs_st3_t"), body: t("gs_st3_b") },
+          { title: t("gs_st4_t"), body: t("gs_st4_b") },
         ]}
       />
     </article>
   );
 }
 
-function DocApply() {
+function DocApply({ t }: { t: T }) {
   return (
     <article>
-      <DocHero
-        eyebrow="Apply"
-        title="Become a Pass Explorer organizer."
-        lead="We approve organizers manually — each application is reviewed by our team and signed on the Factory contract."
-      />
-      <H2>What you need</H2>
-      <P>
-        Valid Brazilian CNPJ + responsible person + email. We do KYC via
-        Privy plus a public CNPJ status check at the Receita Federal.
-      </P>
-      <H2>The form</H2>
+      <DocHero eyebrow={t("ap_eyebrow")} title={t("ap_title")} lead={t("ap_lead")} />
+      <H2>{t("ap_h1")}</H2>
+      <P>{t("ap_p1")}</P>
+      <H2>{t("ap_h2")}</H2>
       <Steps
         items={[
-          { title: "Identity", body: "Legal entity name, CNPJ, main festival." },
-          { title: "Responsible", body: "Full name, email, social link." },
-          { title: "Operation", body: "Stellar wallet (Privy will provision), estimated annual GMV." },
+          { title: t("ap_st1_t"), body: t("ap_st1_b") },
+          { title: t("ap_st2_t"), body: t("ap_st2_b") },
+          { title: t("ap_st3_t"), body: t("ap_st3_b") },
         ]}
       />
-      <Callout tone="purple" title="KYC via Privy + public CNPJ check">
-        Privy handles the responsible-person KYC. We verify the CNPJ
-        status against Receita Federal. No documents to upload.
+      <Callout tone="purple" title={t("ap_call_t")}>
+        {t("ap_call_b")}
       </Callout>
     </article>
   );
 }
 
-function DocDeployEvent() {
+function DocDeployEvent({ t }: { t: T }) {
   return (
     <article>
-      <DocHero
-        eyebrow="Event"
-        title="Deploy your event on Stellar."
-        lead="The 4-step wizard records your event params on the Factory contract. Your event is live the moment the tx settles."
-      />
-      <H2>The 4 steps</H2>
+      <DocHero eyebrow={t("de_eyebrow")} title={t("de_title")} lead={t("de_lead")} />
+      <H2>{t("de_h1")}</H2>
       <Steps
         items={[
-          { title: "Details", body: "Event name, venue, city, date." },
-          { title: "Tickets", body: "Total supply + primary price (in XLM)." },
-          { title: "Rules", body: "Pick the resale cap multiplier (1.2× / 1.5× / 2×) and royalty (3 / 5 / 7 / 10%)." },
-          { title: "Deploy", body: "Review + sign with Privy. ~3 seconds." },
+          { title: t("de_st1_t"), body: t("de_st1_b") },
+          { title: t("de_st2_t"), body: t("de_st2_b") },
+          { title: t("de_st3_t"), body: t("de_st3_b") },
+          { title: t("de_st4_t"), body: t("de_st4_b") },
         ]}
       />
-      <H2>What goes on-chain</H2>
+      <H2>{t("de_h2")}</H2>
       <Code>{`Factory.deploy_event({
   event_name,
   event_date,        // unix seconds
@@ -583,139 +563,85 @@ function DocDeployEvent() {
   max_resale_price,  // stroops (u128)
   royalty_percentage // basis points
 })`}</Code>
-      <Callout tone="gold" title="v1 contract caveat">
-        deploy_event in v1 records the event in Factory storage but returns
-        a placeholder address. The actual EventNFT contract instance is
-        deployed by our team after approval until v2 lands the auto-deployer.
+      <Callout tone="gold" title={t("de_call_t")}>
+        {t("de_call_b")}
       </Callout>
     </article>
   );
 }
 
-function DocPricingCap() {
+function DocPricingCap({ t }: { t: T }) {
   return (
     <article>
-      <DocHero
-        eyebrow="Pricing"
-        title="Set the price. Set the cap."
-        lead="The primary price is what you charge on first sale. The cap is the maximum a holder can resell for — enforced on-chain."
-      />
-      <H2>How the cap is enforced</H2>
-      <P>
-        When a holder lists their pass on the marketplace, the contract
-        checks the listing price against your cap. If above, the
-        transaction reverts. Scalpers can&apos;t list above the cap —
-        period.
-      </P>
+      <DocHero eyebrow={t("pc_eyebrow")} title={t("pc_title")} lead={t("pc_lead")} />
+      <H2>{t("pc_h1")}</H2>
+      <P>{t("pc_p1")}</P>
       <Code>{`// Marketplace.list_ticket()
 require(price <= EventNFT.max_resale_price, "above cap");`}</Code>
-      <H2>Picking the cap</H2>
-      <P>
-        Default is 1.5× the primary. Anything lower than 1.2× hurts
-        liquidity (sellers can&apos;t recoup costs). Anything higher than
-        2× starts to look like organizer-blessed scalping.
-      </P>
+      <H2>{t("pc_h2")}</H2>
+      <P>{t("pc_p2")}</P>
     </article>
   );
 }
 
-function DocRoyalty() {
+function DocRoyalty({ t }: { t: T }) {
   return (
     <article>
-      <DocHero
-        eyebrow="Revenue"
-        title="Royalty on every resale."
-        lead="Set once at deploy. Paid automatically into your wallet in the same atomic transaction as the seller payout."
-      />
-      <H2>How the split works</H2>
-      <P>
-        When a buyer pays, the Marketplace contract splits the payment in
-        a single atomic transaction:
-      </P>
+      <DocHero eyebrow={t("ry_eyebrow")} title={t("ry_title")} lead={t("ry_lead")} />
+      <H2>{t("ry_h1")}</H2>
+      <P>{t("ry_p1")}</P>
       <Code>{`buyer pays:        100 XLM
   ↓
 seller receives:    93 XLM
 organizer royalty:  5 XLM   (5%)
 platform fee:       2 XLM`}</Code>
-      <Callout tone="purple" title="Atomic means atomic">
-        The three transfers happen in one Stellar transaction. There&apos;s
-        no scenario where the seller gets paid and you don&apos;t. The
-        contract reverts the entire payment if any branch fails.
+      <Callout tone="purple" title={t("ry_call_t")}>
+        {t("ry_call_b")}
       </Callout>
     </article>
   );
 }
 
-function DocCheckin() {
+function DocCheckin({ t }: { t: T }) {
   return (
     <article>
-      <DocHero
-        eyebrow="Operations"
-        title="Gate check-in on Stellar."
-        lead="Your porteiro app scans QR codes that resolve to on-chain tokens. Each scan flips the token's used flag in one tx."
-      />
-      <H2>What the scanner sees</H2>
-      <P>
-        The fan opens their pass in the Pass Explorer app and taps Present
-        at the gate. The QR encodes the token id + a signed timestamp
-        (valid 30s) + the event contract address. Your scanner verifies
-        the signature offline and posts the check_in tx.
-      </P>
-      <H2>Edge cases handled</H2>
+      <DocHero eyebrow={t("ck_eyebrow")} title={t("ck_title")} lead={t("ck_lead")} />
+      <H2>{t("ck_h1")}</H2>
+      <P>{t("ck_p1")}</P>
+      <H2>{t("ck_h2")}</H2>
       <Steps
         items={[
-          { title: "Already used", body: "Contract returns Used. Scanner shows BLOCKED red." },
-          { title: "Wrong event", body: "Scanner refuses before posting. No wasted gas." },
-          { title: "Unknown token", body: "Token doesn't exist in EventNFT supply. Blocked." },
-          { title: "Expired QR", body: "Signature timestamp older than 30s. Asks fan to refresh." },
+          { title: t("ck_st1_t"), body: t("ck_st1_b") },
+          { title: t("ck_st2_t"), body: t("ck_st2_b") },
+          { title: t("ck_st3_t"), body: t("ck_st3_b") },
+          { title: t("ck_st4_t"), body: t("ck_st4_b") },
         ]}
       />
     </article>
   );
 }
 
-function DocRefund() {
+function DocRefund({ t }: { t: T }) {
   return (
     <article>
-      <DocHero
-        eyebrow="Revenue"
-        title="Refund and cancellation."
-        lead="On-chain transactions are final. If you cancel the event or need to refund individual passes, here's the path."
-      />
-      <H2>Event-wide cancellation</H2>
-      <P>
-        You set a cancellation policy at deploy time and surface it on the
-        event page. If the event is cancelled, you (the organizer) trigger
-        a contract method that returns a proportional refund from the
-        Marketplace escrow to each ticket holder&apos;s wallet.
-      </P>
-      <Callout tone="red" title="v1 limitation">
-        Bulk refund automation lands in v2. In v1, refunds are coordinated
-        off-chain via support@passexplorer.com. We&apos;ll send a one-time
-        airdrop to your holders.
+      <DocHero eyebrow={t("rf_eyebrow")} title={t("rf_title")} lead={t("rf_lead")} />
+      <H2>{t("rf_h1")}</H2>
+      <P>{t("rf_p1")}</P>
+      <Callout tone="red" title={t("rf_call_t")}>
+        {t("rf_call_b")}
       </Callout>
     </article>
   );
 }
 
-function DocTax() {
+function DocTax({ t }: { t: T }) {
   return (
     <article>
-      <DocHero
-        eyebrow="Operations"
-        title="Brazilian tax considerations."
-        lead="Pass Explorer doesn't withhold tax. You're responsible for declaring royalty income to Receita Federal."
-      />
-      <H2>What gets reported</H2>
-      <P>
-        Every transaction on Stellar is public and timestamped. We provide
-        a CSV export of your royalty stream by month, ready to hand to your
-        accountant or feed into your DRE.
-      </P>
-      <Callout tone="gold" title="Not legal advice">
-        We&apos;re engineers, not auditors. Talk to your accountant about
-        how royalty income is treated under your specific tax regime
-        (Simples Nacional vs Lucro Real vs Presumido).
+      <DocHero eyebrow={t("tx_eyebrow")} title={t("tx_title")} lead={t("tx_lead")} />
+      <H2>{t("tx_h1")}</H2>
+      <P>{t("tx_p1")}</P>
+      <Callout tone="gold" title={t("tx_call_t")}>
+        {t("tx_call_b")}
       </Callout>
     </article>
   );
