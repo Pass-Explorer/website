@@ -1,24 +1,27 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 
-import { Poster, type PosterSlug } from "@/components/primitives";
 import { landingDict } from "@/lib/i18n/dicts/landing";
 import { useT } from "@/lib/i18n";
 
 /**
  * LandingMarketplacePreview — 3-column grid of festival cards with
- * procedural posters, dates, prices, and sold-out badges.
+ * royalty-free Unsplash crowd/stage photography, dates, prices, and
+ * sold-out badges.
  *
- * Ported from web-landing.jsx LandingMarketplacePreview. Each card has
- * a Poster header + Bebas title + city + gold price (or purple "Resale"
- * for sold-out). Click-through goes to the app's event detail page.
+ * Photos come from images.unsplash.com (Unsplash License: free for
+ * commercial use, no attribution required). Each card has a photo
+ * header + Bebas title + city + gold price (or purple "Resale" for
+ * sold-out). Click-through goes to the app's event detail page.
  */
 
 interface PreviewEvent {
   id: string;
   slug: string;
-  poster: PosterSlug;
+  photo: string;
+  alt: string;
   title: string;
   dateShort: string;
   city: string;
@@ -26,11 +29,14 @@ interface PreviewEvent {
   soldOut?: boolean;
 }
 
+// Stable Unsplash photo IDs. URLs are built as:
+// https://images.unsplash.com/photo-{id}?w=800&h=520&fit=crop&q=80&auto=format
 const EVENTS: PreviewEvent[] = [
   {
     id: "lolla",
     slug: "lollapalooza-brasil-2026",
-    poster: "lolla",
+    photo: "1470225620780-dba8ba36b745", // Anthony DELANOIX — festival crowd
+    alt: "Festival crowd at night with stage lights",
     title: "Lollapalooza Brasil",
     dateShort: "03 NOV",
     city: "São Paulo",
@@ -39,7 +45,8 @@ const EVENTS: PreviewEvent[] = [
   {
     id: "primavera",
     slug: "primavera-sound-sp-2026",
-    poster: "primavera",
+    photo: "1501281668745-f7f57925c3b4", // Aranxa Esteve — crowd silhouettes
+    alt: "Crowd silhouettes at indie concert",
     title: "Primavera Sound SP",
     dateShort: "28 NOV",
     city: "São Paulo",
@@ -49,7 +56,8 @@ const EVENTS: PreviewEvent[] = [
   {
     id: "rir",
     slug: "rock-in-rio-2026",
-    poster: "rir",
+    photo: "1459749411175-04bf5292ceea", // Anthony DELANOIX — stage lights from above
+    alt: "Stage lights and crowd from above",
     title: "Rock in Rio",
     dateShort: "12 SEP",
     city: "Rio de Janeiro",
@@ -58,7 +66,8 @@ const EVENTS: PreviewEvent[] = [
   {
     id: "town",
     slug: "the-town-2026",
-    poster: "town",
+    photo: "1506157786151-b8491531f063", // Hanny Naibaho — colorful festival
+    alt: "Festival stage with colorful lights",
     title: "The Town",
     dateShort: "18 SEP",
     city: "São Paulo",
@@ -67,7 +76,8 @@ const EVENTS: PreviewEvent[] = [
   {
     id: "amanhecer",
     slug: "festival-amanhecer-2026",
-    poster: "amanhecer",
+    photo: "1493225457124-a3eb161ffa5f", // Andre Benz — concert silhouette with stage lights
+    alt: "Concert crowd silhouettes against warm stage lights",
     title: "Festival Amanhecer",
     dateShort: "14 DEC",
     city: "Minas Gerais",
@@ -76,13 +86,18 @@ const EVENTS: PreviewEvent[] = [
   {
     id: "ultra",
     slug: "ultra-brasil-2027",
-    poster: "ultra",
+    photo: "1429962714451-bb934ecdc4ec", // Vishnu R Nair — concert with stage
+    alt: "Electronic music stage with lasers",
     title: "Ultra Brasil",
     dateShort: "24 JAN",
     city: "São Paulo",
     primaryXlm: 480,
   },
 ];
+
+function unsplashUrl(id: string, w = 800, h = 520) {
+  return `https://images.unsplash.com/photo-${id}?w=${w}&h=${h}&fit=crop&q=80&auto=format`;
+}
 
 export function LandingMarketplacePreview() {
   const t = useT(landingDict);
@@ -134,7 +149,29 @@ export function LandingMarketplacePreview() {
                 border: "1px solid var(--line)",
               }}
             >
-              <Poster slug={e.poster} id={e.id} height={220} />
+              <div
+                className="relative overflow-hidden"
+                style={{ width: "100%", height: 220 }}
+              >
+                <Image
+                  src={unsplashUrl(e.photo)}
+                  alt={e.alt}
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  style={{ objectFit: "cover" }}
+                  unoptimized
+                />
+                {/* Soft bottom fade for visual rhythm with the card body */}
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-x-0 bottom-0"
+                  style={{
+                    height: 60,
+                    background:
+                      "linear-gradient(to bottom, transparent, var(--night-card))",
+                  }}
+                />
+              </div>
               {e.soldOut && (
                 <div
                   className="absolute top-3.5 right-3.5 font-bold uppercase backdrop-blur-md"
