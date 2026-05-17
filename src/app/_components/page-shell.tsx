@@ -99,10 +99,10 @@ export function PageShell({
 function PageHeader({ active }: { active?: PageKey }) {
   const t = useT(commonDict);
   const nav: { key: PageKey; label: string; href: string }[] = [
-    { key: "festivals",  label: t("nav_festivals"),    href: "/#"      },
-    { key: "howitworks", label: t("nav_how_it_works"), href: "/#how"   },
-    { key: "faq",        label: t("nav_faq"),          href: "/faq"    },
-    { key: "about",      label: t("nav_about"),        href: "/about"  },
+    { key: "festivals",  label: t("nav_festivals"),    href: "/festivals" },
+    { key: "howitworks", label: t("nav_how_it_works"), href: "/#how"      },
+    { key: "faq",        label: t("nav_faq"),          href: "/faq"       },
+    { key: "about",      label: t("nav_about"),        href: "/about"     },
   ];
   return (
     <header
@@ -181,9 +181,9 @@ function PageFooter() {
     {
       title: t("footer_product"),
       links: [
-        { label: t("nav_festivals"),    href: "/#" },
-        { label: t("nav_how_it_works"), href: "/#how" },
-        { label: t("nav_faq"),          href: "/faq" },
+        { label: t("nav_festivals"),    href: "/festivals" },
+        { label: t("nav_how_it_works"), href: "/#how"      },
+        { label: t("nav_faq"),          href: "/faq"       },
         { label: t("footer_changelog"), href: "/changelog" },
       ],
     },

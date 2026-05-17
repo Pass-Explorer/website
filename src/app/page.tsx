@@ -375,10 +375,10 @@ function Footer() {
     {
       title: c("footer_product"),
       links: [
-        { label: c("nav_festivals"),    href: "/#"    },
-        { label: c("nav_docs"),         href: "/docs" },
-        { label: c("nav_how_it_works"), href: "/#how" },
-        { label: c("nav_faq"),          href: "/faq"  },
+        { label: c("nav_festivals"),    href: "/festivals" },
+        { label: c("nav_docs"),         href: "/docs"      },
+        { label: c("nav_how_it_works"), href: "/#how"      },
+        { label: c("nav_faq"),          href: "/faq"       },
       ],
     },
     {

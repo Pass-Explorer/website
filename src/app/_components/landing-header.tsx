@@ -37,10 +37,10 @@ export function LandingHeader() {
       <div className="flex items-center gap-8">
         <nav className="hidden items-center gap-8 md:flex">
           {[
-            { label: t("nav_festivals"),    href: "#"     },
-            { label: t("nav_docs"),         href: "/docs" },
-            { label: t("nav_how_it_works"), href: "#how"  },
-            { label: t("nav_faq"),          href: "/faq"  },
+            { label: t("nav_festivals"),    href: "/festivals" },
+            { label: t("nav_docs"),         href: "/docs"      },
+            { label: t("nav_how_it_works"), href: "#how"       },
+            { label: t("nav_faq"),          href: "/faq"       },
           ].map((l) => (
             <Link
               key={l.label}
