@@ -180,6 +180,19 @@ export function LandingMarketplacePreview() {
             </Link>
           ))}
         </div>
+
+        {/* Honest pre-launch disclaimer */}
+        <p
+          className="mt-8 text-center"
+          style={{
+            fontSize: 11,
+            color: "var(--ink-quiet)",
+            letterSpacing: "0.06em",
+            marginTop: 32,
+          }}
+        >
+          {t("market_disclaimer")}
+        </p>
       </div>
     </section>
   );

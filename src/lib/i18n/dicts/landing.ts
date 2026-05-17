@@ -92,6 +92,7 @@ export const landingDict = {
     market_subtitle: "From official releases to fan resales. All in one feed.",
     market_sold_out: "Sold out",
     market_resale:   "Resale",
+    market_disclaimer: "Illustrative cards · real listings start when mainnet ships",
 
     // ─── For organizers ───────────────────────────────────────────────
     org_eyebrow:    "For organizers",
@@ -224,6 +225,7 @@ export const landingDict = {
     market_subtitle: "De lançamentos oficiais a revendas de fãs. Tudo em um único feed.",
     market_sold_out: "Esgotado",
     market_resale:   "Revenda",
+    market_disclaimer: "Cards ilustrativos · listagens reais começam no mainnet",
 
     // ─── For organizers ───────────────────────────────────────────────
     org_eyebrow:    "Para organizadores",
