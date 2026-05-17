@@ -75,37 +75,45 @@ function Pillars() {
   } as const;
 
   return (
-    <section className="bg-night" style={{ padding: "120px 48px" }}>
-      <div className="mx-auto" style={{ maxWidth: 1240 }}>
-        <p className="eyebrow mb-4" style={{ color: "var(--gold)" }}>
+    <section className="bg-night" style={{ padding: "96px 32px" }}>
+      <div className="mx-auto" style={{ maxWidth: 1100 }}>
+        <p
+          className="eyebrow text-center"
+          style={{
+            color: "var(--gold)",
+            fontSize: "0.68rem",
+            letterSpacing: "0.22em",
+            marginBottom: "0.75rem",
+          }}
+        >
           {t("pillars_eyebrow")}
         </p>
         <h2
-          className="display"
+          className="display text-center"
           style={{
-            fontSize: "clamp(2.5rem, 6vw, 4.5rem)",
-            lineHeight: 0.95,
-            maxWidth: 900,
-            margin: 0,
+            fontSize: "clamp(2.2rem, 5vw, 3.8rem)",
+            letterSpacing: "0.04em",
+            lineHeight: 1,
+            margin: "0 0 1rem",
           }}
         >
           {t("pillars_title_a")}{" "}
           <span style={{ color: "var(--gold)" }}>{t("pillars_title_b")}</span>
         </h2>
         <p
-          className="mt-4"
+          className="mx-auto text-center font-light"
           style={{
-            fontSize: 17,
+            fontSize: "0.95rem",
             color: "var(--ink-dim)",
-            lineHeight: 1.55,
-            maxWidth: 540,
+            lineHeight: 1.7,
+            maxWidth: 480,
           }}
         >
           {t("pillars_lede")}
         </p>
         <div
           className="grid gap-6 md:grid-cols-3"
-          style={{ marginTop: 80 }}
+          style={{ marginTop: 64 }}
         >
           {pillars.map((p) => (
             <div
@@ -179,21 +187,31 @@ function HowItWorks() {
     <section
       id="how"
       className="bg-night-mid"
-      style={{ padding: "120px 48px" }}
+      style={{
+        padding: "96px 32px",
+        borderTop: "0.5px solid var(--line)",
+        borderBottom: "0.5px solid var(--line)",
+      }}
     >
-      <div className="mx-auto" style={{ maxWidth: 1240 }}>
+      <div className="mx-auto" style={{ maxWidth: 1000 }}>
         <p
-          className="eyebrow mb-4 text-center"
-          style={{ color: "var(--gold)" }}
+          className="eyebrow text-center"
+          style={{
+            color: "var(--gold)",
+            fontSize: "0.68rem",
+            letterSpacing: "0.22em",
+            marginBottom: "0.75rem",
+          }}
         >
           {t("how_eyebrow")}
         </p>
         <h2
           className="display text-center"
           style={{
-            fontSize: "clamp(2.5rem, 5vw, 4rem)",
-            lineHeight: 0.95,
-            margin: "0 0 80px",
+            fontSize: "clamp(2.2rem, 5vw, 3.8rem)",
+            letterSpacing: "0.04em",
+            lineHeight: 1,
+            margin: "0 0 64px",
           }}
         >
           {t("how_title")}

@@ -2,9 +2,9 @@
 
 import Link from "next/link";
 
-import { Icon, Wordmark } from "@/components/primitives";
+import { Icon, LangSelector, Wordmark } from "@/components/primitives";
 import { commonDict } from "@/lib/i18n/dicts/common";
-import { type Lang, useLang, useT } from "@/lib/i18n";
+import { useT } from "@/lib/i18n";
 
 /**
  * LandingHeader — sticky top nav for the marketing site.
@@ -18,7 +18,6 @@ const APP_URL =
   process.env.NEXT_PUBLIC_APP_URL ?? "https://app.passexplorer.com";
 
 export function LandingHeader() {
-  const { lang, setLang } = useLang();
   const t = useT(commonDict);
 
   return (
@@ -89,43 +88,7 @@ export function LandingHeader() {
           <Icon name="arrow" size={14} />
         </a>
 
-        {/* Language selector — flag pill */}
-        <div
-          className="hidden md:inline-flex"
-          style={{
-            gap: 4,
-            padding: 3,
-            background: "rgba(255,255,255,0.04)",
-            border: "1px solid var(--line)",
-            borderRadius: 6,
-          }}
-        >
-          {[
-            { id: "en" as const, flag: "🇺🇸", title: "English"    },
-            { id: "pt" as const, flag: "🇧🇷", title: "Português" },
-          ].map((o) => (
-            <button
-              key={o.id}
-              onClick={() => setLang(o.id as Lang)}
-              title={o.title}
-              aria-label={o.title}
-              aria-pressed={lang === o.id}
-              className="cursor-pointer transition-all"
-              style={{
-                padding: "4px 8px",
-                borderRadius: 4,
-                background:
-                  lang === o.id ? "rgba(232,184,75,0.14)" : "transparent",
-                opacity: lang === o.id ? 1 : 0.5,
-                filter: lang === o.id ? "none" : "grayscale(60%)",
-                fontSize: 16,
-                lineHeight: 1,
-              }}
-            >
-              {o.flag}
-            </button>
-          ))}
-        </div>
+        <LangSelector />
       </div>
     </header>
   );

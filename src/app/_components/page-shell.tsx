@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 
-import { Icon, Wordmark } from "@/components/primitives";
+import { Icon, LangSelector, Wordmark } from "@/components/primitives";
 import { commonDict } from "@/lib/i18n/dicts/common";
 import { useT } from "@/lib/i18n";
 
@@ -165,6 +165,8 @@ function PageHeader({ active }: { active?: PageKey }) {
           {t("cta_join_waitlist")}
           <Icon name="arrow" size={14} />
         </a>
+
+        <LangSelector />
       </div>
     </header>
   );

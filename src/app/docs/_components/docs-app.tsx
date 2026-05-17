@@ -3,7 +3,7 @@
 import * as React from "react";
 import Link from "next/link";
 
-import { Icon, Wordmark } from "@/components/primitives";
+import { Icon, LangSelector, Wordmark } from "@/components/primitives";
 import { docsDict } from "@/lib/i18n/dicts/docs";
 import { useT } from "@/lib/i18n";
 
@@ -137,6 +137,8 @@ function Header({ t }: { t: T }) {
         >
           {t("nav_apply")}
         </Link>
+
+        <LangSelector />
       </div>
     </header>
   );

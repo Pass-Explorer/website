@@ -92,20 +92,36 @@ export function LandingMarketplacePreview() {
       style={{ padding: "120px 48px" }}
     >
       <div className="mx-auto" style={{ maxWidth: 1240 }}>
-        <p className="eyebrow mb-4" style={{ color: "var(--gold)" }}>
+        <p
+          className="eyebrow mb-3 text-center"
+          style={{ color: "var(--gold)" }}
+        >
           {t("market_eyebrow")}
         </p>
         <h2
-          className="display"
+          className="display text-center"
           style={{
-            fontSize: "clamp(2.5rem, 6vw, 4.5rem)",
-            lineHeight: 0.95,
-            margin: "0 0 60px",
+            fontSize: "clamp(2.2rem, 5vw, 3.8rem)",
+            lineHeight: 1,
+            letterSpacing: "0.04em",
+            margin: 0,
           }}
         >
-          {t("market_title_a")}{" "}
-          <span style={{ color: "var(--gold)" }}>{t("market_title_b")}</span>
+          {t("market_title")}
         </h2>
+        <p
+          className="mx-auto text-center font-light"
+          style={{
+            fontSize: "0.95rem",
+            color: "var(--ink-dim)",
+            maxWidth: 480,
+            lineHeight: 1.7,
+            marginTop: 12,
+            marginBottom: 60,
+          }}
+        >
+          {t("market_subtitle")}
+        </p>
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {EVENTS.map((e) => (
             <Link
