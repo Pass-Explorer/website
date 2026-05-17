@@ -1,6 +1,10 @@
+"use client";
+
 import Link from "next/link";
 
 import { Poster, type PosterSlug } from "@/components/primitives";
+import { landingDict } from "@/lib/i18n/dicts/landing";
+import { useT } from "@/lib/i18n";
 
 /**
  * LandingMarketplacePreview — 3-column grid of festival cards with
@@ -81,6 +85,7 @@ const EVENTS: PreviewEvent[] = [
 ];
 
 export function LandingMarketplacePreview() {
+  const t = useT(landingDict);
   return (
     <section
       className="bg-night overflow-hidden"
@@ -88,7 +93,7 @@ export function LandingMarketplacePreview() {
     >
       <div className="mx-auto" style={{ maxWidth: 1240 }}>
         <p className="eyebrow mb-4" style={{ color: "var(--gold)" }}>
-          Marketplace
+          {t("market_eyebrow")}
         </p>
         <h2
           className="display"
@@ -98,8 +103,8 @@ export function LandingMarketplacePreview() {
             margin: "0 0 60px",
           }}
         >
-          Every festival.{" "}
-          <span style={{ color: "var(--gold)" }}>Your name.</span>
+          {t("market_title_a")}{" "}
+          <span style={{ color: "var(--gold)" }}>{t("market_title_b")}</span>
         </h2>
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {EVENTS.map((e) => (
@@ -126,7 +131,7 @@ export function LandingMarketplacePreview() {
                     letterSpacing: "0.12em",
                   }}
                 >
-                  Sold out
+                  {t("market_sold_out")}
                 </div>
               )}
               <div className="px-5 py-5">
@@ -152,7 +157,7 @@ export function LandingMarketplacePreview() {
                       color: e.soldOut ? "var(--purple)" : "var(--gold)",
                     }}
                   >
-                    {e.soldOut ? "Resale" : `${e.primaryXlm} XLM`}
+                    {e.soldOut ? t("market_resale") : `${e.primaryXlm} XLM`}
                   </span>
                 </div>
               </div>

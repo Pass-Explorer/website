@@ -1,6 +1,10 @@
+"use client";
+
 import Link from "next/link";
 
 import { Icon } from "@/components/primitives";
+import { landingDict } from "@/lib/i18n/dicts/landing";
+import { useT } from "@/lib/i18n";
 
 /**
  * LandingForOrganizers — split layout with copy + mock royalty dashboard.
@@ -12,6 +16,7 @@ import { Icon } from "@/components/primitives";
  */
 
 export function LandingForOrganizers() {
+  const t = useT(landingDict);
   return (
     <section
       className="bg-night-mid relative overflow-hidden"
@@ -27,7 +32,7 @@ export function LandingForOrganizers() {
             className="eyebrow mb-4"
             style={{ color: "var(--purple)" }}
           >
-            For organizers
+            {t("org_eyebrow")}
           </p>
           <h2
             className="display"
@@ -37,8 +42,8 @@ export function LandingForOrganizers() {
               margin: 0,
             }}
           >
-            Resales finally{" "}
-            <span style={{ color: "var(--purple)" }}>pay you.</span>
+            {t("org_title_a")}{" "}
+            <span style={{ color: "var(--purple)" }}>{t("org_title_b")}</span>
           </h2>
           <p
             className="mt-6 max-w-xl"
@@ -48,17 +53,14 @@ export function LandingForOrganizers() {
               color: "var(--ink-dim)",
             }}
           >
-            Every ticket resold on Pass Explorer pays a royalty straight to
-            your wallet. You set the cap. You control the rescue path. You
-            don't compete with scalpers — you earn on every transaction
-            that exists.
+            {t("org_body")}
           </p>
           <div className="mt-8 grid max-w-xl grid-cols-2 gap-3.5">
             {[
-              { v: "1.2k", l: "Royalty captured · month", suffix: "XLM" },
-              { v: "23",   l: "Resales with royalty",     suffix: "" },
-              { v: "5%",   l: "Default · you choose",     suffix: "" },
-              { v: "0",    l: "Off-platform scalpers",    suffix: "" },
+              { v: "1.2k", l: t("org_stat_cap_l"),     suffix: "XLM" },
+              { v: "23",   l: t("org_stat_sales_l"),   suffix: "" },
+              { v: "5%",   l: t("org_stat_default_l"), suffix: "" },
+              { v: "0",    l: t("org_stat_zero_l"),    suffix: "" },
             ].map((s) => (
               <div
                 key={s.l}
@@ -103,7 +105,7 @@ export function LandingForOrganizers() {
               letterSpacing: "0.02em",
             }}
           >
-            Apply as organizer
+            {t("org_cta")}
             <Icon name="arrow" size={16} />
           </Link>
         </div>
@@ -122,7 +124,7 @@ export function LandingForOrganizers() {
           <div className="mb-5 flex items-baseline justify-between">
             <div>
               <p className="eyebrow" style={{ color: "var(--ink-muted)" }}>
-                Royalty incoming
+                {t("org_dash_label")}
               </p>
               <p
                 className="display tabular-nums mt-1 whitespace-nowrap"

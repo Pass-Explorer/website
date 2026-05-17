@@ -1,15 +1,20 @@
+"use client";
+
+import { landingDict } from "@/lib/i18n/dicts/landing";
+import { useT } from "@/lib/i18n";
+
 /**
  * LandingSplitFlow — animated SVG diagram showing the atomic payment
  * split from buyer to seller + organizer royalty + platform fee.
  *
- * Pure-CSS animations (no client state) for SSR safety. The diagram
- * sits in a viewBox sized to its content so it never clips at any
- * viewport. Each destination has a percentage ring representing its
- * share of the transaction. Mini gold ticket-tokens travel each path
- * in a staggered stream.
+ * Pure-CSS animations for the SVG; client component because the
+ * surrounding copy (eyebrow / headline / caption / node labels) flips
+ * with the i18n context. The diagram sits in a viewBox sized to its
+ * content so it never clips at any viewport.
  */
 
 export function LandingSplitFlow() {
+  const t = useT(landingDict);
   return (
     <section
       className="bg-night relative overflow-hidden"
@@ -35,7 +40,7 @@ export function LandingSplitFlow() {
               className="eyebrow mb-4"
               style={{ color: "var(--gold)" }}
             >
-              Where your money goes
+              {t("split_eyebrow")}
             </p>
             <h2
               className="display max-w-2xl"
@@ -45,10 +50,10 @@ export function LandingSplitFlow() {
                 margin: 0,
               }}
             >
-              One Stellar tx.
+              {t("split_title_a")}
               <br />
               <span style={{ color: "var(--gold)" }}>
-                Three recipients.
+                {t("split_title_b")}
               </span>
             </h2>
           </div>
@@ -60,12 +65,11 @@ export function LandingSplitFlow() {
               lineHeight: 1.55,
             }}
           >
-            The buyer pays. The contract splits. Seller, organizer and
-            platform receive — atomically, in a single Stellar transaction.
+            {t("split_caption")}
           </p>
         </div>
 
-        <SplitDiagram />
+        <SplitDiagram t={t} />
       </div>
     </section>
   );
@@ -83,43 +87,48 @@ interface Recipient {
   delay: string;
 }
 
-const RECIPIENTS: Recipient[] = [
-  {
-    x: 200,
-    color: "#4EC990",
-    glow: "sd-sage-glow",
-    label: "SELLER",
-    role: "The fan reselling",
-    value: "570 XLM",
-    pctText: "95%",
-    pctRing: 95,
-    delay: "0s",
-  },
-  {
-    x: 600,
-    color: "#9B7FE8",
-    glow: "sd-purple-glow",
-    label: "ORGANIZER",
-    role: "Royalty on every resale",
-    value: "28 XLM",
-    pctText: "5%",
-    pctRing: 5,
-    delay: "0.35s",
-  },
-  {
-    x: 1000,
-    color: "#E8B84B",
-    glow: "sd-gold-glow",
-    label: "PLATFORM",
-    role: "Pass Explorer flat fee",
-    value: "2 XLM",
-    pctText: "·",
-    pctRing: 1,
-    delay: "0.7s",
-  },
-];
+type T = (k: keyof (typeof landingDict)["en"]) => string;
 
-function SplitDiagram() {
+function makeRecipients(t: T): Recipient[] {
+  return [
+    {
+      x: 200,
+      color: "#4EC990",
+      glow: "sd-sage-glow",
+      label: t("split_seller"),
+      role: t("split_seller_role"),
+      value: "570 XLM",
+      pctText: "95%",
+      pctRing: 95,
+      delay: "0s",
+    },
+    {
+      x: 600,
+      color: "#9B7FE8",
+      glow: "sd-purple-glow",
+      label: t("split_org"),
+      role: t("split_org_role"),
+      value: "28 XLM",
+      pctText: "5%",
+      pctRing: 5,
+      delay: "0.35s",
+    },
+    {
+      x: 1000,
+      color: "#E8B84B",
+      glow: "sd-gold-glow",
+      label: t("split_platform"),
+      role: t("split_platform_role"),
+      value: "2 XLM",
+      pctText: "·",
+      pctRing: 1,
+      delay: "0.7s",
+    },
+  ];
+}
+
+function SplitDiagram({ t }: { t: T }) {
+  const RECIPIENTS = makeRecipients(t);
   const W = 1200;
   const H = 620;
   const buyerCx = 600;
@@ -219,7 +228,7 @@ function SplitDiagram() {
         </defs>
 
         {/* ───── BUYER (top) ───── */}
-        <BuyerNode cx={buyerCx} cy={buyerCy} />
+        <BuyerNode cx={buyerCx} cy={buyerCy} t={t} />
 
         {/* ───── FLOW LINES + traveling ticket-tokens ───── */}
         {RECIPIENTS.map((d, i) => {
@@ -370,7 +379,7 @@ function SplitDiagram() {
           letterSpacing="2.8"
           style={{ fontFamily: "var(--font-dm-sans), sans-serif" }}
         >
-          ONE TX · ATOMIC
+          {t("split_one_tx")}
         </text>
 
         {/* ───── DESTINATIONS ───── */}
@@ -523,7 +532,7 @@ function SplitDiagram() {
   );
 }
 
-function BuyerNode({ cx, cy }: { cx: number; cy: number }) {
+function BuyerNode({ cx, cy, t }: { cx: number; cy: number; t: T }) {
   return (
     <g>
       {/* outer halo */}
@@ -582,7 +591,7 @@ function BuyerNode({ cx, cy }: { cx: number; cy: number }) {
         letterSpacing="2.8"
         style={{ fontFamily: "var(--font-dm-sans), sans-serif" }}
       >
-        BUYER
+        {t("split_buyer")}
       </text>
       <text
         x={cx}
@@ -604,7 +613,7 @@ function BuyerNode({ cx, cy }: { cx: number; cy: number }) {
         letterSpacing="0.5"
         style={{ fontFamily: "var(--font-dm-sans), sans-serif" }}
       >
-        Resale of GA pass
+        {t("split_buyer_sub")}
       </text>
     </g>
   );

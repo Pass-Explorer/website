@@ -1,6 +1,11 @@
+"use client";
+
 import Link from "next/link";
 
 import { Icon, Wordmark } from "@/components/primitives";
+import { commonDict } from "@/lib/i18n/dicts/common";
+import { landingDict } from "@/lib/i18n/dicts/landing";
+import { useT } from "@/lib/i18n";
 
 import { LandingForOrganizers } from "./_components/landing-for-organizers";
 import { LandingHeader } from "./_components/landing-header";
@@ -12,12 +17,10 @@ import { WaitlistForm } from "./_components/waitlist-form";
 /**
  * Marketing landing page — passexplorer.com.
  *
- * Visual treatment ported from temp/PassExplorer (1) web-landing.jsx, adapted
- * for production: smaller sections, no Privy/Stellar deps so the bundle stays
- * lean for SEO + first-paint. The hero is a client component (mouse-tilt holo
- * ticket + video bg); everything below is pure RSC.
- *
- * Structure: Header → Hero → Pillars → How it works → Stats → Waitlist → Footer.
+ * Client component because every section consumes the i18n context for
+ * PT/EN switching. Metadata stays in the root layout. Structure:
+ * Header → Hero → Pillars → SplitFlow → HowItWorks → Marketplace →
+ * ForOrganizers → Stats → Waitlist → Footer.
  */
 
 export default function HomePage() {
@@ -40,35 +43,42 @@ export default function HomePage() {
 // ─── Pillars ────────────────────────────────────────────────────────────
 
 function Pillars() {
+  const t = useT(landingDict);
   const pillars = [
     {
       icon: "search" as const,
-      label: "For fans",
-      title: "Explore & buy",
-      body: "Discover thousands of festivals and secure your pass — on the official drop or the secondary market.",
-      tone: "gold",
+      label: t("pillars_buy_label"),
+      title: t("pillars_buy_title"),
+      body:  t("pillars_buy_body"),
+      tone:  "gold" as const,
     },
     {
       icon: "sell" as const,
-      label: "For sellers",
-      title: "List & resell",
-      body: "Not going? Resell safely. You set the price within the organizer's cap, the contract handles the rest.",
-      tone: "sage",
+      label: t("pillars_sell_label"),
+      title: t("pillars_sell_title"),
+      body:  t("pillars_sell_body"),
+      tone:  "sage" as const,
     },
     {
       icon: "sparkle" as const,
-      label: "For organizers",
-      title: "Earn on resales",
-      body: "Unlike other marketplaces — you get a cut of every resale, plus total visibility on who holds your passes.",
-      tone: "purple",
+      label: t("pillars_org_label"),
+      title: t("pillars_org_title"),
+      body:  t("pillars_org_body"),
+      tone:  "purple" as const,
     },
-  ] as const;
+  ];
+
+  const colors = {
+    gold:   "var(--gold)",
+    sage:   "var(--sage)",
+    purple: "var(--purple)",
+  } as const;
 
   return (
     <section className="bg-night" style={{ padding: "120px 48px" }}>
       <div className="mx-auto" style={{ maxWidth: 1240 }}>
         <p className="eyebrow mb-4" style={{ color: "var(--gold)" }}>
-          What Pass Explorer does
+          {t("pillars_eyebrow")}
         </p>
         <h2
           className="display"
@@ -79,8 +89,8 @@ function Pillars() {
             margin: 0,
           }}
         >
-          One platform.{" "}
-          <span style={{ color: "var(--gold)" }}>Three sides.</span>
+          {t("pillars_title_a")}{" "}
+          <span style={{ color: "var(--gold)" }}>{t("pillars_title_b")}</span>
         </h2>
         <p
           className="mt-4"
@@ -91,71 +101,63 @@ function Pillars() {
             maxWidth: 540,
           }}
         >
-          Built for fans who want in, fans who need out, and organizers who
-          deserve more.
+          {t("pillars_lede")}
         </p>
         <div
           className="grid gap-6 md:grid-cols-3"
           style={{ marginTop: 80 }}
         >
-          {pillars.map((p) => {
-            const colors = {
-              gold:   "var(--gold)",
-              sage:   "var(--sage)",
-              purple: "var(--purple)",
-            };
-            return (
+          {pillars.map((p) => (
+            <div
+              key={p.title}
+              className="relative overflow-hidden transition-transform hover:translate-y-[-2px]"
+              style={{
+                padding: 32,
+                borderRadius: 16,
+                background: "var(--night-card)",
+                border: "1px solid var(--line)",
+              }}
+            >
               <div
-                key={p.title}
-                className="relative overflow-hidden transition-transform hover:translate-y-[-2px]"
+                className="mb-6 grid place-items-center"
                 style={{
-                  padding: 32,
-                  borderRadius: 16,
-                  background: "var(--night-card)",
-                  border: "1px solid var(--line)",
+                  width: 48,
+                  height: 48,
+                  borderRadius: 10,
+                  background: "rgba(232,184,75,0.1)",
+                  color: colors[p.tone],
                 }}
               >
-                <div
-                  className="mb-6 grid place-items-center"
-                  style={{
-                    width: 48,
-                    height: 48,
-                    borderRadius: 10,
-                    background: "rgba(232,184,75,0.1)",
-                    color: colors[p.tone],
-                  }}
-                >
-                  <Icon name={p.icon} size={24} />
-                </div>
-                <p
-                  className="mb-2 font-bold uppercase"
-                  style={{
-                    fontSize: 10,
-                    letterSpacing: "0.18em",
-                    color: colors[p.tone],
-                  }}
-                >
-                  {p.label}
-                </p>
-                <p
-                  className="display"
-                  style={{ fontSize: 28, color: "var(--ink)" }}
-                >
-                  {p.title}
-                </p>
-                <p
-                  className="mt-3"
-                  style={{
-                    fontSize: 14,
-                    lineHeight: 1.55,
-                    color: "var(--ink-dim)",
-                  }}
-                >
-                  {p.body}
-                </p>
+                <Icon name={p.icon} size={24} />
               </div>
-            );
-          })}
+              <p
+                className="mb-2 font-bold uppercase"
+                style={{
+                  fontSize: 10,
+                  letterSpacing: "0.18em",
+                  color: colors[p.tone],
+                }}
+              >
+                {p.label}
+              </p>
+              <p
+                className="display"
+                style={{ fontSize: 28, color: "var(--ink)" }}
+              >
+                {p.title}
+              </p>
+              <p
+                className="mt-3"
+                style={{
+                  fontSize: 14,
+                  lineHeight: 1.55,
+                  color: "var(--ink-dim)",
+                }}
+              >
+                {p.body}
+              </p>
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -165,12 +167,13 @@ function Pillars() {
 // ─── How it works ──────────────────────────────────────────────────────
 
 function HowItWorks() {
+  const t = useT(landingDict);
   const steps = [
-    { n: "01", title: "Explore",         body: "Browse thousands of festivals. Filter by genre, location, budget.", opacity: 0.2 },
-    { n: "02", title: "Find your pass",  body: "Official drops and resales — one feed, all verified on-chain.", opacity: 0.4 },
-    { n: "03", title: "Buy or sell",     body: "Secure checkout for buyers. Instant listing tools for sellers.", opacity: 0.6 },
-    { n: "04", title: "Everyone wins",   body: "Sellers get paid. Organizers earn royalty. Buyers keep the pass.", opacity: 0.8 },
-    { n: "05", title: "Live it",         body: "Show up, scan, in. That's it.", opacity: 1 },
+    { n: "01", title: t("how_01_title"), body: t("how_01_body"), opacity: 0.2 },
+    { n: "02", title: t("how_02_title"), body: t("how_02_body"), opacity: 0.4 },
+    { n: "03", title: t("how_03_title"), body: t("how_03_body"), opacity: 0.6 },
+    { n: "04", title: t("how_04_title"), body: t("how_04_body"), opacity: 0.8 },
+    { n: "05", title: t("how_05_title"), body: t("how_05_body"), opacity: 1   },
   ];
   return (
     <section
@@ -183,7 +186,7 @@ function HowItWorks() {
           className="eyebrow mb-4 text-center"
           style={{ color: "var(--gold)" }}
         >
-          The experience
+          {t("how_eyebrow")}
         </p>
         <h2
           className="display text-center"
@@ -193,7 +196,7 @@ function HowItWorks() {
             margin: "0 0 80px",
           }}
         >
-          How it works
+          {t("how_title")}
         </h2>
         <div className="grid gap-0 md:grid-cols-5">
           {steps.map((s, i, arr) => (
@@ -249,12 +252,13 @@ function HowItWorks() {
 // ─── Stats — trust strip (5 marketing-scale numbers) ───────────────────
 
 function Stats() {
+  const t = useT(landingDict);
   const items: { v: string; l: string; c: string }[] = [
-    { v: "2,400+", l: "Festivals listed",       c: "var(--gold)"   },
-    { v: "180+",   l: "Countries",               c: "var(--purple)" },
-    { v: "50K+",   l: "Passes available",        c: "var(--sage)"   },
-    { v: "100%",   l: "Verified sellers",        c: "var(--ink)"    },
-    { v: "0%",     l: "Tolerance for scalping",  c: "var(--gold)"   },
+    { v: "2,400+", l: t("stat_festivals"), c: "var(--gold)"   },
+    { v: "180+",   l: t("stat_countries"), c: "var(--purple)" },
+    { v: "50K+",   l: t("stat_passes"),    c: "var(--sage)"   },
+    { v: "100%",   l: t("stat_verified"),  c: "var(--ink)"    },
+    { v: "0%",     l: t("stat_zero"),      c: "var(--gold)"   },
   ];
   return (
     <section
@@ -301,6 +305,7 @@ function Stats() {
 // ─── Waitlist ──────────────────────────────────────────────────────────
 
 function WaitlistSection() {
+  const t = useT(landingDict);
   return (
     <section
       id="waitlist"
@@ -320,7 +325,7 @@ function WaitlistSection() {
         style={{ maxWidth: 720 }}
       >
         <p className="eyebrow mb-5" style={{ color: "var(--gold)" }}>
-          The waitlist
+          {t("waitlist_eyebrow")}
         </p>
         <h2
           className="display mx-auto"
@@ -331,8 +336,8 @@ function WaitlistSection() {
             margin: 0,
           }}
         >
-          Sold out?{" "}
-          <span style={{ color: "var(--gold)" }}>Not for you.</span>
+          {t("waitlist_title_a")}{" "}
+          <span style={{ color: "var(--gold)" }}>{t("waitlist_title_b")}</span>
         </h2>
         <p
           className="mx-auto mt-4 max-w-xl"
@@ -342,8 +347,7 @@ function WaitlistSection() {
             lineHeight: 1.55,
           }}
         >
-          The first secondary marketplace that works for organizers, not against
-          them. Drop your email — we'll let you know when it goes live.
+          {t("waitlist_body")}
         </p>
         <WaitlistForm />
         <p
@@ -354,7 +358,7 @@ function WaitlistSection() {
             letterSpacing: "0.06em",
           }}
         >
-          Stellar testnet now · mainnet 2026
+          {t("waitlist_footnote")}
         </p>
       </div>
     </section>
@@ -364,41 +368,44 @@ function WaitlistSection() {
 // ─── Footer ────────────────────────────────────────────────────────────
 
 function Footer() {
+  const c = useT(commonDict);
+  const l = useT(landingDict);
+
   const cols: { title: string; links: { label: string; href: string; external?: boolean }[] }[] = [
     {
-      title: "Product",
+      title: c("footer_product"),
       links: [
-        { label: "Festivals",    href: "/#" },
-        { label: "Docs",         href: "/docs" },
-        { label: "How it works", href: "/#how" },
-        { label: "FAQ",          href: "/faq" },
+        { label: c("nav_festivals"),    href: "/#"    },
+        { label: c("nav_docs"),         href: "/docs" },
+        { label: c("nav_how_it_works"), href: "/#how" },
+        { label: c("nav_faq"),          href: "/faq"  },
       ],
     },
     {
-      title: "Company",
+      title: c("footer_company"),
       links: [
-        { label: "About",     href: "/about" },
-        { label: "Blog",      href: "/#" },
-        { label: "Press",     href: "/#" },
-        { label: "Careers",   href: "/#" },
+        { label: c("footer_about"),   href: "/about"   },
+        { label: c("footer_blog"),    href: "/blog"    },
+        { label: c("footer_press"),   href: "/press"   },
+        { label: c("footer_careers"), href: "/careers" },
       ],
     },
     {
-      title: "Legal",
+      title: c("footer_legal"),
       links: [
-        { label: "Terms",     href: "/terms" },
-        { label: "Privacy",   href: "/privacy" },
-        { label: "Cookies",   href: "/privacy" },
-        { label: "LGPD",      href: "/privacy" },
+        { label: c("footer_terms"),   href: "/terms"   },
+        { label: c("footer_privacy"), href: "/privacy" },
+        { label: c("footer_cookies"), href: "/privacy" },
+        { label: c("footer_lgpd"),    href: "/privacy" },
       ],
     },
     {
-      title: "Community",
+      title: c("footer_system"),
       links: [
-        { label: "X / Twitter", href: "https://x.com/passexplorer", external: true },
-        { label: "Discord",     href: "/#" },
-        { label: "GitHub",      href: "https://github.com/passexplorer", external: true },
-        { label: "Status",      href: "/status" },
+        { label: c("footer_x"),       href: "https://x.com/passexplorer",     external: true },
+        { label: c("footer_discord"), href: "/#" },
+        { label: c("footer_github"),  href: "https://github.com/passexplorer", external: true },
+        { label: c("nav_status"),     href: "/status" },
       ],
     },
   ];
@@ -424,7 +431,7 @@ function Footer() {
                 lineHeight: 1.5,
               }}
             >
-              Festival ticket marketplace on Stellar. Built in Brazil — open to organizers worldwide.
+              {c("footer_blurb")}
             </p>
           </div>
           {cols.map((col) => (
@@ -440,25 +447,25 @@ function Footer() {
                 {col.title}
               </p>
               <ul className="flex flex-col gap-2.5">
-                {col.links.map((l) => (
-                  <li key={l.label}>
-                    {l.external ? (
+                {col.links.map((link) => (
+                  <li key={link.label}>
+                    {link.external ? (
                       <a
-                        href={l.href}
+                        href={link.href}
                         target="_blank"
                         rel="noopener noreferrer"
                         style={{ fontSize: 13, color: "var(--ink-dim)" }}
                         className="hover:text-gold transition-colors"
                       >
-                        {l.label}
+                        {link.label}
                       </a>
                     ) : (
                       <Link
-                        href={l.href}
+                        href={link.href}
                         style={{ fontSize: 13, color: "var(--ink-dim)" }}
                         className="hover:text-gold transition-colors"
                       >
-                        {l.label}
+                        {link.label}
                       </Link>
                     )}
                   </li>
@@ -469,7 +476,7 @@ function Footer() {
         </div>
 
         <div
-          className="mt-15 flex items-center justify-between pt-6"
+          className="flex items-center justify-between pt-6"
           style={{
             borderTop: "1px solid var(--line)",
             color: "var(--ink-quiet)",
@@ -477,8 +484,8 @@ function Footer() {
             marginTop: 60,
           }}
         >
-          <span>© 2026 Pass Explorer · Built on Stellar</span>
-          <span className="font-mono">v0.1.0 · build 5eb83e</span>
+          <span>{c("footer_copy")}</span>
+          <span className="font-mono">{l("build_tag")}</span>
         </div>
       </div>
     </footer>

@@ -1,6 +1,10 @@
+"use client";
+
 import Link from "next/link";
 
 import { Icon, Wordmark } from "@/components/primitives";
+import { commonDict } from "@/lib/i18n/dicts/common";
+import { useT } from "@/lib/i18n";
 
 /**
  * PageShell — shared chrome for sub-pages (About / FAQ / Terms / Privacy
@@ -93,11 +97,12 @@ export function PageShell({
 // ─── Header ─────────────────────────────────────────────────────────
 
 function PageHeader({ active }: { active?: PageKey }) {
+  const t = useT(commonDict);
   const nav: { key: PageKey; label: string; href: string }[] = [
-    { key: "festivals",  label: "Festivals",   href: "/#"      },
-    { key: "howitworks", label: "How it works", href: "/#how"   },
-    { key: "faq",        label: "FAQ",         href: "/faq"    },
-    { key: "about",      label: "About",       href: "/about"  },
+    { key: "festivals",  label: t("nav_festivals"),    href: "/#"      },
+    { key: "howitworks", label: t("nav_how_it_works"), href: "/#how"   },
+    { key: "faq",        label: t("nav_faq"),          href: "/faq"    },
+    { key: "about",      label: t("nav_about"),        href: "/about"  },
   ];
   return (
     <header
@@ -141,7 +146,7 @@ function PageHeader({ active }: { active?: PageKey }) {
             className="pulse"
             style={{ color: "var(--sage)" }}
           />
-          Status
+          {t("nav_status")}
         </Link>
 
         <a
@@ -157,7 +162,7 @@ function PageHeader({ active }: { active?: PageKey }) {
             letterSpacing: "0.04em",
           }}
         >
-          Join waitlist
+          {t("cta_join_waitlist")}
           <Icon name="arrow" size={14} />
         </a>
       </div>
@@ -168,44 +173,45 @@ function PageHeader({ active }: { active?: PageKey }) {
 // ─── Footer ─────────────────────────────────────────────────────────
 
 function PageFooter() {
+  const t = useT(commonDict);
   const cols: {
     title: string;
     links: { label: string; href: string; external?: boolean }[];
   }[] = [
     {
-      title: "Product",
+      title: t("footer_product"),
       links: [
-        { label: "Festivals",    href: "/#" },
-        { label: "How it works", href: "/#how" },
-        { label: "FAQ",          href: "/faq" },
-        { label: "Changelog",    href: "/changelog" },
+        { label: t("nav_festivals"),    href: "/#" },
+        { label: t("nav_how_it_works"), href: "/#how" },
+        { label: t("nav_faq"),          href: "/faq" },
+        { label: t("footer_changelog"), href: "/changelog" },
       ],
     },
     {
-      title: "Company",
+      title: t("footer_company"),
       links: [
-        { label: "About",   href: "/about" },
-        { label: "Blog",    href: "/#" },
-        { label: "Press",   href: "/#" },
-        { label: "Careers", href: "/#" },
+        { label: t("footer_about"),   href: "/about"   },
+        { label: t("footer_blog"),    href: "/blog"    },
+        { label: t("footer_press"),   href: "/press"   },
+        { label: t("footer_careers"), href: "/careers" },
       ],
     },
     {
-      title: "Legal",
+      title: t("footer_legal"),
       links: [
-        { label: "Terms",   href: "/terms" },
-        { label: "Privacy", href: "/privacy" },
-        { label: "Cookies", href: "/privacy" },
-        { label: "LGPD",    href: "/privacy" },
+        { label: t("footer_terms"),   href: "/terms"   },
+        { label: t("footer_privacy"), href: "/privacy" },
+        { label: t("footer_cookies"), href: "/privacy" },
+        { label: t("footer_lgpd"),    href: "/privacy" },
       ],
     },
     {
-      title: "System",
+      title: t("footer_system"),
       links: [
-        { label: "Status",      href: "/status" },
-        { label: "Changelog",   href: "/changelog" },
-        { label: "GitHub",      href: "https://github.com/passexplorer", external: true },
-        { label: "X / Twitter", href: "https://x.com/passexplorer",     external: true },
+        { label: t("nav_status"),       href: "/status"    },
+        { label: t("footer_changelog"), href: "/changelog" },
+        { label: t("footer_github"),    href: "https://github.com/passexplorer", external: true },
+        { label: t("footer_x"),         href: "https://x.com/passexplorer",     external: true },
       ],
     },
   ];
@@ -230,7 +236,7 @@ function PageFooter() {
                 lineHeight: 1.5,
               }}
             >
-              Festival ticket marketplace on Stellar. Built in Brazil.
+              {t("footer_blurb")}
             </p>
           </div>
           {cols.map((col) => (
@@ -283,8 +289,8 @@ function PageFooter() {
             marginTop: 60,
           }}
         >
-          <span>© 2026 Pass Explorer · Built on Stellar</span>
-          <span className="font-mono">v0.1.0 · build 5eb83e</span>
+          <span>{t("footer_copy")}</span>
+          <span className="font-mono">{t("footer_build")}</span>
         </div>
       </div>
     </footer>

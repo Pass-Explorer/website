@@ -1,48 +1,25 @@
 "use client";
 
-import * as React from "react";
 import Link from "next/link";
 
 import { Icon, Wordmark } from "@/components/primitives";
+import { commonDict } from "@/lib/i18n/dicts/common";
+import { type Lang, useLang, useT } from "@/lib/i18n";
 
 /**
  * LandingHeader — sticky top nav for the marketing site.
  *
- * Ported from temp/PassExplorer (1) LandingHeader: Wordmark on the left,
- * nav links + Sign in ghost button + Join waitlist gold CTA + language
- * selector (en/pt with flag pills) on the right.
- *
- * Lang persistence in localStorage under 'px-lang' (same key as the
- * prototype) — visual-only in v1, real i18n routing lands when we wire
- * Pages-router PT translations.
+ * Wordmark on the left, nav links + Sign in ghost + Join waitlist CTA +
+ * language selector on the right. All copy + lang state lives in the
+ * shared i18n context so the toggle flips the whole site.
  */
-
-type Lang = "en" | "pt";
 
 const APP_URL =
   process.env.NEXT_PUBLIC_APP_URL ?? "https://app.passexplorer.com";
 
 export function LandingHeader() {
-  const [lang, setLang] = React.useState<Lang>("en");
-
-  // Hydrate from localStorage after mount to avoid SSR mismatch.
-  React.useEffect(() => {
-    try {
-      const stored = localStorage.getItem("px-lang");
-      if (stored === "en" || stored === "pt") setLang(stored);
-    } catch {
-      // localStorage may be blocked in iframes — fine, default stays 'en'.
-    }
-  }, []);
-
-  function pick(l: Lang) {
-    setLang(l);
-    try {
-      localStorage.setItem("px-lang", l);
-    } catch {
-      // silent
-    }
-  }
+  const { lang, setLang } = useLang();
+  const t = useT(commonDict);
 
   return (
     <header
@@ -60,10 +37,10 @@ export function LandingHeader() {
       <div className="flex items-center gap-8">
         <nav className="hidden items-center gap-8 md:flex">
           {[
-            { label: "Festivals", href: "#" },
-            { label: "Docs", href: "/docs" },
-            { label: "How it works", href: "#how" },
-            { label: "FAQ", href: "/faq" },
+            { label: t("nav_festivals"),    href: "#"     },
+            { label: t("nav_docs"),         href: "/docs" },
+            { label: t("nav_how_it_works"), href: "#how"  },
+            { label: t("nav_faq"),          href: "/faq"  },
           ].map((l) => (
             <Link
               key={l.label}
@@ -91,7 +68,7 @@ export function LandingHeader() {
             letterSpacing: "0.04em",
           }}
         >
-          Sign in
+          {t("cta_sign_in")}
         </a>
 
         {/* Join waitlist gold */}
@@ -108,7 +85,7 @@ export function LandingHeader() {
             letterSpacing: "0.04em",
           }}
         >
-          Join waitlist
+          {t("cta_join_waitlist")}
           <Icon name="arrow" size={14} />
         </a>
 
@@ -124,12 +101,12 @@ export function LandingHeader() {
           }}
         >
           {[
-            { id: "en" as const, flag: "🇺🇸", title: "English" },
+            { id: "en" as const, flag: "🇺🇸", title: "English"    },
             { id: "pt" as const, flag: "🇧🇷", title: "Português" },
           ].map((o) => (
             <button
               key={o.id}
-              onClick={() => pick(o.id)}
+              onClick={() => setLang(o.id as Lang)}
               title={o.title}
               aria-label={o.title}
               aria-pressed={lang === o.id}

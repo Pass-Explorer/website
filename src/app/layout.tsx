@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 import { Bebas_Neue, DM_Sans } from "next/font/google";
 
+import { LangProvider } from "@/lib/i18n";
+
 import "./globals.css";
 
 const bebasNeue = Bebas_Neue({
@@ -54,7 +56,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       suppressHydrationWarning
     >
       <body className="bg-night text-ink min-h-dvh antialiased">
-        {children}
+        <LangProvider>{children}</LangProvider>
       </body>
     </html>
   );

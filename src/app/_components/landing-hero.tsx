@@ -3,6 +3,8 @@
 import { useRef, useState } from "react";
 
 import { Icon, QRGlyph } from "@/components/primitives";
+import { landingDict } from "@/lib/i18n/dicts/landing";
+import { useT } from "@/lib/i18n";
 
 /**
  * LandingHero — full-bleed hero with festival-hero.mp4 backdrop +
@@ -15,6 +17,7 @@ import { Icon, QRGlyph } from "@/components/primitives";
  */
 
 export function LandingHero() {
+  const t = useT(landingDict);
   return (
     <section
       className="relative overflow-hidden"
@@ -115,7 +118,7 @@ export function LandingHero() {
                 letterSpacing: "0.14em",
               }}
             >
-              The festival ticket marketplace
+              {t("hero_tag")}
             </span>
           </div>
 
@@ -128,9 +131,9 @@ export function LandingHero() {
               letterSpacing: "0.005em",
             }}
           >
-            <span className="block">Find.</span>
+            <span className="block">{t("hero_find")}</span>
             <span className="block" style={{ color: "var(--gold)" }}>
-              Experience.
+              {t("hero_experience")}
             </span>
             <span
               className="block"
@@ -139,7 +142,7 @@ export function LandingHero() {
                 color: "transparent",
               }}
             >
-              Trade.
+              {t("hero_trade")}
             </span>
           </h1>
 
@@ -152,19 +155,19 @@ export function LandingHero() {
               color: "var(--ink-dim)",
             }}
           >
-            The marketplace where fans{" "}
+            {t("hero_lede_a")}{" "}
             <strong style={{ color: "var(--ink)", fontWeight: 500 }}>
-              find and buy
+              {t("hero_lede_buy")}
             </strong>{" "}
-            passes for festivals,{" "}
+            {t("hero_lede_b")}{" "}
             <strong style={{ color: "var(--ink)", fontWeight: 500 }}>
-              sell
+              {t("hero_lede_sell")}
             </strong>{" "}
-            the ones they won't use — and organizers{" "}
+            {t("hero_lede_c")}{" "}
             <strong style={{ color: "var(--ink)", fontWeight: 500 }}>
-              earn on every resale
+              {t("hero_lede_royalty")}
             </strong>
-            .
+            {t("hero_lede_dot")}
           </p>
 
           {/* CTAs */}
@@ -182,7 +185,7 @@ export function LandingHero() {
                 letterSpacing: "0.02em",
               }}
             >
-              Early access
+              {t("hero_cta_early")}
               <Icon name="arrow" size={16} />
             </a>
             <a
@@ -200,7 +203,7 @@ export function LandingHero() {
               }}
             >
               <Icon name="qr" size={16} />
-              How it works
+              {t("hero_cta_how")}
             </a>
           </div>
 
@@ -209,10 +212,10 @@ export function LandingHero() {
             className="mt-9 flex flex-wrap gap-6"
             style={{ color: "var(--ink-muted)", fontSize: 11 }}
           >
-            <span>✓ Pix · on/offramp</span>
-            <span>✓ Built on Stellar</span>
-            <span>✓ Privy social custody</span>
-            <span>✓ Open to organizers</span>
+            <span>{t("hero_b_pix")}</span>
+            <span>{t("hero_b_stellar")}</span>
+            <span>{t("hero_b_privy")}</span>
+            <span>{t("hero_b_open")}</span>
           </div>
         </div>
 

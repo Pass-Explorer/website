@@ -3,6 +3,9 @@
 import { useState } from "react";
 
 import { Icon } from "@/components/primitives";
+import { commonDict } from "@/lib/i18n/dicts/common";
+import { landingDict } from "@/lib/i18n/dicts/landing";
+import { useT } from "@/lib/i18n";
 
 /**
  * WaitlistForm — posts email to Formspree (mbdwzndo endpoint).
@@ -15,6 +18,8 @@ import { Icon } from "@/components/primitives";
 const FORMSPREE_ENDPOINT = "https://formspree.io/f/mbdwzndo";
 
 export function WaitlistForm() {
+  const t = useT(landingDict);
+  const c = useT(commonDict);
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [error, setError] = useState<string | null>(null);
@@ -53,7 +58,7 @@ export function WaitlistForm() {
       >
         <Icon name="check" size={16} stroke={2.4} />
         <span style={{ fontSize: 14, fontWeight: 600 }}>
-          You're on the list. We'll be in touch.
+          {t("waitlist_thanks")}
         </span>
       </div>
     );
@@ -68,7 +73,7 @@ export function WaitlistForm() {
         type="email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        placeholder="your@email.com"
+        placeholder={t("waitlist_input")}
         required
         disabled={status === "submitting"}
         className="flex-1 outline-none"
@@ -97,7 +102,7 @@ export function WaitlistForm() {
           opacity: status === "submitting" ? 0.6 : 1,
         }}
       >
-        {status === "submitting" ? "Joining…" : "Join waitlist"}
+        {status === "submitting" ? t("waitlist_submitting") : c("cta_join_waitlist")}
         {status !== "submitting" && <Icon name="arrow" size={16} />}
       </button>
       {status === "error" && (
@@ -108,7 +113,7 @@ export function WaitlistForm() {
             color: "var(--red)",
           }}
         >
-          {error ?? "Something went wrong. Try again."}
+          {error ?? t("waitlist_error")}
         </p>
       )}
     </form>
