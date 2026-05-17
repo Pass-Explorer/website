@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Icon, Wordmark } from "@/components/primitives";
 
 import { LandingForOrganizers } from "./_components/landing-for-organizers";
+import { LandingHeader } from "./_components/landing-header";
 import { LandingHero } from "./_components/landing-hero";
 import { LandingMarketplacePreview } from "./_components/landing-marketplace";
 import { LandingSplitFlow } from "./_components/landing-split-flow";
@@ -22,7 +23,7 @@ import { WaitlistForm } from "./_components/waitlist-form";
 export default function HomePage() {
   return (
     <div className="bg-night text-ink min-h-dvh font-body">
-      <Header />
+      <LandingHeader />
       <LandingHero />
       <Pillars />
       <LandingSplitFlow />
@@ -33,60 +34,6 @@ export default function HomePage() {
       <WaitlistSection />
       <Footer />
     </div>
-  );
-}
-
-// ─── Header ─────────────────────────────────────────────────────────────
-
-function Header() {
-  return (
-    <header
-      className="sticky top-0 z-30 flex items-center justify-between border-b backdrop-blur-md"
-      style={{
-        padding: "20px 48px",
-        background: "rgba(8,8,16,0.6)",
-        borderColor: "var(--line)",
-      }}
-    >
-      <Link href="/" aria-label="Pass Explorer home">
-        <Wordmark size={16} />
-      </Link>
-      <nav className="hidden items-center gap-8 md:flex">
-        {[
-          { label: "Festivals", href: "#" },
-          { label: "Organizers", href: "/organizers" },
-          { label: "How it works", href: "#how" },
-          { label: "FAQ", href: "/faq" },
-        ].map((l) => (
-          <Link
-            key={l.label}
-            href={l.href}
-            style={{ fontSize: 13, color: "var(--ink-dim)" }}
-            className="hover:text-gold transition-colors"
-          >
-            {l.label}
-          </Link>
-        ))}
-      </nav>
-      <div className="flex items-center gap-3">
-        <a
-          href="#waitlist"
-          className="tap inline-flex items-center gap-2 font-semibold"
-          style={{
-            height: 38,
-            padding: "0 18px",
-            background: "var(--gold)",
-            color: "var(--night)",
-            borderRadius: 6,
-            fontSize: 12,
-            letterSpacing: "0.04em",
-          }}
-        >
-          Join waitlist
-          <Icon name="arrow" size={14} />
-        </a>
-      </div>
-    </header>
   );
 }
 

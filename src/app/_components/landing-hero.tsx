@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 
-import { Icon } from "@/components/primitives";
+import { Icon, QRGlyph } from "@/components/primitives";
 
 /**
  * LandingHero — full-bleed hero with festival-hero.mp4 backdrop +
@@ -62,6 +62,28 @@ export function LandingHero() {
           height: 200,
           background:
             "linear-gradient(to bottom, transparent, var(--night) 90%)",
+        }}
+      />
+
+      {/* Film grain — radial dot pattern overlay (screen blend) */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 z-[2]"
+        style={{
+          backgroundImage:
+            "radial-gradient(rgba(255,255,255,0.025) 1px, transparent 1px)",
+          backgroundSize: "3px 3px",
+          mixBlendMode: "screen",
+        }}
+      />
+
+      {/* Vignette — soft dark edges */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 z-[2]"
+        style={{
+          background:
+            "radial-gradient(ellipse at center, transparent 50%, rgba(8,8,16,0.6) 100%)",
         }}
       />
 
@@ -309,6 +331,23 @@ function HeroPass() {
           </div>
         </div>
 
+        {/* QR with pulsing halo */}
+        <div
+          className="absolute"
+          style={{
+            right: 24,
+            top: 24,
+            width: 60,
+            height: 60,
+            padding: 4,
+            background: "var(--ink)",
+            borderRadius: 6,
+            animation: "pass-qr-pulse 2.4s ease-out infinite",
+          }}
+        >
+          <QRGlyph size={52} seed="hero" />
+        </div>
+
         {/* Spec lines */}
         <div
           className="font-mono absolute right-4 bottom-3 left-4 flex justify-between"
@@ -340,6 +379,11 @@ function HeroPass() {
         @keyframes pass-strip {
           0%, 100% { opacity: 0.6; }
           50%      { opacity: 1; }
+        }
+        @keyframes pass-qr-pulse {
+          0%   { box-shadow: 0 0 0 0 rgba(232,184,75,0.5); }
+          80%  { box-shadow: 0 0 0 14px rgba(232,184,75,0); }
+          100% { box-shadow: 0 0 0 0 rgba(232,184,75,0); }
         }
       `}</style>
     </div>
