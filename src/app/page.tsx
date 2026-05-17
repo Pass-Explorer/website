@@ -2,7 +2,10 @@ import Link from "next/link";
 
 import { Icon, Wordmark } from "@/components/primitives";
 
+import { LandingForOrganizers } from "./_components/landing-for-organizers";
 import { LandingHero } from "./_components/landing-hero";
+import { LandingMarketplacePreview } from "./_components/landing-marketplace";
+import { LandingSplitFlow } from "./_components/landing-split-flow";
 import { WaitlistForm } from "./_components/waitlist-form";
 
 /**
@@ -22,7 +25,10 @@ export default function HomePage() {
       <Header />
       <LandingHero />
       <Pillars />
+      <LandingSplitFlow />
       <HowItWorks />
+      <LandingMarketplacePreview />
+      <LandingForOrganizers />
       <Stats />
       <WaitlistSection />
       <Footer />
