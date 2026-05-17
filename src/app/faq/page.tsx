@@ -2,90 +2,105 @@ import type { Metadata } from "next";
 
 import { PageShell } from "../_components/page-shell";
 
+import { FAQAccordion } from "./_components/faq-accordion";
+
 export const metadata: Metadata = {
   title: "FAQ",
-  description: "Common questions about Pass Explorer.",
+  description: "Frequently asked questions about Pass Explorer.",
 };
 
-const FAQS = [
+/**
+ * FAQ — ported from temp/PassExplorer (1) PageFAQ.
+ *
+ * Hero "We explain.", lede with support email, accordion of 10 questions
+ * with the prototype's rotating + icon (becomes × at 45° when open).
+ * Active "FAQ" nav highlight via PageShell active prop.
+ */
+
+const FAQS: { q: string; a: string }[] = [
   {
-    q: "Why blockchain for tickets?",
-    a: "Three reasons: the resale royalty back to the organizer is enforced by the smart contract (not a polite ask), the resale price cap is set on-chain (no scalping above 1.5x by default), and the splits are atomic (one transaction settles seller, organizer royalty and platform fee).",
+    q: "Do I need to understand crypto to use this?",
+    a: "No. You sign in with email or Google. Privy creates your Stellar wallet automatically via Trusted Execution Environment + Shamir Secret Sharing. No seed phrase, no wallet app. The experience is the same as any modern marketplace.",
   },
   {
-    q: "Do I need a crypto wallet?",
-    a: "No. You log in with Google, Apple or email via Privy. Privy provisions a Stellar wallet for you behind the scenes, with social recovery — no seed phrases to back up.",
+    q: "Why Stellar and not another blockchain?",
+    a: "Speed (3–5s finality), sub-cent fees (viable for $10–$500 tickets), and a borderless architecture that fits the international profile of festivals. Soroban gives mature smart contracts without Ethereum's absurd gas costs.",
   },
   {
-    q: "Can I sell my pass for whatever I want?",
-    a: "Up to the cap. The organizer sets a max resale price (e.g. 1.5× the primary). The Marketplace contract rejects any listing above that. You're free to list at face value or below if you just want to recoup costs.",
+    q: "Is the ticket really mine? Can I transfer it?",
+    a: "Yes — the token lives in your Stellar wallet and is yours. Transfers are gated by the marketplace contract: you can't gift it off-platform. That's intentional — it's how organizer royalties stay enforceable on every resale.",
   },
   {
-    q: "How does the organizer earn?",
-    a: "On primary sales they receive the full sale price minus the platform fee. On resales the contract automatically takes a royalty (default 5%) and sends it to the organizer's wallet. They see every resale on-chain.",
+    q: "How does the resale cap work?",
+    a: "The organizer sets the cap when deploying the event (e.g. 1.5× primary). The EventNFT contract rejects any listing above it — it's not a UI rule, it's physically impossible to list higher.",
   },
   {
-    q: "Why Pix?",
-    a: "Brazil-first. Pix is instant, free, and ubiquitous. Pass Explorer integrates an on/offramp so you can buy a pass with Pix without ever touching XLM directly. The XLM rail is invisible to non-crypto fans.",
+    q: "What happens with the 5% royalty?",
+    a: "On every resale the Marketplace contract executes an atomic split: buyer pays X, seller receives X − royalty − fee, organizer receives the configurable royalty %, platform takes its flat fee. All in one Stellar transaction.",
   },
   {
-    q: "When mainnet?",
-    a: "We're on Stellar testnet now. Mainnet target is mid-2026, paced by the first festival partnership going live. Join the waitlist to get notified.",
+    q: "What if I can't go to the festival?",
+    a: "List your pass on the secondary market (within the cap). When it sells, the atomic split pays you + royalty to the organizer + platform fee. No fraud, no disputes.",
   },
   {
-    q: "I'm an organizer. How do I onboard?",
-    a: "Apply on /organizer/apply. We do a quick KYC (legal entity + responsible KYC + CNPJ check) and approve you on-chain. After that you can deploy events and mint tickets directly from your dashboard. The Pass Explorer admin signs the approval transaction.",
+    q: "Can I pay in fiat? Do I need XLM?",
+    a: "Yes. You pay in BRL via Pix — our Stellar anchor (SEP-24) onramps to XLM automatically, then the contract executes the purchase. When you sell, the offramp converts back to Pix on your CPF in seconds. You never have to touch crypto.",
+  },
+  {
+    q: "Who can be an organizer?",
+    a: "Any Brazilian event organizer. You apply at /organizer/apply, complete a minimal KYC (CNPJ + responsible-party identity), and receive permission to deploy EventNFTs.",
+  },
+  {
+    q: "What if the festival is cancelled?",
+    a: "The contract supports refund mode: the organizer can trigger a one-shot refund for all tickets, and tokens return to the pool. Legal and tax details are being finalized for mainnet.",
+  },
+  {
+    q: "Is there a mobile app?",
+    a: "Not native — we use a PWA (Progressive Web App) with Serwist. Installs as an app, works offline for already-purchased tickets, push notifications. Apple Wallet web pass for gate scanning.",
   },
 ];
 
 export default function FAQPage() {
   return (
-    <PageShell
-      eyebrow="FAQ"
-      title="Questions worth asking."
-      lede="If you have something not covered here, ping us on X @passexplorer."
-    >
-      <div className="flex flex-col gap-3">
-        {FAQS.map((f) => (
-          <details
-            key={f.q}
-            className="group"
-            style={{
-              padding: 20,
-              borderRadius: 10,
-              background: "var(--night-card)",
-              border: "1px solid var(--line)",
-            }}
-          >
-            <summary
-              className="display flex cursor-pointer items-center justify-between gap-3"
-              style={{
-                fontSize: 20,
-                color: "var(--ink)",
-                listStyle: "none",
-              }}
-            >
-              {f.q}
-              <span
-                className="grid place-items-center transition-transform group-open:rotate-180"
-                style={{ width: 20, height: 20, color: "var(--gold)" }}
-              >
-                ↓
-              </span>
-            </summary>
-            <p
-              className="mt-3"
-              style={{
-                fontSize: 14,
-                color: "var(--ink-dim)",
-                lineHeight: 1.65,
-              }}
-            >
-              {f.a}
-            </p>
-          </details>
-        ))}
-      </div>
+    <PageShell active="faq">
+      <section
+        className="mx-auto"
+        style={{ padding: "100px 48px 80px", maxWidth: 900 }}
+      >
+        <p
+          className="eyebrow"
+          style={{ color: "var(--gold)", marginBottom: 20 }}
+        >
+          Frequently asked questions
+        </p>
+        <h1
+          className="display"
+          style={{
+            fontSize: "clamp(3rem, 8vw, 5.5rem)",
+            lineHeight: 0.92,
+            margin: 0,
+          }}
+        >
+          We <span style={{ color: "var(--gold)" }}>explain.</span>
+        </h1>
+        <p
+          className="mt-6"
+          style={{
+            fontSize: 17,
+            color: "var(--ink-dim)",
+            lineHeight: 1.6,
+            maxWidth: 600,
+          }}
+        >
+          Everything you wanted to know before buying your first pass.
+          Didn&apos;t find it here? Email{" "}
+          <span style={{ color: "var(--gold)" }}>oi@passexplorer.com</span>.
+        </p>
+
+        <div className="mt-15" style={{ marginTop: 60 }}>
+          <FAQAccordion items={FAQS} />
+        </div>
+      </section>
     </PageShell>
   );
 }

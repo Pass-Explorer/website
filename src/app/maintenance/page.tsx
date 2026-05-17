@@ -1,87 +1,124 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
-import { Icon, Wordmark } from "@/components/primitives";
+import { Icon } from "@/components/primitives";
+
+import { PageShell } from "../_components/page-shell";
 
 export const metadata: Metadata = {
   title: "Maintenance",
   description: "Pass Explorer is updating.",
 };
 
-/**
- * Maintenance page — flipped on by the Vercel deploy env var when we're
- * pushing a contract upgrade or migrating the indexer. Static, no client
- * JS. Mirrors the prototype's `web-pages.jsx` PageMaintenance design.
- */
-
 export default function MaintenancePage() {
   return (
-    <div className="bg-night text-ink flex min-h-dvh flex-col items-center justify-center px-6 py-16 text-center font-body">
-      <Wordmark size={14} />
+    <PageShell>
+      <section
+        className="mx-auto text-center"
+        style={{ padding: "120px 48px", maxWidth: 700 }}
+      >
+        <div
+          className="relative grid place-items-center mx-auto"
+          style={{
+            width: 96,
+            height: 96,
+            borderRadius: 24,
+            background: "rgba(232,184,75,0.1)",
+            border: "1px solid var(--gold)",
+            overflow: "hidden",
+            marginBottom: 32,
+          }}
+        >
+          <div
+            aria-hidden="true"
+            className="absolute inset-0"
+            style={{
+              background:
+                "conic-gradient(from 220deg at 50% 0%, rgba(232,184,75,0) 0deg, rgba(232,184,75,0.25) 60deg, rgba(155,127,232,0.30) 120deg, rgba(78,201,144,0.25) 200deg, rgba(232,184,75,0.15) 280deg, rgba(232,184,75,0) 360deg)",
+              filter: "blur(18px)",
+              opacity: 0.4,
+              pointerEvents: "none",
+            }}
+          />
+          <span
+            style={{ color: "var(--gold)", position: "relative" }}
+          >
+            <Icon name="bolt" size={48} />
+          </span>
+        </div>
 
-      <div
-        className="mt-12 grid place-items-center"
-        style={{
-          width: 96,
-          height: 96,
-          borderRadius: 24,
-          background: "var(--gold-soft)",
-          color: "var(--gold)",
-        }}
-      >
-        <Icon name="bolt" size={44} stroke={1.6} />
-      </div>
-
-      <p className="eyebrow mt-8" style={{ color: "var(--gold)" }}>
-        Stellar testnet · upgrade in progress
-      </p>
-      <h1
-        className="display mt-4"
-        style={{
-          fontSize: "clamp(2.5rem, 7vw, 4.5rem)",
-          color: "var(--ink)",
-          lineHeight: 0.95,
-          maxWidth: 720,
-        }}
-      >
-        Quick break.{" "}
-        <span style={{ color: "var(--gold)" }}>Be right back.</span>
-      </h1>
-      <p
-        className="mx-auto mt-4 max-w-lg"
-        style={{
-          fontSize: 14,
-          color: "var(--ink-dim)",
-          lineHeight: 1.6,
-        }}
-      >
-        We're pushing a small contract upgrade. The marketplace is paused for a
-        few minutes — your wallet and tickets are safe and untouched.
-      </p>
-
-      <div
-        className="mt-8 flex flex-col gap-3"
-        style={{ fontSize: 12, color: "var(--ink-muted)" }}
-      >
-        <div className="flex items-center justify-center gap-2">
+        <p className="eyebrow" style={{ color: "var(--gold)" }}>
+          Maintenance window
+        </p>
+        <h1
+          className="display"
+          style={{
+            fontSize: "clamp(3rem, 7vw, 4.5rem)",
+            lineHeight: 0.92,
+            margin: "20px 0",
+          }}
+        >
+          Back in{" "}
+          <span style={{ color: "var(--gold)" }}>14 minutes.</span>
+        </h1>
+        <p
+          className="mx-auto"
+          style={{
+            fontSize: 16,
+            color: "var(--ink-dim)",
+            marginBottom: 40,
+            maxWidth: 480,
+            lineHeight: 1.6,
+          }}
+        >
+          Stellar RPC is migrating to v4.2. Purchases and resales are paused —
+          already-purchased passes remain valid in your wallet.
+        </p>
+        <div
+          className="inline-flex items-center"
+          style={{
+            gap: 8,
+            padding: "8px 16px",
+            borderRadius: 999,
+            background: "var(--night-card)",
+            border: "1px solid var(--line)",
+          }}
+        >
           <span
             aria-hidden="true"
             className="pulse"
-            style={{ color: "var(--gold)" }}
+            style={{ background: "var(--gold)" }}
           />
-          <span className="font-mono" style={{ letterSpacing: "0.06em" }}>
-            ETA · &lt;5 min
+          <span
+            className="font-mono"
+            style={{
+              fontSize: 12,
+              color: "var(--ink-dim)",
+            }}
+          >
+            ETA · 22:14 BRT · 14m 32s
           </span>
         </div>
-        <a
-          href="https://x.com/passexplorer"
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{ color: "var(--gold)" }}
-          className="font-mono"
-        >
-          Live updates · @passexplorer ↗
-        </a>
-      </div>
-    </div>
+        <div style={{ marginTop: 32 }}>
+          <Link
+            href="/status"
+            className="tap inline-flex items-center gap-2 font-semibold"
+            style={{
+              height: 44,
+              padding: "0 20px",
+              background: "transparent",
+              color: "var(--ink)",
+              border: "1px solid var(--line)",
+              borderRadius: 6,
+              fontSize: 12,
+              letterSpacing: "0.02em",
+            }}
+          >
+            View detailed status
+            <Icon name="arrow" size={14} />
+          </Link>
+        </div>
+      </section>
+    </PageShell>
   );
 }

@@ -90,7 +90,7 @@ export function LandingForOrganizers() {
             ))}
           </div>
           <Link
-            href="/organizers"
+            href="/docs"
             className="tap mt-8 inline-flex items-center gap-2 font-semibold"
             style={{
               height: 50,

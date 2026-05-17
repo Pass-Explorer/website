@@ -58,7 +58,7 @@ export function LandingHeader() {
         <nav className="hidden items-center gap-8 md:flex">
           {[
             { label: "Festivals", href: "#" },
-            { label: "Organizers", href: "/organizers" },
+            { label: "Organizers", href: "/docs" },
             { label: "How it works", href: "#how" },
             { label: "FAQ", href: "/faq" },
           ].map((l) => (

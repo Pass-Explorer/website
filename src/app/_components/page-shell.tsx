@@ -3,141 +3,289 @@ import Link from "next/link";
 import { Icon, Wordmark } from "@/components/primitives";
 
 /**
- * PageShell — shared chrome for sub-pages (About / FAQ / Terms / etc.).
- * Sticky compact header (logo + back to home), centered content well,
- * shared footer with copy. Keeps the marketing pages consistent and the
- * page bodies focused on their content only.
+ * PageShell — shared chrome for sub-pages (About / FAQ / Terms / Privacy
+ * / Status / Changelog).
+ *
+ * Visual treatment ported from temp/PassExplorer (1) PageShell:
+ *   - PageHeader: Wordmark + 4 nav links + sage Status pulse + gold
+ *     Join waitlist CTA
+ *   - PageFooter: 5-column layout (Wordmark+blurb / Product / Company /
+ *     Legal / System) + copyright + mono version
+ *
+ * Two usage modes:
+ *   1. Title + body — pass eyebrow/title/lede and PageShell renders the
+ *      standard centered narrow column header above children.
+ *   2. Custom layout — omit eyebrow/title and render your own hero block
+ *      inside children (e.g. About has 2-column problem/thesis + timeline).
  */
 
+type PageKey = "festivals" | "howitworks" | "faq" | "about" | "status";
+
 interface PageShellProps {
-  eyebrow: string;
-  title: string;
+  /** Active nav key — sets the gold highlight. */
+  active?: PageKey;
+  /** When set, renders a centered narrow-column hero with eyebrow + title + lede. */
+  eyebrow?: string;
+  title?: string;
   lede?: string;
   children: React.ReactNode;
 }
 
-export function PageShell({ eyebrow, title, lede, children }: PageShellProps) {
+export function PageShell({
+  active,
+  eyebrow,
+  title,
+  lede,
+  children,
+}: PageShellProps) {
+  const hasHero = Boolean(eyebrow && title);
+
   return (
-    <div className="bg-night text-ink min-h-dvh font-body">
-      <CompactHeader />
-      <main className="mx-auto px-6 py-16" style={{ maxWidth: 920 }}>
-        <Link
-          href="/"
-          className="inline-flex items-center gap-1.5"
-          style={{
-            fontSize: 11,
-            color: "var(--ink-muted)",
-            letterSpacing: "0.04em",
-          }}
+    <div className="bg-night text-ink font-body min-h-dvh">
+      <PageHeader active={active} />
+      {hasHero ? (
+        <main
+          className="mx-auto"
+          style={{ padding: "100px 48px 80px", maxWidth: 900 }}
         >
-          <Icon name="chevL" size={12} />
-          Back to home
-        </Link>
-        <p
-          className="eyebrow mt-8"
-          style={{ color: "var(--gold)", letterSpacing: "0.18em" }}
-        >
-          {eyebrow}
-        </p>
-        <h1
-          className="display mt-3"
-          style={{
-            fontSize: "clamp(2.5rem, 7vw, 4.5rem)",
-            lineHeight: 0.95,
-          }}
-        >
-          {title}
-        </h1>
-        {lede && (
-          <p
-            className="mt-5 max-w-2xl"
-            style={{
-              fontSize: 17,
-              color: "var(--ink-dim)",
-              lineHeight: 1.55,
-            }}
-          >
-            {lede}
-          </p>
-        )}
-        <div className="mt-12">{children}</div>
-      </main>
-      <CompactFooter />
+          {eyebrow && (
+            <p
+              className="eyebrow"
+              style={{ color: "var(--gold)", marginBottom: 20 }}
+            >
+              {eyebrow}
+            </p>
+          )}
+          {title && (
+            <h1
+              className="display"
+              style={{
+                fontSize: "clamp(3rem, 8vw, 5.5rem)",
+                lineHeight: 0.92,
+                margin: 0,
+              }}
+            >
+              {title}
+            </h1>
+          )}
+          {lede && (
+            <p
+              className="mt-6 max-w-xl"
+              style={{
+                fontSize: 17,
+                color: "var(--ink-dim)",
+                lineHeight: 1.6,
+              }}
+            >
+              {lede}
+            </p>
+          )}
+          <div className="mt-12">{children}</div>
+        </main>
+      ) : (
+        children
+      )}
+      <PageFooter />
     </div>
   );
 }
 
-function CompactHeader() {
+// ─── Header ─────────────────────────────────────────────────────────
+
+function PageHeader({ active }: { active?: PageKey }) {
+  const nav: { key: PageKey; label: string; href: string }[] = [
+    { key: "festivals",  label: "Festivals",   href: "/#"      },
+    { key: "howitworks", label: "How it works", href: "/#how"   },
+    { key: "faq",        label: "FAQ",         href: "/faq"    },
+    { key: "about",      label: "About",       href: "/about"  },
+  ];
   return (
     <header
       className="sticky top-0 z-30 flex items-center justify-between border-b backdrop-blur-md"
       style={{
-        padding: "16px 24px",
-        background: "rgba(8,8,16,0.7)",
+        padding: "20px 48px",
+        background: "rgba(8,8,16,0.6)",
         borderColor: "var(--line)",
       }}
     >
       <Link href="/" aria-label="Pass Explorer home">
-        <Wordmark size={14} />
+        <Wordmark size={16} />
       </Link>
-      <nav className="hidden gap-6 md:flex">
-        {[
-          { label: "FAQ", href: "/faq" },
-          { label: "Status", href: "/status" },
-          { label: "Changelog", href: "/changelog" },
-        ].map((l) => (
-          <Link
-            key={l.label}
-            href={l.href}
-            style={{ fontSize: 12, color: "var(--ink-muted)" }}
-            className="hover:text-gold transition-colors"
-          >
-            {l.label}
-          </Link>
-        ))}
-      </nav>
-      <a
-        href="/#waitlist"
-        className="tap inline-flex items-center gap-1.5 font-semibold"
-        style={{
-          height: 32,
-          padding: "0 14px",
-          background: "var(--gold)",
-          color: "var(--night)",
-          borderRadius: 6,
-          fontSize: 11,
-          letterSpacing: "0.04em",
-        }}
-      >
-        Join
-        <Icon name="arrow" size={12} />
-      </a>
+      <div className="flex items-center gap-8">
+        <nav className="hidden items-center gap-8 md:flex">
+          {nav.map((l) => (
+            <Link
+              key={l.key}
+              href={l.href}
+              style={{
+                fontSize: 13,
+                color: active === l.key ? "var(--gold)" : "var(--ink-dim)",
+                fontWeight: active === l.key ? 600 : 400,
+              }}
+              className="hover:text-gold transition-colors"
+            >
+              {l.label}
+            </Link>
+          ))}
+        </nav>
+
+        {/* Sage status pulse — clickable to /status */}
+        <Link
+          href="/status"
+          className="hidden items-center gap-1.5 md:inline-flex"
+          style={{ fontSize: 11, color: "var(--sage)" }}
+          aria-label="Status"
+        >
+          <span
+            aria-hidden="true"
+            className="pulse"
+            style={{ color: "var(--sage)" }}
+          />
+          Status
+        </Link>
+
+        <a
+          href="/#waitlist"
+          className="tap inline-flex items-center gap-2 font-semibold uppercase"
+          style={{
+            height: 38,
+            padding: "0 18px",
+            background: "var(--gold)",
+            color: "var(--night)",
+            borderRadius: 6,
+            fontSize: 12,
+            letterSpacing: "0.04em",
+          }}
+        >
+          Join waitlist
+          <Icon name="arrow" size={14} />
+        </a>
+      </div>
     </header>
   );
 }
 
-function CompactFooter() {
+// ─── Footer ─────────────────────────────────────────────────────────
+
+function PageFooter() {
+  const cols: {
+    title: string;
+    links: { label: string; href: string; external?: boolean }[];
+  }[] = [
+    {
+      title: "Product",
+      links: [
+        { label: "Festivals",    href: "/#" },
+        { label: "How it works", href: "/#how" },
+        { label: "FAQ",          href: "/faq" },
+        { label: "Changelog",    href: "/changelog" },
+      ],
+    },
+    {
+      title: "Company",
+      links: [
+        { label: "About",   href: "/about" },
+        { label: "Blog",    href: "/#" },
+        { label: "Press",   href: "/#" },
+        { label: "Careers", href: "/#" },
+      ],
+    },
+    {
+      title: "Legal",
+      links: [
+        { label: "Terms",   href: "/terms" },
+        { label: "Privacy", href: "/privacy" },
+        { label: "Cookies", href: "/privacy" },
+        { label: "LGPD",    href: "/privacy" },
+      ],
+    },
+    {
+      title: "System",
+      links: [
+        { label: "Status",      href: "/status" },
+        { label: "Changelog",   href: "/changelog" },
+        { label: "GitHub",      href: "https://github.com/passexplorer", external: true },
+        { label: "X / Twitter", href: "https://x.com/passexplorer",     external: true },
+      ],
+    },
+  ];
+
   return (
     <footer
-      className="border-t"
       style={{
         background: "var(--night)",
-        borderColor: "var(--line)",
-        padding: "32px 24px 24px",
+        borderTop: "1px solid var(--line)",
+        padding: "60px 48px 40px",
       }}
     >
-      <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 md:flex-row">
-        <Wordmark size={12} />
-        <p
-          className="font-mono"
+      <div className="mx-auto" style={{ maxWidth: 1240 }}>
+        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1fr_1fr]">
+          <div>
+            <Wordmark size={18} />
+            <p
+              className="mt-4 max-w-xs"
+              style={{
+                fontSize: 12,
+                color: "var(--ink-muted)",
+                lineHeight: 1.5,
+              }}
+            >
+              Festival ticket marketplace on Stellar. Built in Brazil.
+            </p>
+          </div>
+          {cols.map((col) => (
+            <div key={col.title}>
+              <p
+                className="mb-3.5 font-bold uppercase"
+                style={{
+                  fontSize: 11,
+                  color: "var(--gold)",
+                  letterSpacing: "0.12em",
+                }}
+              >
+                {col.title}
+              </p>
+              <ul className="flex flex-col gap-2.5">
+                {col.links.map((l) => (
+                  <li key={l.label}>
+                    {l.external ? (
+                      <a
+                        href={l.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{ fontSize: 13, color: "var(--ink-dim)" }}
+                        className="hover:text-gold transition-colors"
+                      >
+                        {l.label}
+                      </a>
+                    ) : (
+                      <Link
+                        href={l.href}
+                        style={{ fontSize: 13, color: "var(--ink-dim)" }}
+                        className="hover:text-gold transition-colors"
+                      >
+                        {l.label}
+                      </Link>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+
+        <div
+          className="flex items-center justify-between pt-6"
           style={{
-            fontSize: 10,
+            borderTop: "1px solid var(--line)",
             color: "var(--ink-quiet)",
-            letterSpacing: "0.08em",
+            fontSize: 11,
+            marginTop: 60,
           }}
         >
-          © 2026 Pass Explorer · Built on Stellar
-        </p>
+          <span>© 2026 Pass Explorer · Built on Stellar</span>
+          <span className="font-mono">v0.1.0 · build 5eb83e</span>
+        </div>
       </div>
     </footer>
   );
