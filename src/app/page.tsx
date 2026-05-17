@@ -51,6 +51,12 @@ function Pillars() {
       title: t("pillars_buy_title"),
       body:  t("pillars_buy_body"),
       tone:  "gold" as const,
+      features: [
+        t("pillars_buy_f1"),
+        t("pillars_buy_f2"),
+        t("pillars_buy_f3"),
+        t("pillars_buy_f4"),
+      ],
     },
     {
       icon: "sell" as const,
@@ -58,6 +64,12 @@ function Pillars() {
       title: t("pillars_sell_title"),
       body:  t("pillars_sell_body"),
       tone:  "sage" as const,
+      features: [
+        t("pillars_sell_f1"),
+        t("pillars_sell_f2"),
+        t("pillars_sell_f3"),
+        t("pillars_sell_f4"),
+      ],
     },
     {
       icon: "sparkle" as const,
@@ -65,6 +77,12 @@ function Pillars() {
       title: t("pillars_org_title"),
       body:  t("pillars_org_body"),
       tone:  "purple" as const,
+      features: [
+        t("pillars_org_f1"),
+        t("pillars_org_f2"),
+        t("pillars_org_f3"),
+        t("pillars_org_f4"),
+      ],
     },
   ];
 
@@ -160,10 +178,46 @@ function Pillars() {
                   fontSize: 14,
                   lineHeight: 1.55,
                   color: "var(--ink-dim)",
+                  marginBottom: 24,
                 }}
               >
                 {p.body}
               </p>
+              <ul
+                className="flex flex-col"
+                style={{
+                  gap: 10,
+                  listStyle: "none",
+                  margin: 0,
+                  padding: 0,
+                }}
+              >
+                {p.features.map((f) => (
+                  <li
+                    key={f}
+                    className="flex items-start"
+                    style={{
+                      gap: 10,
+                      fontSize: 13,
+                      color: "var(--ink-dim)",
+                      lineHeight: 1.55,
+                    }}
+                  >
+                    <span
+                      aria-hidden="true"
+                      style={{
+                        width: 4,
+                        height: 4,
+                        borderRadius: 999,
+                        background: colors[p.tone],
+                        marginTop: 8,
+                        flexShrink: 0,
+                      }}
+                    />
+                    <span>{f}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
           ))}
         </div>

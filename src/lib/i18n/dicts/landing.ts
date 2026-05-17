@@ -29,12 +29,26 @@ export const landingDict = {
     pillars_buy_label:  "For fans",
     pillars_buy_title:  "Explore & buy",
     pillars_buy_body:   "Discover thousands of festivals and secure your pass. On the official sale or the secondary market.",
+    pillars_buy_f1:     "Search by genre, location and date",
+    pillars_buy_f2:     "Compare passes across sellers",
+    pillars_buy_f3:     "Every ticket verified before purchase",
+    pillars_buy_f4:     "Instant digital delivery",
+
     pillars_sell_label: "For pass holders",
     pillars_sell_title: "List & sell",
     pillars_sell_body:  "Can't make it? Sell your pass safely on the marketplace. Set your price within the organizer's cap, the contract handles the rest.",
+    pillars_sell_f1:    "List in under 2 minutes",
+    pillars_sell_f2:    "Fair pricing tools built in",
+    pillars_sell_f3:    "Secure payment, instant payout",
+    pillars_sell_f4:    "Buyer protection on every sale",
+
     pillars_org_label:  "For organizers",
     pillars_org_title:  "Control & earn",
     pillars_org_body:   "Unlike other secondary markets, you get a cut of every resale. Plus full visibility into who holds your passes.",
+    pillars_org_f1:     "Earn royalties on every resale",
+    pillars_org_f2:     "Set resale price caps if needed",
+    pillars_org_f3:     "Real-time attendee insights",
+    pillars_org_f4:     "Reduce scalping and fraud",
 
     // ─── How it works ────────────────────────────────────────────────
     how_eyebrow:   "The experience",
@@ -147,12 +161,26 @@ export const landingDict = {
     pillars_buy_label:  "Para fãs",
     pillars_buy_title:  "Explore e compre",
     pillars_buy_body:   "Descubra milhares de festivais e garanta seu passe. Na venda oficial ou no mercado secundário.",
+    pillars_buy_f1:     "Pesquise por gênero, localização e data",
+    pillars_buy_f2:     "Compare passes entre vendedores",
+    pillars_buy_f3:     "Todos os ingressos verificados antes da compra",
+    pillars_buy_f4:     "Entrega digital instantânea",
+
     pillars_sell_label: "Para detentores de passe",
     pillars_sell_title: "Anuncie e venda",
     pillars_sell_body:  "Não vai conseguir ir? Venda seu passe com segurança. Você define o preço dentro do teto do organizador, o contrato cuida do resto.",
+    pillars_sell_f1:    "Anuncie em menos de 2 minutos",
+    pillars_sell_f2:    "Ferramentas de precificação justa incluídas",
+    pillars_sell_f3:    "Pagamento seguro, repasse imediato",
+    pillars_sell_f4:    "Proteção ao comprador em toda venda",
+
     pillars_org_label:  "Para organizadores",
     pillars_org_title:  "Controle e lucre",
     pillars_org_body:   "Diferente de outros marketplaces, você fica com uma fatia de cada revenda. Mais visibilidade total de quem tem seus passes.",
+    pillars_org_f1:     "Receba royalties em cada revenda",
+    pillars_org_f2:     "Defina limites de preço de revenda se necessário",
+    pillars_org_f3:     "Dados dos participantes em tempo real",
+    pillars_org_f4:     "Reduza cambismo e fraudes",
 
     // ─── How it works ────────────────────────────────────────────────
     how_eyebrow:   "A experiência",
