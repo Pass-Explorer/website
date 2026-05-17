@@ -158,33 +158,61 @@ function SplitDiagram() {
           600 XLM
         </text>
 
-        {/* FLOW LINES */}
+        {/* FLOW LINES + traveling coins */}
         {[
           { x: 180, color: "#4EC990", grad: "sd-flow-sage",   delay: "0s" },
           { x: 500, color: "#9B7FE8", grad: "sd-flow-purple", delay: "0.3s" },
           { x: 820, color: "#E8B84B", grad: "sd-flow-gold",   delay: "0.6s" },
-        ].map((d, i) => (
-          <g key={i}>
-            <path
-              d={`M 500 130 Q 500 240 ${d.x} 320`}
-              stroke={d.color}
-              strokeWidth="6"
-              fill="none"
-              opacity="0.08"
-            />
-            <path
-              d={`M 500 130 Q 500 240 ${d.x} 320`}
-              stroke={`url(#${d.grad})`}
-              strokeWidth="2"
-              fill="none"
-              strokeDasharray="8 6"
-              style={{
-                animation: `sd-flow 1.6s linear infinite`,
-                animationDelay: d.delay,
-              }}
-            />
-          </g>
-        ))}
+        ].map((d, i) => {
+          const pathId = `sd-path-${i}`;
+          const pathD = `M 500 130 Q 500 240 ${d.x} 320`;
+          return (
+            <g key={i}>
+              {/* glow under-line */}
+              <path
+                d={pathD}
+                stroke={d.color}
+                strokeWidth="6"
+                fill="none"
+                opacity="0.08"
+              />
+              {/* invisible path for animateMotion to follow */}
+              <path id={pathId} d={pathD} fill="none" stroke="none" />
+              {/* dashed gradient main line */}
+              <path
+                d={pathD}
+                stroke={`url(#${d.grad})`}
+                strokeWidth="2"
+                fill="none"
+                strokeDasharray="8 6"
+                style={{
+                  animation: `sd-flow 1.6s linear infinite`,
+                  animationDelay: d.delay,
+                }}
+              />
+              {/* traveling coin */}
+              <circle
+                r="6"
+                fill={d.color}
+                style={{
+                  filter: `drop-shadow(0 0 8px ${d.color})`,
+                }}
+              >
+                <animateMotion
+                  dur="2.4s"
+                  repeatCount="indefinite"
+                  begin={d.delay}
+                  keyTimes="0;1"
+                  keyPoints="0;1"
+                  calcMode="spline"
+                  keySplines="0.4 0 0.2 1"
+                >
+                  <mpath href={`#${pathId}`} />
+                </animateMotion>
+              </circle>
+            </g>
+          );
+        })}
 
         {/* Center atomic pill */}
         <g

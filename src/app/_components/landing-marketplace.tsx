@@ -84,18 +84,18 @@ export function LandingMarketplacePreview() {
   return (
     <section
       className="bg-night overflow-hidden"
-      style={{ padding: "96px 24px" }}
+      style={{ padding: "120px 48px" }}
     >
       <div className="mx-auto" style={{ maxWidth: 1240 }}>
         <p className="eyebrow mb-4" style={{ color: "var(--gold)" }}>
           Marketplace
         </p>
         <h2
-          className="display mb-12"
+          className="display"
           style={{
             fontSize: "clamp(2.5rem, 6vw, 4.5rem)",
             lineHeight: 0.95,
-            margin: 0,
+            margin: "0 0 60px",
           }}
         >
           Every festival.{" "}

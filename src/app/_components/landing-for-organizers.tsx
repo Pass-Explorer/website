@@ -15,7 +15,7 @@ export function LandingForOrganizers() {
   return (
     <section
       className="bg-night-mid relative overflow-hidden"
-      style={{ padding: "96px 24px" }}
+      style={{ padding: "120px 48px" }}
     >
       <div
         className="mx-auto grid items-center gap-12 lg:grid-cols-[1fr_1.2fr]"

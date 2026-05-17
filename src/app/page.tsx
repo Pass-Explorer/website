@@ -65,8 +65,8 @@ function Pillars() {
   ] as const;
 
   return (
-    <section className="bg-night" style={{ padding: "96px 24px" }}>
-      <div className="mx-auto max-w-7xl">
+    <section className="bg-night" style={{ padding: "120px 48px" }}>
+      <div className="mx-auto" style={{ maxWidth: 1240 }}>
         <p className="eyebrow mb-4" style={{ color: "var(--gold)" }}>
           What Pass Explorer does
         </p>
@@ -76,23 +76,28 @@ function Pillars() {
             fontSize: "clamp(2.5rem, 6vw, 4.5rem)",
             lineHeight: 0.95,
             maxWidth: 900,
+            margin: 0,
           }}
         >
           One platform.{" "}
           <span style={{ color: "var(--gold)" }}>Three sides.</span>
         </h2>
         <p
-          className="mt-4 max-w-xl"
+          className="mt-4"
           style={{
             fontSize: 17,
             color: "var(--ink-dim)",
             lineHeight: 1.55,
+            maxWidth: 540,
           }}
         >
           Built for fans who want in, fans who need out, and organizers who
           deserve more.
         </p>
-        <div className="mt-16 grid gap-6 md:grid-cols-3">
+        <div
+          className="grid gap-6 md:grid-cols-3"
+          style={{ marginTop: 80 }}
+        >
           {pillars.map((p) => {
             const colors = {
               gold:   "var(--gold)",
@@ -171,9 +176,9 @@ function HowItWorks() {
     <section
       id="how"
       className="bg-night-mid"
-      style={{ padding: "96px 24px" }}
+      style={{ padding: "120px 48px" }}
     >
-      <div className="mx-auto max-w-7xl">
+      <div className="mx-auto" style={{ maxWidth: 1240 }}>
         <p
           className="eyebrow mb-4 text-center"
           style={{ color: "var(--gold)" }}
@@ -181,10 +186,11 @@ function HowItWorks() {
           The experience
         </p>
         <h2
-          className="display mb-16 text-center"
+          className="display text-center"
           style={{
             fontSize: "clamp(2.5rem, 5vw, 4rem)",
             lineHeight: 0.95,
+            margin: "0 0 80px",
           }}
         >
           How it works
@@ -240,86 +246,53 @@ function HowItWorks() {
   );
 }
 
-// ─── Stats ─────────────────────────────────────────────────────────────
+// ─── Stats — trust strip (5 marketing-scale numbers) ───────────────────
 
 function Stats() {
-  const items = [
-    { v: "0", l: "Tx fees hidden", sub: "Atomic splits on Stellar — every cent visible" },
-    { v: "5%", l: "Royalty per resale", sub: "Set by the organizer, enforced on-chain" },
-    { v: "1.5x", l: "Default resale cap", sub: "No more 10x scalping. Ever." },
-    { v: "~3s", l: "Settlement", sub: "From sign to settle. Stellar testnet." },
+  const items: { v: string; l: string; c: string }[] = [
+    { v: "2,400+", l: "Festivals listed",       c: "var(--gold)"   },
+    { v: "180+",   l: "Countries",               c: "var(--purple)" },
+    { v: "50K+",   l: "Passes available",        c: "var(--sage)"   },
+    { v: "100%",   l: "Verified sellers",        c: "var(--ink)"    },
+    { v: "0%",     l: "Tolerance for scalping",  c: "var(--gold)"   },
   ];
   return (
     <section
-      className="bg-night relative overflow-hidden"
-      style={{ padding: "96px 24px" }}
+      className="bg-night"
+      style={{
+        padding: "80px 48px",
+        borderTop: "1px solid var(--line)",
+        borderBottom: "1px solid var(--line)",
+      }}
     >
       <div
-        aria-hidden="true"
-        className="absolute inset-0 opacity-50"
-        style={{
-          background:
-            "radial-gradient(ellipse 40% 50% at 50% 50%, rgba(232,184,75,0.06), transparent 70%)",
-        }}
-      />
-      <div className="relative mx-auto max-w-7xl">
-        <p className="eyebrow mb-4" style={{ color: "var(--gold)" }}>
-          Built on math, not vibes
-        </p>
-        <h2
-          className="display"
-          style={{
-            fontSize: "clamp(2.5rem, 6vw, 4.5rem)",
-            lineHeight: 0.95,
-            maxWidth: 900,
-          }}
-        >
-          Math that <span style={{ color: "var(--gold)" }}>can't lie.</span>
-        </h2>
-        <div className="mt-12 grid gap-2 md:grid-cols-4">
-          {items.map((s) => (
-            <div
-              key={s.l}
+        className="mx-auto grid gap-8 md:grid-cols-3 lg:grid-cols-5"
+        style={{ maxWidth: 1240 }}
+      >
+        {items.map((s) => (
+          <div key={s.l} className="text-left">
+            <p
+              className="display tabular-nums whitespace-nowrap"
               style={{
-                padding: 24,
-                borderRadius: 12,
-                background: "var(--night-card)",
-                border: "1px solid var(--line)",
+                fontSize: 56,
+                lineHeight: 1,
+                color: s.c,
               }}
             >
-              <p
-                className="display tabular-nums"
-                style={{
-                  fontSize: 64,
-                  color: "var(--gold)",
-                  lineHeight: 1,
-                }}
-              >
-                {s.v}
-              </p>
-              <p
-                className="mt-3 font-bold uppercase"
-                style={{
-                  fontSize: 10,
-                  letterSpacing: "0.14em",
-                  color: "var(--ink)",
-                }}
-              >
-                {s.l}
-              </p>
-              <p
-                className="mt-1"
-                style={{
-                  fontSize: 11,
-                  color: "var(--ink-muted)",
-                  lineHeight: 1.4,
-                }}
-              >
-                {s.sub}
-              </p>
-            </div>
-          ))}
-        </div>
+              {s.v}
+            </p>
+            <p
+              className="mt-2 font-semibold uppercase"
+              style={{
+                fontSize: 12,
+                color: "var(--ink-muted)",
+                letterSpacing: "0.06em",
+              }}
+            >
+              {s.l}
+            </p>
+          </div>
+        ))}
       </div>
     </section>
   );
@@ -331,27 +304,31 @@ function WaitlistSection() {
   return (
     <section
       id="waitlist"
-      className="bg-night-mid relative overflow-hidden"
-      style={{ padding: "120px 24px" }}
+      className="relative overflow-hidden"
+      style={{ padding: "140px 48px" }}
     >
       <div
         aria-hidden="true"
-        className="absolute inset-0 opacity-50"
+        className="absolute inset-0"
         style={{
           background:
-            "radial-gradient(ellipse 60% 50% at 50% 30%, rgba(232,184,75,0.08), transparent 70%)",
+            "radial-gradient(circle at 50% 50%, rgba(232,184,75,0.12), transparent 60%)",
         }}
       />
-      <div className="relative mx-auto max-w-3xl text-center">
-        <p className="eyebrow mb-4" style={{ color: "var(--gold)" }}>
+      <div
+        className="relative mx-auto text-center"
+        style={{ maxWidth: 720 }}
+      >
+        <p className="eyebrow mb-5" style={{ color: "var(--gold)" }}>
           The waitlist
         </p>
         <h2
           className="display mx-auto"
           style={{
-            fontSize: "clamp(2.5rem, 7vw, 5rem)",
-            lineHeight: 0.95,
+            fontSize: "clamp(3rem, 8vw, 6rem)",
+            lineHeight: 0.92,
             maxWidth: 720,
+            margin: 0,
           }}
         >
           Sold out?{" "}
@@ -387,60 +364,123 @@ function WaitlistSection() {
 // ─── Footer ────────────────────────────────────────────────────────────
 
 function Footer() {
+  const cols: { title: string; links: { label: string; href: string; external?: boolean }[] }[] = [
+    {
+      title: "Product",
+      links: [
+        { label: "Festivals",    href: "/#" },
+        { label: "Organizers",   href: "/organizers" },
+        { label: "How it works", href: "/#how" },
+        { label: "FAQ",          href: "/faq" },
+      ],
+    },
+    {
+      title: "Company",
+      links: [
+        { label: "About",     href: "/about" },
+        { label: "Blog",      href: "/#" },
+        { label: "Press",     href: "/#" },
+        { label: "Careers",   href: "/#" },
+      ],
+    },
+    {
+      title: "Legal",
+      links: [
+        { label: "Terms",     href: "/terms" },
+        { label: "Privacy",   href: "/privacy" },
+        { label: "Cookies",   href: "/privacy" },
+        { label: "LGPD",      href: "/privacy" },
+      ],
+    },
+    {
+      title: "Community",
+      links: [
+        { label: "X / Twitter", href: "https://x.com/passexplorer", external: true },
+        { label: "Discord",     href: "/#" },
+        { label: "GitHub",      href: "https://github.com/passexplorer", external: true },
+        { label: "Status",      href: "/status" },
+      ],
+    },
+  ];
+
   return (
     <footer
       className="border-t"
       style={{
         background: "var(--night)",
         borderColor: "var(--line)",
-        padding: "48px 24px 32px",
+        padding: "60px 48px 40px",
       }}
     >
-      <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 md:flex-row">
-        <Wordmark size={14} />
-        <nav className="flex flex-wrap items-center gap-6">
-          {[
-            { label: "About", href: "/about" },
-            { label: "FAQ", href: "/faq" },
-            { label: "Terms", href: "/terms" },
-            { label: "Privacy", href: "/privacy" },
-            { label: "Status", href: "/status" },
-            { label: "Changelog", href: "/changelog" },
-          ].map((l) => (
-            <Link
-              key={l.label}
-              href={l.href}
-              style={{ fontSize: 12, color: "var(--ink-muted)" }}
-              className="hover:text-gold transition-colors"
+      <div className="mx-auto" style={{ maxWidth: 1240 }}>
+        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1fr_1fr]">
+          <div>
+            <Wordmark size={18} />
+            <p
+              className="mt-4 max-w-xs"
+              style={{
+                fontSize: 12,
+                color: "var(--ink-muted)",
+                lineHeight: 1.5,
+              }}
             >
-              {l.label}
-            </Link>
+              Festival ticket marketplace on Stellar. Built in Brazil — open to organizers worldwide.
+            </p>
+          </div>
+          {cols.map((col) => (
+            <div key={col.title}>
+              <p
+                className="mb-3.5 font-bold uppercase"
+                style={{
+                  fontSize: 11,
+                  color: "var(--gold)",
+                  letterSpacing: "0.12em",
+                }}
+              >
+                {col.title}
+              </p>
+              <ul className="flex flex-col gap-2.5">
+                {col.links.map((l) => (
+                  <li key={l.label}>
+                    {l.external ? (
+                      <a
+                        href={l.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{ fontSize: 13, color: "var(--ink-dim)" }}
+                        className="hover:text-gold transition-colors"
+                      >
+                        {l.label}
+                      </a>
+                    ) : (
+                      <Link
+                        href={l.href}
+                        style={{ fontSize: 13, color: "var(--ink-dim)" }}
+                        className="hover:text-gold transition-colors"
+                      >
+                        {l.label}
+                      </Link>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
           ))}
-        </nav>
-        <a
-          href="https://x.com/passexplorer"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="font-mono"
+        </div>
+
+        <div
+          className="mt-15 flex items-center justify-between pt-6"
           style={{
+            borderTop: "1px solid var(--line)",
+            color: "var(--ink-quiet)",
             fontSize: 11,
-            color: "var(--ink-muted)",
-            letterSpacing: "0.06em",
+            marginTop: 60,
           }}
         >
-          @passexplorer ↗
-        </a>
+          <span>© 2026 Pass Explorer · Built on Stellar</span>
+          <span className="font-mono">v0.1.0 · build 5eb83e</span>
+        </div>
       </div>
-      <p
-        className="mt-8 text-center font-mono"
-        style={{
-          fontSize: 10,
-          color: "var(--ink-quiet)",
-          letterSpacing: "0.08em",
-        }}
-      >
-        © 2026 Pass Explorer · Built on Stellar
-      </p>
     </footer>
   );
 }
