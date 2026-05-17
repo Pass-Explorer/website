@@ -1,22 +1,32 @@
-import type { Metadata } from "next";
+"use client";
+
+import { aboutDict } from "@/lib/i18n/dicts/about";
+import { useT } from "@/lib/i18n";
 
 import { PageShell } from "../_components/page-shell";
 
-export const metadata: Metadata = {
-  title: "About",
-  description:
-    "Pass Explorer — built for people who refuse to take 'sold out' as an answer.",
-};
-
 /**
- * About — ported from temp/PassExplorer (1) PageAbout.
- *
- * Hero (eyebrow + Bebas headline), 2-column Problem / Thesis, 4-milestone
- * timeline with In progress pulse pill, 3-card Team grid with gradient
- * initial avatars.
+ * About — bilingual. Hero (eyebrow + Bebas headline), 2-column
+ * Problem/Thesis, 4-milestone timeline with In-progress pulse pill, and
+ * 3-card Team grid with gradient initial avatars.
  */
 
 export default function AboutPage() {
+  const t = useT(aboutDict);
+
+  const milestones = [
+    { d: t("m1_date"), title: t("m1_t"), s: t("m1_s") },
+    { d: t("m2_date"), title: t("m2_t"), s: t("m2_s"), live: true },
+    { d: t("m3_date"), title: t("m3_t"), s: t("m3_s") },
+    { d: t("m4_date"), title: t("m4_t"), s: t("m4_s") },
+  ];
+
+  const team = [
+    { i: "DG", name: "Daniel Gorgonha", role: t("role") },
+    { i: "NM", name: "Naydson Mariosa", role: t("role") },
+    { i: "MD", name: "Mauricio Doerr",  role: t("role") },
+  ];
+
   return (
     <PageShell active="about">
       <section
@@ -27,7 +37,7 @@ export default function AboutPage() {
           className="eyebrow"
           style={{ color: "var(--gold)", marginBottom: 20 }}
         >
-          About · Pass Explorer
+          {t("eyebrow")}
         </p>
         <h1
           className="display"
@@ -37,10 +47,10 @@ export default function AboutPage() {
             margin: 0,
           }}
         >
-          Built for people who
+          {t("title_a")}
           <br />
           <span style={{ color: "var(--gold)" }}>
-            refuse to take &ldquo;sold out&rdquo; as an answer.
+            {t("title_b")}
           </span>
         </h1>
 
@@ -54,7 +64,7 @@ export default function AboutPage() {
               className="display"
               style={{ fontSize: 32, color: "var(--gold)" }}
             >
-              The problem
+              {t("problem_title")}
             </h2>
             <p
               className="mt-4"
@@ -64,11 +74,7 @@ export default function AboutPage() {
                 color: "var(--ink-dim)",
               }}
             >
-              Every relevant festival sells out in minutes. The secondary
-              market is dominated by scalpers, fraud, and platforms that
-              profit at the organizer&apos;s expense. The fan pays 3× the
-              price for a ticket that might not be real. The organizer sees
-              zero of the resale.
+              {t("problem_body")}
             </p>
           </div>
           <div>
@@ -76,7 +82,7 @@ export default function AboutPage() {
               className="display"
               style={{ fontSize: 32, color: "var(--gold)" }}
             >
-              Our thesis
+              {t("thesis_title")}
             </h2>
             <p
               className="mt-4"
@@ -86,10 +92,7 @@ export default function AboutPage() {
                 color: "var(--ink-dim)",
               }}
             >
-              A marketplace that <em>works for</em> organizers instead of
-              against them. On-chain cap prevents predation. Automatic
-              royalty rewards the creator. No off-platform scalpers because
-              the transfer is physically blocked outside the contract.
+              {t("thesis_body")}
             </p>
           </div>
         </div>
@@ -99,32 +102,10 @@ export default function AboutPage() {
           className="display"
           style={{ fontSize: 48, marginTop: 100, marginBottom: 40 }}
         >
-          Timeline
+          {t("timeline")}
         </h2>
         <div className="flex flex-col gap-6">
-          {[
-            {
-              d: "Q1 2026",
-              t: "Thesis + landing",
-              s: "Bilingual landing built, contracts ready, 34 tests passing.",
-            },
-            {
-              d: "Q2 2026",
-              t: "Hackathon · MVP",
-              s: "Testnet deploy, PWA app, end-to-end resale flow working.",
-              live: true,
-            },
-            {
-              d: "Q3 2026",
-              t: "Beta testnet",
-              s: "First 2–3 real organizers onboarded in testnet. Audit kickoff.",
-            },
-            {
-              d: "Q4 2026",
-              t: "Mainnet",
-              s: "Public launch with fiat anchor integration. First real festival live.",
-            },
-          ].map((m, i, arr) => (
+          {milestones.map((m, i, arr) => (
             <div
               key={m.d}
               className="flex gap-5"
@@ -151,7 +132,7 @@ export default function AboutPage() {
                     className="display"
                     style={{ fontSize: 24, color: "var(--ink)" }}
                   >
-                    {m.t}
+                    {m.title}
                   </span>
                   {m.live && (
                     <span
@@ -170,7 +151,7 @@ export default function AboutPage() {
                         className="pulse"
                         style={{ color: "var(--sage)" }}
                       />
-                      In progress
+                      {t("in_progress")}
                     </span>
                   )}
                 </div>
@@ -195,14 +176,10 @@ export default function AboutPage() {
           className="display"
           style={{ fontSize: 48, marginTop: 100, marginBottom: 40 }}
         >
-          Team
+          {t("team")}
         </h2>
         <div className="grid gap-5 md:grid-cols-3">
-          {[
-            { i: "DG", name: "Daniel Gorgonha",  role: "Co-founder" },
-            { i: "NM", name: "Naydson Mariosa",  role: "Co-founder" },
-            { i: "MD", name: "Mauricio Doerr",   role: "Co-founder" },
-          ].map((p) => (
+          {team.map((p) => (
             <div
               key={p.name}
               style={{

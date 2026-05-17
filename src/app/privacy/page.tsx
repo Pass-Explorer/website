@@ -1,38 +1,38 @@
-import type { Metadata } from "next";
+"use client";
 
 import { Icon } from "@/components/primitives";
+import { privacyDict } from "@/lib/i18n/dicts/privacy";
+import { useT } from "@/lib/i18n";
 
 import { PageShell } from "../_components/page-shell";
 
-export const metadata: Metadata = {
-  title: "Privacy",
-};
-
 type Item = [string, string];
 
-const COLLECT: Item[] = [
-  ["Email · Google ID", "For account creation via Privy. We don't sell."],
-  ["Stellar address", "Your wallet. Public on-chain by nature."],
-  ["Purchase history", "To show your tickets and history. Public on-chain."],
-  ["Usage data", "PostHog product analytics. Anonymous by default."],
-];
-
-const DONT_COLLECT: Item[] = [
-  ["CPF · ID document", "We don't ask. KYC is for organizers only."],
-  ["Credit card", "Payment is XLM or Anchor — we never touch the card."],
-  ["Precise location", "No GPS. City only if you fill it in your profile."],
-  ["Third-party cookies", "No cross-site tracking."],
-];
-
-const RIGHTS: Item[] = [
-  ["Access", "Download all your data at /profile → \"Export data\"."],
-  ["Correction", "Edit your profile at any time."],
-  ["Deletion", "Request via dpo@passexplorer.com. On-chain data is immutable."],
-  ["Portability", "Receive your data in structured JSON format."],
-  ["Revocation", "Cancel consents at /profile → \"Notifications\"."],
-];
-
 export default function PrivacyPage() {
+  const t = useT(privacyDict);
+
+  const COLLECT: Item[] = [
+    [t("c_1k"), t("c_1v")],
+    [t("c_2k"), t("c_2v")],
+    [t("c_3k"), t("c_3v")],
+    [t("c_4k"), t("c_4v")],
+  ];
+
+  const DONT: Item[] = [
+    [t("d_1k"), t("d_1v")],
+    [t("d_2k"), t("d_2v")],
+    [t("d_3k"), t("d_3v")],
+    [t("d_4k"), t("d_4v")],
+  ];
+
+  const RIGHTS: Item[] = [
+    [t("r_1k"), t("r_1v")],
+    [t("r_2k"), t("r_2v")],
+    [t("r_3k"), t("r_3v")],
+    [t("r_4k"), t("r_4v")],
+    [t("r_5k"), t("r_5v")],
+  ];
+
   return (
     <PageShell>
       <section
@@ -43,7 +43,7 @@ export default function PrivacyPage() {
           className="eyebrow"
           style={{ color: "var(--gold)", marginBottom: 20 }}
         >
-          Privacy · LGPD compliant · v1.0
+          {t("eyebrow")}
         </p>
         <h1
           className="display"
@@ -53,7 +53,7 @@ export default function PrivacyPage() {
             margin: 0,
           }}
         >
-          Privacy policy
+          {t("title")}
         </h1>
         <p
           style={{
@@ -63,17 +63,16 @@ export default function PrivacyPage() {
             marginTop: 24,
           }}
         >
-          Your privacy matters. This policy describes what data we collect, why,
-          and how you can control it. Per LGPD (Law no. 13.709/2018).
+          {t("lede")}
         </p>
 
         <div
           className="flex flex-col"
           style={{ marginTop: 60, gap: 32 }}
         >
-          <PrivacyBlock t="What we collect" items={COLLECT} />
-          <PrivacyBlock t="What we DON'T collect" items={DONT_COLLECT} />
-          <PrivacyBlock t="Your rights (LGPD)" items={RIGHTS} />
+          <PrivacyBlock t={t("block_collect")} items={COLLECT} />
+          <PrivacyBlock t={t("block_dont")}    items={DONT}    />
+          <PrivacyBlock t={t("block_rights")}  items={RIGHTS}  />
         </div>
 
         <div
@@ -94,7 +93,7 @@ export default function PrivacyPage() {
                 className="display"
                 style={{ fontSize: 22, color: "var(--purple)", margin: 0 }}
               >
-                DPO · Data Protection Officer
+                {t("dpo_title")}
               </p>
               <p
                 style={{
@@ -104,11 +103,9 @@ export default function PrivacyPage() {
                   lineHeight: 1.6,
                 }}
               >
-                dpo@passexplorer.com · Av. Paulista, 1234 · Conj 567 · São Paulo
-                SP 01310-100
+                {t("dpo_body")}
                 <br />
-                Average response time: 5 business days · LGPD complaint via
-                ANPD: gov.br/anpd
+                {t("dpo_eta")}
               </p>
             </div>
           </div>

@@ -1,10 +1,15 @@
+"use client";
+
 import Link from "next/link";
 
 import { Icon } from "@/components/primitives";
+import { notFoundDict } from "@/lib/i18n/dicts/notfound";
+import { useT } from "@/lib/i18n";
 
 import { PageShell } from "./_components/page-shell";
 
 export default function NotFound() {
+  const t = useT(notFoundDict);
   return (
     <PageShell>
       <section
@@ -27,7 +32,7 @@ export default function NotFound() {
           className="eyebrow"
           style={{ color: "var(--gold)", marginTop: -20 }}
         >
-          Page not found
+          {t("eyebrow")}
         </p>
         <h1
           className="display"
@@ -37,7 +42,7 @@ export default function NotFound() {
             margin: "20px 0",
           }}
         >
-          That pass doesn't exist.
+          {t("title")}
         </h1>
         <p
           className="mx-auto"
@@ -49,8 +54,7 @@ export default function NotFound() {
             lineHeight: 1.6,
           }}
         >
-          Either the link is wrong, the event was removed, or you typed
-          something weird. Try one of these:
+          {t("body")}
         </p>
         <div
           className="flex justify-center"
@@ -69,7 +73,7 @@ export default function NotFound() {
               letterSpacing: "0.02em",
             }}
           >
-            Browse festivals
+            {t("cta_browse")}
             <Icon name="arrow" size={16} />
           </Link>
           <Link
@@ -86,7 +90,7 @@ export default function NotFound() {
               letterSpacing: "0.02em",
             }}
           >
-            FAQ
+            {t("cta_faq")}
           </Link>
         </div>
       </section>

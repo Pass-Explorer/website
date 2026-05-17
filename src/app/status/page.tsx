@@ -1,38 +1,31 @@
-import type { Metadata } from "next";
+"use client";
+
+import { statusDict } from "@/lib/i18n/dicts/status";
+import { useT } from "@/lib/i18n";
 
 import { PageShell } from "../_components/page-shell";
 
-export const metadata: Metadata = {
-  title: "Status",
-  description: "Real-time status of Pass Explorer infrastructure.",
-};
-
-interface Row {
-  service: string;
-  s: "operational" | "degraded" | "outage";
-  uptime: number;
-  latency: string;
-}
-
-const ROWS: Row[] = [
-  { service: "Stellar RPC (Validation Cloud)", s: "operational", uptime: 99.97, latency: "142ms" },
-  { service: "Indexer (Rust + sqlx)",          s: "operational", uptime: 99.99, latency: "4s ago" },
-  { service: "Postgres (Neon)",                 s: "operational", uptime: 99.99, latency: "12ms p50" },
-  { service: "Smart contracts",                 s: "operational", uptime: 100.0, latency: "no pause" },
-  { service: "Privy (Stripe)",                  s: "operational", uptime: 99.98, latency: "230ms" },
-  { service: "IPFS · Pinata",                   s: "operational", uptime: 99.99, latency: "847 pins" },
-  { service: "Web app (Vercel)",                s: "operational", uptime: 100.0, latency: "edge" },
-  { service: "Email (Resend)",                  s: "operational", uptime: 99.95, latency: "1.2s p50" },
-];
-
-const LEDGER: { l: string; v: string; c: string }[] = [
-  { l: "Block",      v: "47,291,023",  c: "var(--gold)" },
-  { l: "Fee",        v: "100 stroops", c: "var(--ink)" },
-  { l: "Tx/s",       v: "847",         c: "var(--sage)" },
-  { l: "Validators", v: "23 nodes",    c: "var(--ink)" },
-];
-
 export default function StatusPage() {
+  const t = useT(statusDict);
+
+  const ROWS = [
+    { service: t("svc_rpc"),       uptime: 99.97, latency: t("latency_rpc")       },
+    { service: t("svc_indexer"),   uptime: 99.99, latency: t("latency_indexer")   },
+    { service: t("svc_postgres"),  uptime: 99.99, latency: t("latency_postgres")  },
+    { service: t("svc_contracts"), uptime: 100.0, latency: t("latency_contracts") },
+    { service: t("svc_privy"),     uptime: 99.98, latency: t("latency_privy")     },
+    { service: t("svc_ipfs"),      uptime: 99.99, latency: t("latency_ipfs")      },
+    { service: t("svc_web"),       uptime: 100.0, latency: t("latency_web")       },
+    { service: t("svc_email"),     uptime: 99.95, latency: t("latency_email")     },
+  ];
+
+  const LEDGER: { l: string; v: string; c: string }[] = [
+    { l: t("ledger_block"),      v: "47,291,023",          c: "var(--gold)" },
+    { l: t("ledger_fee"),        v: "100 stroops",         c: "var(--ink)"  },
+    { l: t("ledger_tps"),        v: "847",                 c: "var(--sage)" },
+    { l: t("ledger_validators"), v: t("ledger_validators_v"), c: "var(--ink)"  },
+  ];
+
   return (
     <PageShell active="status">
       <section
@@ -48,7 +41,7 @@ export default function StatusPage() {
             className="pulse"
             style={{ background: "var(--sage)", marginRight: 8 }}
           />
-          All systems operational
+          {t("eyebrow")}
         </p>
         <h1
           className="display"
@@ -58,7 +51,7 @@ export default function StatusPage() {
             margin: 0,
           }}
         >
-          All up.
+          {t("title")}
         </h1>
         <p
           style={{
@@ -68,7 +61,7 @@ export default function StatusPage() {
             marginTop: 24,
           }}
         >
-          Last incident: never · 90-day uptime: 99.98% · Updated 14 seconds ago
+          {t("sub")}
         </p>
 
         {/* status grid */}
@@ -108,7 +101,7 @@ export default function StatusPage() {
                     marginTop: 2,
                   }}
                 >
-                  Operational
+                  {t("label_operational")}
                 </div>
               </div>
               {/* uptime bars */}
@@ -136,7 +129,7 @@ export default function StatusPage() {
                     marginTop: 4,
                   }}
                 >
-                  30d · {row.uptime}% uptime
+                  {t("uptime_30d").replace("{pct}", String(row.uptime))}
                 </div>
               </div>
               <span
@@ -167,7 +160,7 @@ export default function StatusPage() {
             className="eyebrow"
             style={{ color: "var(--gold)", marginBottom: 16 }}
           >
-            Stellar testnet · ledger
+            {t("ledger_eyebrow")}
           </p>
           <div
             className="grid"

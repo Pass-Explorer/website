@@ -1,16 +1,15 @@
-import type { Metadata } from "next";
+"use client";
+
 import Link from "next/link";
 
 import { Icon } from "@/components/primitives";
+import { maintenanceDict } from "@/lib/i18n/dicts/maintenance";
+import { useT } from "@/lib/i18n";
 
 import { PageShell } from "../_components/page-shell";
 
-export const metadata: Metadata = {
-  title: "Maintenance",
-  description: "Pass Explorer is updating.",
-};
-
 export default function MaintenancePage() {
+  const t = useT(maintenanceDict);
   return (
     <PageShell>
       <section
@@ -48,7 +47,7 @@ export default function MaintenancePage() {
         </div>
 
         <p className="eyebrow" style={{ color: "var(--gold)" }}>
-          Maintenance window
+          {t("eyebrow")}
         </p>
         <h1
           className="display"
@@ -58,8 +57,8 @@ export default function MaintenancePage() {
             margin: "20px 0",
           }}
         >
-          Back in{" "}
-          <span style={{ color: "var(--gold)" }}>14 minutes.</span>
+          {t("title_a")}{" "}
+          <span style={{ color: "var(--gold)" }}>{t("title_b")}</span>
         </h1>
         <p
           className="mx-auto"
@@ -71,8 +70,7 @@ export default function MaintenancePage() {
             lineHeight: 1.6,
           }}
         >
-          Stellar RPC is migrating to v4.2. Purchases and resales are paused —
-          already-purchased passes remain valid in your wallet.
+          {t("body")}
         </p>
         <div
           className="inline-flex items-center"
@@ -96,7 +94,7 @@ export default function MaintenancePage() {
               color: "var(--ink-dim)",
             }}
           >
-            ETA · 22:14 BRT · 14m 32s
+            {t("eta")}
           </span>
         </div>
         <div style={{ marginTop: 32 }}>
@@ -114,7 +112,7 @@ export default function MaintenancePage() {
               letterSpacing: "0.02em",
             }}
           >
-            View detailed status
+            {t("cta")}
             <Icon name="arrow" size={14} />
           </Link>
         </div>

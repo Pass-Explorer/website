@@ -1,11 +1,9 @@
-import type { Metadata } from "next";
+"use client";
+
+import { changelogDict } from "@/lib/i18n/dicts/changelog";
+import { useT } from "@/lib/i18n";
 
 import { PageShell } from "../_components/page-shell";
-
-export const metadata: Metadata = {
-  title: "Changelog",
-  description: "What's new in Pass Explorer.",
-};
 
 type ItemType = "feat" | "fix" | "chore";
 
@@ -16,72 +14,74 @@ interface Entry {
   items: { type: ItemType; t: string }[];
 }
 
-const ENTRIES: Entry[] = [
-  {
-    v: "v0.4.0",
-    d: "17 May 2026",
-    tag: "WEB LAUNCH",
-    items: [
-      { type: "feat", t: "Web version of Pass Explorer (Landing + Admin + Organizer)" },
-      { type: "feat", t: "Admin persona with global dashboard and platform fee governance" },
-      { type: "feat", t: "Gate persona with QR scanner at the festival gate" },
-    ],
-  },
-  {
-    v: "v0.3.0",
-    d: "16 May 2026",
-    tag: "PROTOTYPE",
-    items: [
-      { type: "feat", t: "Organizer Event Detail with Sales/Resales/Holders/Check-in sub-tabs" },
-      { type: "feat", t: "Resale flow with animated atomic split" },
-      { type: "feat", t: "Fullscreen QR reveal with hologram + shimmer" },
-      { type: "fix",  t: "R$NaN in cap when capMult was undefined" },
-    ],
-  },
-  {
-    v: "v0.2.0",
-    d: "15 May 2026",
-    tag: "WALLETS",
-    items: [
-      { type: "feat", t: "Privy embedded wallets — sign in with Google/Apple/email" },
-      { type: "feat", t: "Stellar wallet provisioned via TEE + Shamir SSS, no seed phrases" },
-    ],
-  },
-  {
-    v: "v0.1.0",
-    d: "14 May 2026",
-    tag: "CONTRACTS",
-    items: [
-      { type: "feat", t: "Factory, EventNFT (SEP-41) and Marketplace deployed · 34 tests" },
-      { type: "feat", t: "Automatic 5% royalty · atomic split in a single Stellar tx" },
-      { type: "feat", t: "Gated transfer · only Marketplace can move tokens" },
-    ],
-  },
-  {
-    v: "v0.0.1",
-    d: "28 Apr 2026",
-    tag: "LANDING",
-    items: [
-      { type: "feat", t: "Bilingual landing EN/PT-BR via toggle" },
-      { type: "feat", t: "Waitlist capture via Formspree" },
-      { type: "feat", t: "Brand identity: night/gold/sage/purple + Bebas Neue + DM Sans" },
-    ],
-  },
-];
-
-const COLORS: Record<ItemType, string> = {
-  feat:  "var(--sage)",
-  fix:   "var(--gold)",
-  chore: "var(--ink-muted)",
-};
-
-const LABELS: Record<ItemType, string> = {
-  feat:  "FEAT",
-  fix:   "FIX",
-  chore: "CHORE",
-};
-
 export default function ChangelogPage() {
+  const t = useT(changelogDict);
+
+  const ENTRIES: Entry[] = [
+    {
+      v: t("e1_v"),
+      d: t("e1_d"),
+      tag: t("e1_tag"),
+      items: [
+        { type: "feat", t: t("e1_i1") },
+        { type: "feat", t: t("e1_i2") },
+        { type: "feat", t: t("e1_i3") },
+      ],
+    },
+    {
+      v: t("e2_v"),
+      d: t("e2_d"),
+      tag: t("e2_tag"),
+      items: [
+        { type: "feat", t: t("e2_i1") },
+        { type: "feat", t: t("e2_i2") },
+        { type: "feat", t: t("e2_i3") },
+        { type: "fix",  t: t("e2_i4") },
+      ],
+    },
+    {
+      v: t("e3_v"),
+      d: t("e3_d"),
+      tag: t("e3_tag"),
+      items: [
+        { type: "feat", t: t("e3_i1") },
+        { type: "feat", t: t("e3_i2") },
+      ],
+    },
+    {
+      v: t("e4_v"),
+      d: t("e4_d"),
+      tag: t("e4_tag"),
+      items: [
+        { type: "feat", t: t("e4_i1") },
+        { type: "feat", t: t("e4_i2") },
+        { type: "feat", t: t("e4_i3") },
+      ],
+    },
+    {
+      v: t("e5_v"),
+      d: t("e5_d"),
+      tag: t("e5_tag"),
+      items: [
+        { type: "feat", t: t("e5_i1") },
+        { type: "feat", t: t("e5_i2") },
+        { type: "feat", t: t("e5_i3") },
+      ],
+    },
+  ];
+
+  const COLORS: Record<ItemType, string> = {
+    feat:  "var(--sage)",
+    fix:   "var(--gold)",
+    chore: "var(--ink-muted)",
+  };
+
+  const LABELS: Record<ItemType, string> = {
+    feat:  t("feat"),
+    fix:   t("fix"),
+    chore: t("chore"),
+  };
+
   return (
     <PageShell>
       <section
@@ -92,7 +92,7 @@ export default function ChangelogPage() {
           className="eyebrow"
           style={{ color: "var(--gold)", marginBottom: 20 }}
         >
-          Build in public
+          {t("eyebrow")}
         </p>
         <h1
           className="display"
@@ -102,7 +102,7 @@ export default function ChangelogPage() {
             margin: 0,
           }}
         >
-          Changelog
+          {t("title")}
         </h1>
         <p
           style={{
@@ -112,14 +112,10 @@ export default function ChangelogPage() {
             marginTop: 24,
           }}
         >
-          What changed, when, and why. Updated whenever a deploy lands in
-          production.
+          {t("lede")}
         </p>
 
-        <div
-          className="flex flex-col"
-          style={{ marginTop: 60, gap: 32 }}
-        >
+        <div className="flex flex-col" style={{ marginTop: 60, gap: 32 }}>
           {ENTRIES.map((e) => (
             <article
               key={e.v}

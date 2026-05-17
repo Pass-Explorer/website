@@ -1,0 +1,88 @@
+import type { Dict } from "../types";
+
+export const privacyDict = {
+  en: {
+    eyebrow:  "Privacy · LGPD compliant · v1.0",
+    title:    "Privacy policy",
+    lede:     "Your privacy matters. This policy describes what data we collect, why, and how you can control it. Per LGPD (Law no. 13.709/2018).",
+
+    block_collect:   "What we collect",
+    block_dont:      "What we DON'T collect",
+    block_rights:    "Your rights (LGPD)",
+
+    c_1k: "Email · Google ID",
+    c_1v: "For account creation via Privy. We don't sell.",
+    c_2k: "Stellar address",
+    c_2v: "Your wallet. Public on-chain by nature.",
+    c_3k: "Purchase history",
+    c_3v: "To show your tickets and history. Public on-chain.",
+    c_4k: "Usage data",
+    c_4v: "PostHog product analytics. Anonymous by default.",
+
+    d_1k: "CPF · ID document",
+    d_1v: "We don't ask. KYC is for organizers only.",
+    d_2k: "Credit card",
+    d_2v: "Payment is XLM or Anchor — we never touch the card.",
+    d_3k: "Precise location",
+    d_3v: "No GPS. City only if you fill it in your profile.",
+    d_4k: "Third-party cookies",
+    d_4v: "No cross-site tracking.",
+
+    r_1k: "Access",
+    r_1v: "Download all your data at /profile → “Export data”.",
+    r_2k: "Correction",
+    r_2v: "Edit your profile at any time.",
+    r_3k: "Deletion",
+    r_3v: "Request via dpo@passexplorer.com. On-chain data is immutable.",
+    r_4k: "Portability",
+    r_4v: "Receive your data in structured JSON format.",
+    r_5k: "Revocation",
+    r_5v: "Cancel consents at /profile → “Notifications”.",
+
+    dpo_title: "DPO · Data Protection Officer",
+    dpo_body:  "dpo@passexplorer.com · Av. Paulista, 1234 · Conj 567 · São Paulo SP 01310-100",
+    dpo_eta:   "Average response time: 5 business days · LGPD complaint via ANPD: gov.br/anpd",
+  },
+  pt: {
+    eyebrow:  "Privacidade · LGPD compliant · v1.0",
+    title:    "Política de privacidade",
+    lede:     "Sua privacidade importa. Esta política descreve quais dados coletamos, por quê, e como você pode controlá-los. Conforme LGPD (Lei nº 13.709/2018).",
+
+    block_collect:   "O que coletamos",
+    block_dont:      "O que NÃO coletamos",
+    block_rights:    "Seus direitos (LGPD)",
+
+    c_1k: "Email · Google ID",
+    c_1v: "Para criação de conta via Privy. Não vendemos.",
+    c_2k: "Endereço Stellar",
+    c_2v: "Sua carteira. Pública on-chain por natureza.",
+    c_3k: "Histórico de compras",
+    c_3v: "Pra mostrar seus tickets e histórico. Público on-chain.",
+    c_4k: "Dados de uso",
+    c_4v: "PostHog product analytics. Anônimo por default.",
+
+    d_1k: "CPF · documento",
+    d_1v: "Não pedimos. KYC é exclusivo pra organizadores.",
+    d_2k: "Cartão de crédito",
+    d_2v: "Pagamento é via XLM ou Anchor — nunca tocamos no cartão.",
+    d_3k: "Localização precisa",
+    d_3v: "Nada de GPS. Cidade só se você preencher no perfil.",
+    d_4k: "Cookies de terceiros",
+    d_4v: "Sem rastreamento cross-site.",
+
+    r_1k: "Acesso",
+    r_1v: "Baixe todos seus dados em /profile → “Exportar dados”.",
+    r_2k: "Correção",
+    r_2v: "Edite seu perfil a qualquer momento.",
+    r_3k: "Eliminação",
+    r_3v: "Solicite via dpo@passexplorer.com. Dados on-chain são imutáveis.",
+    r_4k: "Portabilidade",
+    r_4v: "Receba seus dados em formato JSON estruturado.",
+    r_5k: "Revogação",
+    r_5v: "Cancele consentimentos em /profile → “Notificações”.",
+
+    dpo_title: "DPO · Encarregado de Proteção de Dados",
+    dpo_body:  "dpo@passexplorer.com · Av. Paulista, 1234 · Conj 567 · São Paulo SP 01310-100",
+    dpo_eta:   "Tempo médio de resposta: 5 dias úteis · Reclamação LGPD via ANPD: gov.br/anpd",
+  },
+} as const satisfies Dict;
