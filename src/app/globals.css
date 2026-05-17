@@ -1,0 +1,174 @@
+/* ──────────────────────────────────────────────────────────────
+ * Pass Explorer marketing site — brand foundations
+ * Mirrors repos/app/src/app/globals.css. Subset of brand tokens —
+ * no Privy / Stellar so we can stay light + SEO-fast.
+ * ────────────────────────────────────────────────────────────── */
+
+@import "tailwindcss";
+
+:root {
+  /* Core palette */
+  --night:       #080810;
+  --night-mid:   #14141F;
+  --night-card:  #1A1A28;
+  --night-elev:  #22222F;
+  --line:        rgba(242, 237, 228, 0.08);
+  --line-strong: rgba(242, 237, 228, 0.16);
+
+  --gold:       #E8B84B;
+  --gold-deep:  #B8902F;
+  --gold-soft:  rgba(232, 184, 75, 0.12);
+  --sage:       #4EC990;
+  --sage-soft:  rgba(78, 201, 144, 0.14);
+  --purple:     #9B7FE8;
+  --purple-soft: rgba(155, 127, 232, 0.14);
+  --red:        #F26D5B;
+
+  --ink:        #F2EDE4;
+  --ink-dim:    rgba(242, 237, 228, 0.72);
+  --ink-muted:  rgba(242, 237, 228, 0.48);
+  --ink-quiet:  rgba(242, 237, 228, 0.28);
+}
+
+@theme inline {
+  --color-night: #080810;
+  --color-night-mid: #14141F;
+  --color-night-card: #1A1A28;
+  --color-gold: #E8B84B;
+  --color-gold-soft: rgba(232, 184, 75, 0.12);
+  --color-sage: #4EC990;
+  --color-sage-soft: rgba(78, 201, 144, 0.14);
+  --color-purple: #9B7FE8;
+  --color-purple-soft: rgba(155, 127, 232, 0.14);
+  --color-red: #F26D5B;
+  --color-ink: #F2EDE4;
+  --color-ink-dim: rgba(242, 237, 228, 0.72);
+  --color-ink-muted: rgba(242, 237, 228, 0.48);
+  --color-ink-quiet: rgba(242, 237, 228, 0.28);
+  --color-line: rgba(242, 237, 228, 0.08);
+  --color-line-strong: rgba(242, 237, 228, 0.16);
+
+  --font-display: "Bebas Neue", "Anton", "Arial Narrow", sans-serif;
+  --font-body:    "DM Sans", "Inter", system-ui, sans-serif;
+  --font-mono:    "JetBrains Mono", ui-monospace, monospace;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--night);
+  color: var(--ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+a { color: inherit; text-decoration: none; }
+
+/* Display / mono utilities */
+.display {
+  font-family: var(--font-display);
+  letter-spacing: 0.01em;
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+.eyebrow {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+.mono { font-family: var(--font-mono); }
+.num { font-variant-numeric: tabular-nums; }
+
+/* Tap helper */
+.tap { -webkit-tap-highlight-color: transparent; transition: opacity 0.12s ease, transform 0.12s ease; }
+.tap:active { opacity: 0.7; transform: scale(0.98); }
+
+/* Pulse dot */
+.pulse {
+  position: relative;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+.pulse::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 1px solid currentColor;
+  opacity: 0;
+  animation: pulse-ring 1.8s ease-out infinite;
+}
+
+@keyframes pulse-ring {
+  0%   { transform: scale(0.6); opacity: 0.8; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: none; }
+}
+.fade-up { animation: fadeUp 0.7s ease both; animation-delay: var(--delay, 0s); }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: none; }
+}
+.fade-in { animation: fadeIn 0.32s ease forwards; }
+
+@keyframes drift {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  33%      { transform: translate3d(-1%, 0.5%, 0); }
+  66%      { transform: translate3d(1.5%, -0.75%, 0); }
+}
+
+@keyframes ambient-breathe {
+  0%, 100% { opacity: 0.92; }
+  50%      { opacity: 1; }
+}
+
+@keyframes ambient-beam-sweep {
+  0%, 100% { transform: rotate(-3deg); }
+  50%      { transform: rotate(3deg); }
+}
+
+@keyframes ambient-pan {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-200px); }
+}
+
+@keyframes coinDrop {
+  0%   { transform: translateY(-18px) scale(0.4); opacity: 0; }
+  35%  { transform: translateY(0) scale(1.05); opacity: 1; }
+  60%  { transform: translateY(0) scale(0.98); }
+  100% { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@layer base {
+  body { background: var(--night); color: var(--ink); }
+  h1, h2, h3 { font-family: var(--font-display); font-weight: 400; letter-spacing: 0.04em; }
+}
