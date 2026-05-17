@@ -55,7 +55,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       className={`${bebasNeue.variable} ${dmSans.variable}`}
       suppressHydrationWarning
     >
-      <body className="bg-night text-ink min-h-dvh antialiased">
+      <body
+        className="bg-night text-ink min-h-dvh antialiased"
+        suppressHydrationWarning
+      >
         <LangProvider>{children}</LangProvider>
       </body>
     </html>
