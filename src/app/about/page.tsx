@@ -6,7 +6,7 @@ import { useT } from "@/lib/i18n";
 import { PageShell } from "../_components/page-shell";
 
 /**
- * About — bilingual. Hero (eyebrow + Bebas headline), 2-column
+ * About - bilingual. Hero (eyebrow + Bebas headline), 2-column
  * Problem/Thesis, 4-milestone timeline with In-progress pulse pill, and
  * 3-card Team grid with gradient initial avatars.
  */

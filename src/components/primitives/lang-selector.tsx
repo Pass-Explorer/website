@@ -3,7 +3,7 @@
 import { type Lang, useLang } from "@/lib/i18n";
 
 /**
- * LangSelector — flag-pill toggle for EN ↔ PT.
+ * LangSelector - flag-pill toggle for EN ↔ PT.
  *
  * Pair of flag buttons (🇺🇸 / 🇧🇷) inside a rounded pill. The active flag
  * is full-color with a faint gold tint; inactive flags are faded +

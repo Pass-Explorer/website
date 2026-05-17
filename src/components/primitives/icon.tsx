@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 /**
  * Pass Explorer icon set.
  *
- * Inline SVG strokes — single source ensures every glyph carries the same
+ * Inline SVG strokes. single source ensures every glyph carries the same
  * weight, cap, and join. Use this instead of mixing lucide / heroicons /
  * tabler across the app: visual consistency on small mobile chrome matters
  * more than registry coverage.

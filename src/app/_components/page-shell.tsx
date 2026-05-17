@@ -7,7 +7,7 @@ import { commonDict } from "@/lib/i18n/dicts/common";
 import { useT } from "@/lib/i18n";
 
 /**
- * PageShell — shared chrome for sub-pages (About / FAQ / Terms / Privacy
+ * PageShell - shared chrome for sub-pages (About / FAQ / Terms / Privacy
  * / Status / Changelog).
  *
  * Visual treatment ported from temp/PassExplorer (1) PageShell:
@@ -17,16 +17,16 @@ import { useT } from "@/lib/i18n";
  *     Legal / System) + copyright + mono version
  *
  * Two usage modes:
- *   1. Title + body — pass eyebrow/title/lede and PageShell renders the
+ *   1. Title + body. pass eyebrow/title/lede and PageShell renders the
  *      standard centered narrow column header above children.
- *   2. Custom layout — omit eyebrow/title and render your own hero block
+ *   2. Custom layout. omit eyebrow/title and render your own hero block
  *      inside children (e.g. About has 2-column problem/thesis + timeline).
  */
 
 type PageKey = "festivals" | "howitworks" | "faq" | "about" | "status";
 
 interface PageShellProps {
-  /** Active nav key — sets the gold highlight. */
+  /** Active nav key. sets the gold highlight. */
   active?: PageKey;
   /** When set, renders a centered narrow-column hero with eyebrow + title + lede. */
   eyebrow?: string;
@@ -134,7 +134,7 @@ function PageHeader({ active }: { active?: PageKey }) {
           ))}
         </nav>
 
-        {/* Sage status pulse — clickable to /status */}
+        {/* Sage status pulse. clickable to /status */}
         <Link
           href="/status"
           className="hidden items-center gap-1.5 md:inline-flex"

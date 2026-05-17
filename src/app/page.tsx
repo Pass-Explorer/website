@@ -15,7 +15,7 @@ import { LandingSplitFlow } from "./_components/landing-split-flow";
 import { WaitlistForm } from "./_components/waitlist-form";
 
 /**
- * Marketing landing page — passexplorer.com.
+ * Marketing landing page. passexplorer.com.
  *
  * Client component because every section consumes the i18n context for
  * PT/EN switching. Metadata stays in the root layout. Structure:
@@ -321,7 +321,7 @@ function HowItWorks() {
   );
 }
 
-// ─── Stats — trust strip (5 marketing-scale numbers) ───────────────────
+// ─── Stats. trust strip (5 marketing-scale numbers) ───────────────────
 
 function Stats() {
   const t = useT(landingDict);

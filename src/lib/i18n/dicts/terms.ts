@@ -4,14 +4,14 @@ export const termsDict = {
   en: {
     eyebrow: "Legal · v1.0 · 17 May 2026",
     title:   "Terms of use",
-    lede:    "By using Pass Explorer, you agree to the terms below. They are real — read them carefully before buying.",
+    lede:    "By using Pass Explorer, you agree to the terms below. They are real, read them carefully before buying.",
 
     c1_t: "What Pass Explorer is",
-    c1_b: "A festival ticket marketplace operated by Pass Explorer Tecnologia Ltda. (CNPJ XX.XXX.XXX/0001-XX). We connect fans, sellers, and organizers via Stellar smart contracts. We are not a bank, not an anchor — we are a software platform.",
+    c1_b: "A festival ticket marketplace operated by Pass Explorer Tecnologia Ltda. (CNPJ XX.XXX.XXX/0001-XX). We connect fans, sellers, and organizers via Stellar smart contracts. We are not a bank, not an anchor, we are a software platform.",
     c2_t: "Your wallet and your tokens",
     c2_b: "When you sign in with email or Google, Privy provisions a custodial-grade Stellar wallet (TEE + Shamir SSS). Tokens (tickets) live in that wallet. You are responsible for the key; we offer recovery via Privy but do not have direct access.",
     c3_t: "Anti-scalping",
-    c3_b: "Every resale goes through the Marketplace contract. Listings above the cap set by the organizer are physically rejected. Off-platform transfers are blocked by the EventNFT contract. Attempts to bypass these rules (e.g. external resale of wallet credentials) may be considered a terms violation.",
+    c3_b: "Every resale goes through the Marketplace contract. Listings above the cap set by the organizer are physically rejected. Off-platform transfers are blocked by the EventNFT contract. Attempts to bypass these rules (e.g, external resale of wallet credentials) may be considered a terms violation.",
     c4_t: "Royalty and fees",
     c4_b: "Every resale pays: (a) the seller minus royalty and fee, (b) the royalty configured by the organizer (default 5%), (c) the platform's flat fee (currently R$ 2). Changes to the flat fee go through a 24h time-lock and multisig governance.",
     c5_t: "Cancellations and refunds",
@@ -29,10 +29,10 @@ export const termsDict = {
   pt: {
     eyebrow: "Legal · v1.0 · 17 mai 2026",
     title:   "Termos de uso",
-    lede:    "Ao usar o Pass Explorer, você concorda com os termos abaixo. Eles são reais — leia com cuidado antes de comprar.",
+    lede:    "Ao usar o Pass Explorer, você concorda com os termos abaixo. Eles são reais, leia com cuidado antes de comprar.",
 
     c1_t: "O que é o Pass Explorer",
-    c1_b: "Marketplace de ingressos para festivais operado pela Pass Explorer Tecnologia Ltda. (CNPJ XX.XXX.XXX/0001-XX). Conectamos fãs, vendedores e organizadores via smart contracts na Stellar. Não somos banco, não somos anchor — somos uma plataforma de software.",
+    c1_b: "Marketplace de ingressos para festivais operado pela Pass Explorer Tecnologia Ltda. (CNPJ XX.XXX.XXX/0001-XX). Conectamos fãs, vendedores e organizadores via smart contracts na Stellar. Não somos banco, não somos anchor, somos uma plataforma de software.",
     c2_t: "Sua carteira e seus tokens",
     c2_b: "Quando você entra com email ou Google, o Privy provisiona uma carteira Stellar custodial-grade (TEE + Shamir SSS). Os tokens (ingressos) ficam nessa carteira. Você é responsável pela chave; oferecemos recovery via Privy mas não temos acesso direto.",
     c3_t: "Anti-cambismo",

@@ -8,7 +8,7 @@ export const pressDict = {
     lede:      "If you're a journalist, podcaster, or organizer who wants to write about Pass Explorer, the assets and the elevator pitch live below. Press contact: press@passexplorer.com.",
 
     pitch_title:  "One-line pitch",
-    pitch_body:   "Pass Explorer is the festival ticket marketplace where organizers earn a royalty on every resale — built on Stellar, with on-chain caps that physically block scalpers above a price ceiling.",
+    pitch_body:   "Pass Explorer is the festival ticket marketplace where organizers earn a royalty on every resale, built on Stellar, with on-chain caps that physically block scalpers above a price ceiling.",
 
     facts_title:  "Quick facts",
     f1_l: "Founded",      f1_v: "2026 · São Paulo, Brazil",
@@ -19,7 +19,7 @@ export const pressDict = {
     f6_l: "Platform fee", f6_v: "R$ 2 flat per tx",
 
     assets_title: "Brand assets",
-    assets_body:  "Logo, color palette, fonts, screenshots. We'll send the full ZIP from press@passexplorer.com when you reach out — keeps it easier to give context with each request.",
+    assets_body:  "Logo, color palette, fonts, screenshots. We'll send the full ZIP from press@passexplorer.com when you reach out, keeps it easier to give context with each request.",
 
     coverage_title: "Coverage",
     coverage_body:  "Nothing yet. If you publish about us, ping press@passexplorer.com and we'll link it here.",
@@ -33,7 +33,7 @@ export const pressDict = {
     lede:      "Se você é jornalista, podcaster ou organizador que quer escrever sobre o Pass Explorer, os ativos e o pitch curto estão abaixo. Contato pra imprensa: press@passexplorer.com.",
 
     pitch_title:  "Pitch de uma linha",
-    pitch_body:   "Pass Explorer é o marketplace de ingressos pra festivais onde o organizador ganha royalty em cada revenda — construído na Stellar, com tetos on-chain que bloqueiam cambistas fisicamente acima do preço.",
+    pitch_body:   "Pass Explorer é o marketplace de ingressos pra festivais onde o organizador ganha royalty em cada revenda, construído na Stellar, com tetos on-chain que bloqueiam cambistas fisicamente acima do preço.",
 
     facts_title:  "Fatos rápidos",
     f1_l: "Fundado",         f1_v: "2026 · São Paulo, Brasil",
@@ -44,7 +44,7 @@ export const pressDict = {
     f6_l: "Taxa da plataforma", f6_v: "R$ 2 fixo por tx",
 
     assets_title: "Materiais de marca",
-    assets_body:  "Logo, paleta de cores, fontes, screenshots. Enviamos o ZIP completo via press@passexplorer.com quando você entrar em contato — facilita dar contexto a cada pedido.",
+    assets_body:  "Logo, paleta de cores, fontes, screenshots. Enviamos o ZIP completo via press@passexplorer.com quando você entrar em contato, facilita dar contexto a cada pedido.",
 
     coverage_title: "Cobertura",
     coverage_body:  "Ainda nada. Se você publicar sobre a gente, pinga em press@passexplorer.com e linkamos aqui.",

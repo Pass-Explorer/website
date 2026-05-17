@@ -22,15 +22,15 @@ const dmSans = DM_Sans({
 
 export const metadata: Metadata = {
   title: {
-    default: "Pass Explorer — Festival ticket marketplace on Stellar",
-    template: "%s — Pass Explorer",
+    default: "Pass Explorer. Festival ticket marketplace on Stellar",
+    template: "%s. Pass Explorer",
   },
   description:
-    "Sold out? Not for you. The festival pass marketplace where organizers earn royalties on every resale — built on Stellar.",
+    "Sold out? Not for you. The festival pass marketplace where organizers earn royalties on every resale. built on Stellar.",
   applicationName: "Pass Explorer",
   metadataBase: new URL("https://passexplorer.com"),
   openGraph: {
-    title: "Pass Explorer — Festival ticket marketplace on Stellar",
+    title: "Pass Explorer. Festival ticket marketplace on Stellar",
     description:
       "Resales capped on-chain. Royalty to the organizer. Built on Stellar.",
     siteName: "Pass Explorer",

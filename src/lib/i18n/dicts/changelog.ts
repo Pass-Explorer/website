@@ -31,7 +31,7 @@ export const changelogDict = {
     e3_v:    "v0.2.0",
     e3_d:    "15 May 2026",
     e3_tag:  "WALLETS",
-    e3_i1:   "Privy embedded wallets — sign in with Google/Apple/email",
+    e3_i1:   "Privy embedded wallets, sign in with Google/Apple/email",
     e3_i2:   "Stellar wallet provisioned via TEE + Shamir SSS, no seed phrases",
 
     // v0.1.0
@@ -77,7 +77,7 @@ export const changelogDict = {
     e3_v:    "v0.2.0",
     e3_d:    "15 mai 2026",
     e3_tag:  "CARTEIRAS",
-    e3_i1:   "Carteiras embedded da Privy — login com Google/Apple/email",
+    e3_i1:   "Carteiras embedded da Privy, login com Google/Apple/email",
     e3_i2:   "Carteira Stellar provisionada via TEE + Shamir SSS, sem seed phrase",
 
     e4_v:    "v0.1.0",

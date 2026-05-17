@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 
 /**
- * Festival poster — procedural SVG generator.
+ * Festival poster. procedural SVG generator.
  *
  * Each event resolves to a palette + glyph. Layered: radial gradient backdrop,
  * subtle dot pattern, concentric gold arcs, oversized glyph, scanlines, and a
@@ -40,7 +40,7 @@ const PALETTES: Record<PosterSlug, Palette> = {
 };
 
 interface PosterProps {
-  /** Event slug — determines palette and glyph. Unknown slug falls back to `lolla`. */
+  /** Event slug. determines palette and glyph. Unknown slug falls back to `lolla`. */
   slug: string;
   /** Stable id so concurrent posters don't share `<defs>` (collides on SSR). */
   id?: string;
@@ -93,7 +93,7 @@ export function Poster({
         </defs>
         <rect width="400" height="300" fill={`url(#${gid}-bg)`} />
         <rect width="400" height="300" fill={`url(#${gid}-dots)`} />
-        {/* concentric arcs — Explorer signature ring motif */}
+        {/* concentric arcs. Explorer signature ring motif */}
         <g opacity="0.35" stroke={p.b} fill="none" strokeWidth="1">
           <circle cx="320" cy="60" r="40" />
           <circle cx="320" cy="60" r="70" />

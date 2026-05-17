@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 
 /**
- * Animated festival ambient — procedural "video" backdrop.
+ * Animated festival ambient. procedural "video" backdrop.
  *
  * Resolves the deferred coherence tension from the brand pipeline
  * (Explorer signature living in copy not visuals): this is a moving,
@@ -17,7 +17,7 @@ import { cn } from "@/lib/utils";
  * compose foreground content; the ambient pane sits behind via z-index.
  *
  * If you have a real cinematic mp4 (`videos/festival-hero.mp4`), pass
- * `videoSrc` — the procedural layer becomes a fallback.
+ * `videoSrc`. the procedural layer becomes a fallback.
  */
 
 export type AmbientVariant = "night" | "sunset" | "sunrise";

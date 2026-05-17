@@ -1,10 +1,10 @@
 import { cn } from "@/lib/utils";
 
 /**
- * Pass Explorer wordmark — PASS · [ticket glyph] · EXPLORER lockup.
+ * Pass Explorer wordmark. PASS · [ticket glyph] · EXPLORER lockup.
  *
  * Lockup: "PASS" in ink + a small inline gold ticket glyph + "EXPLORER" in
- * gold. The ticket is the brand's pictogram — same gold gradient as the
+ * gold. The ticket is the brand's pictogram. same gold gradient as the
  * hero DigitalPass, with the perforation line that recurs across the site.
  *
  * Use in headers, footers, marketing chrome, OG cards. Pass `glyphOnly`
@@ -14,7 +14,7 @@ import { cn } from "@/lib/utils";
 interface WordmarkProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Type size in px (the lockup scales as a unit). */
   size?: number;
-  /** CSS color value or var for the "EXPLORER" half — default `var(--gold)`. */
+  /** CSS color value or var for the "EXPLORER" half. default `var(--gold)`. */
   color?: string;
   /** Render just the ticket glyph (icon mode). */
   glyphOnly?: boolean;

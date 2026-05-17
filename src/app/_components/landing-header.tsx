@@ -7,7 +7,7 @@ import { commonDict } from "@/lib/i18n/dicts/common";
 import { useT } from "@/lib/i18n";
 
 /**
- * LandingHeader — sticky top nav for the marketing site.
+ * LandingHeader - sticky top nav for the marketing site.
  *
  * Wordmark on the left, nav links + Sign in ghost + Join waitlist CTA +
  * language selector on the right. All copy + lang state lives in the
@@ -52,7 +52,7 @@ export function LandingHeader() {
           ))}
         </nav>
 
-        {/* Sign in ghost — opens the app where Privy handles auth */}
+        {/* Sign in ghost. opens the app where Privy handles auth */}
         <a
           href={APP_URL}
           className="tap hidden items-center font-semibold uppercase md:inline-flex"

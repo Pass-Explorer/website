@@ -8,7 +8,7 @@ import { landingDict } from "@/lib/i18n/dicts/landing";
 import { useT } from "@/lib/i18n";
 
 /**
- * WaitlistForm — posts email to Formspree (mbdwzndo endpoint).
+ * WaitlistForm - posts email to Formspree (mbdwzndo endpoint).
  *
  * Pure client component (handles success/error state inline). Preserves
  * the production Formspree integration from the legacy index.html so

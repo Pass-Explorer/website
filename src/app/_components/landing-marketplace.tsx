@@ -7,7 +7,7 @@ import { landingDict } from "@/lib/i18n/dicts/landing";
 import { useT } from "@/lib/i18n";
 
 /**
- * LandingMarketplacePreview — 3-column grid of festival cards with
+ * LandingMarketplacePreview. 3-column grid of festival cards with
  * royalty-free Unsplash crowd/stage photography, dates, prices, and
  * sold-out badges.
  *
@@ -35,7 +35,7 @@ const EVENTS: PreviewEvent[] = [
   {
     id: "lolla",
     slug: "lollapalooza-brasil-2026",
-    photo: "1470225620780-dba8ba36b745", // Anthony DELANOIX — festival crowd
+    photo: "1470225620780-dba8ba36b745", // Anthony DELANOIX. festival crowd
     alt: "Festival crowd at night with stage lights",
     title: "Lollapalooza Brasil",
     dateShort: "03 NOV",
@@ -45,7 +45,7 @@ const EVENTS: PreviewEvent[] = [
   {
     id: "primavera",
     slug: "primavera-sound-sp-2026",
-    photo: "1501281668745-f7f57925c3b4", // Aranxa Esteve — crowd silhouettes
+    photo: "1501281668745-f7f57925c3b4", // Aranxa Esteve. crowd silhouettes
     alt: "Crowd silhouettes at indie concert",
     title: "Primavera Sound SP",
     dateShort: "28 NOV",
@@ -56,7 +56,7 @@ const EVENTS: PreviewEvent[] = [
   {
     id: "rir",
     slug: "rock-in-rio-2026",
-    photo: "1459749411175-04bf5292ceea", // Anthony DELANOIX — stage lights from above
+    photo: "1459749411175-04bf5292ceea", // Anthony DELANOIX. stage lights from above
     alt: "Stage lights and crowd from above",
     title: "Rock in Rio",
     dateShort: "12 SEP",
@@ -66,7 +66,7 @@ const EVENTS: PreviewEvent[] = [
   {
     id: "town",
     slug: "the-town-2026",
-    photo: "1506157786151-b8491531f063", // Hanny Naibaho — colorful festival
+    photo: "1506157786151-b8491531f063", // Hanny Naibaho. colorful festival
     alt: "Festival stage with colorful lights",
     title: "The Town",
     dateShort: "18 SEP",
@@ -76,7 +76,7 @@ const EVENTS: PreviewEvent[] = [
   {
     id: "amanhecer",
     slug: "festival-amanhecer-2026",
-    photo: "1493225457124-a3eb161ffa5f", // Andre Benz — concert silhouette with stage lights
+    photo: "1493225457124-a3eb161ffa5f", // Andre Benz. concert silhouette with stage lights
     alt: "Concert crowd silhouettes against warm stage lights",
     title: "Festival Amanhecer",
     dateShort: "14 DEC",
@@ -86,7 +86,7 @@ const EVENTS: PreviewEvent[] = [
   {
     id: "ultra",
     slug: "ultra-brasil-2027",
-    photo: "1429962714451-bb934ecdc4ec", // Vishnu R Nair — concert with stage
+    photo: "1429962714451-bb934ecdc4ec", // Vishnu R Nair. concert with stage
     alt: "Electronic music stage with lasers",
     title: "Ultra Brasil",
     dateShort: "24 JAN",

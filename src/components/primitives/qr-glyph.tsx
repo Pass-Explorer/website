@@ -3,13 +3,13 @@
 import { useMemo } from "react";
 
 /**
- * QR glyphs — deterministic procedural decorations, NOT scannable codes.
+ * QR glyphs. deterministic procedural decorations, NOT scannable codes.
  *
  * Used inside DigitalPass stubs (small) and the TicketReveal hero (big).
  * The seed string drives an xorshift PRNG so the glyph looks unique per
  * ticket but stays stable across renders. The big variant carves three
  * corner finders so it reads as "QR" at a glance, even though scanning
- * does nothing — real QR generation happens at the validator screen via
+ * does nothing. real QR generation happens at the validator screen via
  * an actual encoder before check-in.
  */
 

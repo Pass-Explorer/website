@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 
 /**
- * StatusPill — small badge with optional pulsing dot, tinted by tone.
+ * StatusPill - small badge with optional pulsing dot, tinted by tone.
  *
  * Tones map to the persona/semantic palette:
  *  - `sage`   → confirmations, "live on Stellar", verified seller

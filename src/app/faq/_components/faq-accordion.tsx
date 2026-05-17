@@ -5,7 +5,7 @@ import * as React from "react";
 import { Icon } from "@/components/primitives";
 
 /**
- * FAQAccordion — controlled single-open accordion.
+ * FAQAccordion - controlled single-open accordion.
  *
  * Ported from temp/PassExplorer (1) PageFAQ accordion: each item has a
  * left-aligned question + right circular toggle. Toggle is rgba bg when

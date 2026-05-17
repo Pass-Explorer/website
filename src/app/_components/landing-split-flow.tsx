@@ -4,7 +4,7 @@ import { landingDict } from "@/lib/i18n/dicts/landing";
 import { useT } from "@/lib/i18n";
 
 /**
- * LandingSplitFlow — animated SVG diagram showing the atomic payment
+ * LandingSplitFlow - animated SVG diagram showing the atomic payment
  * split from buyer to seller + organizer royalty + platform fee.
  *
  * Pure-CSS animations for the SVG; client component because the
@@ -207,7 +207,7 @@ function SplitDiagram({ t }: { t: T }) {
             <stop offset="100%" stopColor="#8B6F1F" />
           </linearGradient>
 
-          {/* Ticket symbol — used as traveling token */}
+          {/* Ticket symbol. used as traveling token */}
           <symbol id="sd-ticket" viewBox="0 0 23 15">
             <path
               d="M1.5 2 H21.5 A1.5 1.5 0 0 1 23 3.5 V5.5 A2 2 0 0 0 23 9.5 V11.5 A1.5 1.5 0 0 1 21.5 13 H1.5 A1.5 1.5 0 0 1 0 11.5 V9.5 A2 2 0 0 0 0 5.5 V3.5 A1.5 1.5 0 0 1 1.5 2 Z"

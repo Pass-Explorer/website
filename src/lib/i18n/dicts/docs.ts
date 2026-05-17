@@ -37,7 +37,7 @@ export const docsDict = {
     gs_h1:      "What you get",
     gs_p1:      "Three things a regular secondary market can't give you: a royalty on every resale (default 5%), a hard cap on resale prices enforced by the smart contract, and instant settlement in ~3 seconds with sub-cent fees on Stellar.",
     gs_call_t:  "No web3 jargon needed",
-    gs_call_b:  "Buyers log in with Google, Apple, or email via Privy. Their Stellar wallet is provisioned behind the scenes — no seed phrase, no plugins.",
+    gs_call_b:  "Buyers log in with Google, Apple, or email via Privy. Their Stellar wallet is provisioned behind the scenes, no seed phrase, no plugins.",
     gs_h2:      "How long to onboard",
     gs_st1_t:   "Apply",
     gs_st1_b:   "3-step KYC form. ~5 minutes.",
@@ -51,7 +51,7 @@ export const docsDict = {
     // ─── Apply ────────────────────────────────────────────────────────
     ap_eyebrow: "Apply",
     ap_title:   "Become a Pass Explorer organizer.",
-    ap_lead:    "We approve organizers manually — each application is reviewed by our team and signed on the Factory contract.",
+    ap_lead:    "We approve organizers manually, each application is reviewed by our team and signed on the Factory contract.",
     ap_h1:      "What you need",
     ap_p1:      "Valid Brazilian CNPJ + responsible person + email. We do KYC via Privy plus a public CNPJ status check at the Receita Federal.",
     ap_h2:      "The form",
@@ -84,9 +84,9 @@ export const docsDict = {
     // ─── Pricing cap ──────────────────────────────────────────────────
     pc_eyebrow: "Pricing",
     pc_title:   "Set the price. Set the cap.",
-    pc_lead:    "The primary price is what you charge on first sale. The cap is the maximum a holder can resell for — enforced on-chain.",
+    pc_lead:    "The primary price is what you charge on first sale. The cap is the maximum a holder can resell for, enforced on-chain.",
     pc_h1:      "How the cap is enforced",
-    pc_p1:      "When a holder lists their pass on the marketplace, the contract checks the listing price against your cap. If above, the transaction reverts. Scalpers can't list above the cap — period.",
+    pc_p1:      "When a holder lists their pass on the marketplace, the contract checks the listing price against your cap. If above, the transaction reverts. Scalpers can't list above the cap, period.",
     pc_h2:      "Picking the cap",
     pc_p2:      "Default is 1.5× the primary. Anything lower than 1.2× hurts liquidity (sellers can't recoup costs). Anything higher than 2× starts to look like organizer-blessed scalping.",
 
@@ -167,7 +167,7 @@ export const docsDict = {
     gs_h1:      "O que você ganha",
     gs_p1:      "Três coisas que um mercado secundário comum não te dá: royalty em cada revenda (padrão 5%), um teto fixo no preço de revenda imposto pelo smart contract, e liquidação instantânea em ~3 segundos com taxas abaixo de um centavo na Stellar.",
     gs_call_t:  "Sem jargão web3",
-    gs_call_b:  "Compradores entram com Google, Apple ou email via Privy. A carteira Stellar é provisionada nos bastidores — sem seed phrase, sem plugin.",
+    gs_call_b:  "Compradores entram com Google, Apple ou email via Privy. A carteira Stellar é provisionada nos bastidores, sem seed phrase, sem plugin.",
     gs_h2:      "Quanto tempo pra entrar",
     gs_st1_t:   "Aplicar",
     gs_st1_b:   "Formulário KYC de 3 passos. ~5 minutos.",
@@ -181,7 +181,7 @@ export const docsDict = {
     // ─── Apply ────────────────────────────────────────────────────────
     ap_eyebrow: "Aplicar",
     ap_title:   "Vire um organizador do Pass Explorer.",
-    ap_lead:    "Aprovamos organizadores manualmente — cada aplicação é revisada pela nossa equipe e assinada no contrato Factory.",
+    ap_lead:    "Aprovamos organizadores manualmente, cada aplicação é revisada pela nossa equipe e assinada no contrato Factory.",
     ap_h1:      "O que você precisa",
     ap_p1:      "CNPJ brasileiro válido + pessoa responsável + email. Fazemos KYC via Privy mais uma consulta pública de situação cadastral do CNPJ na Receita Federal.",
     ap_h2:      "O formulário",
@@ -214,9 +214,9 @@ export const docsDict = {
     // ─── Pricing cap ──────────────────────────────────────────────────
     pc_eyebrow: "Preço",
     pc_title:   "Defina o preço. Defina o teto.",
-    pc_lead:    "O preço primário é o que você cobra na primeira venda. O teto é o máximo que um holder pode revender — imposto on-chain.",
+    pc_lead:    "O preço primário é o que você cobra na primeira venda. O teto é o máximo que um holder pode revender, imposto on-chain.",
     pc_h1:      "Como o teto é imposto",
-    pc_p1:      "Quando um holder lista o pass no marketplace, o contrato confere o preço da listagem contra seu teto. Se passar, a transação reverte. Cambistas não conseguem listar acima do teto — ponto.",
+    pc_p1:      "Quando um holder lista o pass no marketplace, o contrato confere o preço da listagem contra seu teto. Se passar, a transação reverte. Cambistas não conseguem listar acima do teto, ponto.",
     pc_h2:      "Escolhendo o teto",
     pc_p2:      "Padrão é 1,5× o primário. Menos que 1,2× machuca a liquidez (vendedores não recuperam custos). Mais que 2× começa a parecer cambismo abençoado pelo organizador.",
 

@@ -5,13 +5,13 @@ export const blogDict = {
     eyebrow: "Build in public",
     title_a: "Notes from",
     title_b: "the build.",
-    lede:    "We write here when something ships — a contract upgrade, a UX decision, a hackathon recap. Short, honest, no fluff. Subscribe via the RSS feed or follow us on X.",
+    lede:    "We write here when something ships, a contract upgrade, a UX decision, a hackathon recap. Short, honest, no fluff. Subscribe via the RSS feed or follow us on X.",
 
     empty_pill: "Coming soon",
     empty_t:    "First post lands when the testnet flows end-to-end.",
     empty_b:    "Until then, the changelog has the play-by-play.",
 
-    // Placeholder posts (pre-launch — copy will be edited as real posts ship)
+    // Placeholder posts (pre-launch, copy will be edited as real posts ship)
     p1_date: "May 17, 2026",
     p1_tag:  "ANNOUNCEMENT",
     p1_t:    "Pass Explorer goes public",
@@ -24,7 +24,7 @@ export const blogDict = {
 
     p3_date: "Apr 28, 2026",
     p3_tag:  "CONTRACTS",
-    p3_t:    "Factory, EventNFT and Marketplace — 34 tests passing",
+    p3_t:    "Factory, EventNFT and Marketplace. 34 tests passing",
     p3_b:    "Walkthrough of the three smart contracts that make atomic resale work. How royalty is captured, why off-platform transfers are blocked at the contract level, and the cap-enforcement invariant.",
 
     cta_changelog: "Read the changelog",
@@ -34,7 +34,7 @@ export const blogDict = {
     eyebrow: "Build in public",
     title_a: "Notas da",
     title_b: "construção.",
-    lede:    "Escrevemos aqui quando algo entra no ar — upgrade de contrato, decisão de UX, recap de hackathon. Curto, honesto, sem enrolação. Assine pelo RSS ou segue a gente no X.",
+    lede:    "Escrevemos aqui quando algo entra no ar, upgrade de contrato, decisão de UX, recap de hackathon. Curto, honesto, sem enrolação. Assine pelo RSS ou segue a gente no X.",
 
     empty_pill: "Em breve",
     empty_t:    "Primeiro post sai quando o fluxo na testnet rodar de ponta a ponta.",
@@ -52,7 +52,7 @@ export const blogDict = {
 
     p3_date: "28 abr 2026",
     p3_tag:  "CONTRATOS",
-    p3_t:    "Factory, EventNFT e Marketplace — 34 testes passando",
+    p3_t:    "Factory, EventNFT e Marketplace. 34 testes passando",
     p3_b:    "Passeio pelos três smart contracts que fazem a revenda atômica funcionar. Como o royalty é capturado, por que transferências off-platform são bloqueadas no contrato, e o invariante de teto de preço.",
 
     cta_changelog: "Ler o changelog",

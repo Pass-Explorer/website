@@ -7,7 +7,7 @@ import { landingDict } from "@/lib/i18n/dicts/landing";
 import { useT } from "@/lib/i18n";
 
 /**
- * LandingForOrganizers — split layout with copy + mock royalty dashboard.
+ * LandingForOrganizers - split layout with copy + mock royalty dashboard.
  *
  * Ported from web-landing.jsx LandingForOrganizers. Left side: purple
  * eyebrow + Bebas pitch + body + 4 stat tiles + ghost CTA. Right side:

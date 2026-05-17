@@ -7,7 +7,7 @@ import { landingDict } from "@/lib/i18n/dicts/landing";
 import { useT } from "@/lib/i18n";
 
 /**
- * LandingHero — full-bleed hero with festival-hero.mp4 backdrop +
+ * LandingHero - full-bleed hero with festival-hero.mp4 backdrop +
  * mouse-tilt HeroPass ticket. Left text wall (legibility), right
  * floating animated ticket.
  *
@@ -26,7 +26,7 @@ export function LandingHero() {
         padding: "80px 24px 100px",
       }}
     >
-      {/* Video background — full-bleed, native resolution sweet spot */}
+      {/* Video background. full-bleed, native resolution sweet spot */}
       <video
         autoPlay
         muted
@@ -42,7 +42,7 @@ export function LandingHero() {
         <source src="/festival-hero.mp4" type="video/mp4" />
       </video>
 
-      {/* Soft asymmetric wash — readable but lets video breathe */}
+      {/* Soft asymmetric wash. readable but lets video breathe */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute top-0 bottom-0 left-0 z-[1]"
@@ -71,7 +71,7 @@ export function LandingHero() {
         }}
       />
 
-      {/* Film grain — radial dot pattern overlay (screen blend) */}
+      {/* Film grain. radial dot pattern overlay (screen blend) */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 z-[2]"
@@ -83,7 +83,7 @@ export function LandingHero() {
         }}
       />
 
-      {/* Vignette — soft dark edges */}
+      {/* Vignette - soft dark edges */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 z-[2]"

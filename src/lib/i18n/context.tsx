@@ -14,7 +14,7 @@ const LangContext = React.createContext<LangContextValue | null>(null);
 const STORAGE_KEY = "px-lang";
 
 /**
- * LangProvider — provides the active marketing-site language to all
+ * LangProvider - provides the active marketing-site language to all
  * descendants. SSR renders DEFAULT_LANG ("en"); after mount we read
  * localStorage (`px-lang`) and swap to the user's preference, then keep
  * `<html lang>` in sync.
@@ -59,7 +59,7 @@ export function LangProvider({ children }: { children: React.ReactNode }) {
 }
 
 /**
- * useLang — returns `{ lang, setLang }`. Throws if used outside provider.
+ * useLang - returns `{ lang, setLang }`. Throws if used outside provider.
  */
 export function useLang(): LangContextValue {
   const ctx = React.useContext(LangContext);
@@ -70,7 +70,7 @@ export function useLang(): LangContextValue {
 }
 
 /**
- * useT — returns a typed lookup function bound to the active language.
+ * useT - returns a typed lookup function bound to the active language.
  * Pass a Dict<K> and call `t("key")` to read the translation.
  */
 export function useT<K extends string>(dict: Dict<K>): (key: K) => string {

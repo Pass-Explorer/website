@@ -1,7 +1,7 @@
 import type { Dict } from "../types";
 
 /**
- * common — copy shared across header, footer, and CTAs that appear on
+ * common, copy shared across header, footer, and CTAs that appear on
  * every page.
  */
 export const commonDict = {
@@ -16,7 +16,7 @@ export const commonDict = {
     cta_sign_in:       "Sign in",
     cta_join_waitlist: "Join waitlist",
 
-    footer_blurb:   "Festival ticket marketplace on Stellar. Built in Brazil — open to organizers worldwide.",
+    footer_blurb:   "Festival ticket marketplace on Stellar. Built in Brazil, open to organizers worldwide.",
     footer_product: "Product",
     footer_company: "Company",
     footer_legal:   "Legal",
@@ -49,7 +49,7 @@ export const commonDict = {
     cta_sign_in:       "Entrar",
     cta_join_waitlist: "Lista de espera",
 
-    footer_blurb:   "Marketplace de ingressos para festivais na Stellar. Feito no Brasil — aberto a organizadores no mundo todo.",
+    footer_blurb:   "Marketplace de ingressos para festivais na Stellar. Feito no Brasil, aberto a organizadores no mundo todo.",
     footer_product: "Produto",
     footer_company: "Empresa",
     footer_legal:   "Legal",

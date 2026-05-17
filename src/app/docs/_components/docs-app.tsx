@@ -8,7 +8,7 @@ import { docsDict } from "@/lib/i18n/dicts/docs";
 import { useT } from "@/lib/i18n";
 
 /**
- * DocsApp — single-page docs site with sidebar nav and content swap.
+ * DocsApp - single-page docs site with sidebar nav and content swap.
  *
  * Sticky header (Wordmark + gold "Docs" pill + search input + apply CTA),
  * left sidebar grouped by topic (Get started / Event / Revenue /
@@ -59,7 +59,7 @@ export function DocsApp() {
     return () => window.removeEventListener("hashchange", syncFromHash);
   }, []);
 
-  // Push hash when user picks a sidebar item — keeps URL shareable.
+  // Push hash when user picks a sidebar item. keeps URL shareable.
   function pickSection(s: Section) {
     setSection(s);
     if (typeof window !== "undefined") {

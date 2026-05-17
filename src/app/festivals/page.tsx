@@ -10,7 +10,7 @@ import { LandingMarketplacePreview } from "../_components/landing-marketplace";
 import { PageShell } from "../_components/page-shell";
 
 /**
- * /festivals — pre-launch festival preview.
+ * /festivals. pre-launch festival preview.
  *
  * Reuses the LandingMarketplacePreview component (same 6 festival cards
  * the landing page shows) so visitors landing here can see what's
