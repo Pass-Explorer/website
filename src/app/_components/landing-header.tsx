@@ -19,6 +19,9 @@ import { Icon, Wordmark } from "@/components/primitives";
 
 type Lang = "en" | "pt";
 
+const APP_URL =
+  process.env.NEXT_PUBLIC_APP_URL ?? "https://app.passexplorer.com";
+
 export function LandingHeader() {
   const [lang, setLang] = React.useState<Lang>("en");
 
@@ -58,7 +61,7 @@ export function LandingHeader() {
         <nav className="hidden items-center gap-8 md:flex">
           {[
             { label: "Festivals", href: "#" },
-            { label: "Organizers", href: "/docs" },
+            { label: "Docs", href: "/docs" },
             { label: "How it works", href: "#how" },
             { label: "FAQ", href: "/faq" },
           ].map((l) => (
@@ -73,9 +76,9 @@ export function LandingHeader() {
           ))}
         </nav>
 
-        {/* Sign in ghost */}
+        {/* Sign in ghost — opens the app where Privy handles auth */}
         <a
-          href="#waitlist"
+          href={APP_URL}
           className="tap hidden items-center font-semibold uppercase md:inline-flex"
           style={{
             height: 38,

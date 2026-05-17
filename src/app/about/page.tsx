@@ -199,24 +199,9 @@ export default function AboutPage() {
         </h2>
         <div className="grid gap-5 md:grid-cols-3">
           {[
-            {
-              i: "DG",
-              name: "Daniel Gorgonha",
-              role: "Founder · Engineering",
-              x: "@danielgrgnh",
-            },
-            {
-              i: "MS",
-              name: "Mariana Silva",
-              role: "Product · Design",
-              x: "@mariana_s",
-            },
-            {
-              i: "CR",
-              name: "Carlos Ribeiro",
-              role: "Operations · Festivals",
-              x: "@cr_lives",
-            },
+            { i: "DG", name: "Daniel Gorgonha",  role: "Co-founder" },
+            { i: "NM", name: "Naydson Mariosa",  role: "Co-founder" },
+            { i: "MD", name: "Mauricio Doerr",   role: "Co-founder" },
           ].map((p) => (
             <div
               key={p.name}
@@ -256,12 +241,6 @@ export default function AboutPage() {
                 }}
               >
                 {p.role}
-              </p>
-              <p
-                className="font-mono mt-2.5"
-                style={{ fontSize: 12, color: "var(--ink-muted)" }}
-              >
-                {p.x}
               </p>
             </div>
           ))}

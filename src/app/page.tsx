@@ -369,7 +369,7 @@ function Footer() {
       title: "Product",
       links: [
         { label: "Festivals",    href: "/#" },
-        { label: "Organizers",   href: "/docs" },
+        { label: "Docs",         href: "/docs" },
         { label: "How it works", href: "/#how" },
         { label: "FAQ",          href: "/faq" },
       ],

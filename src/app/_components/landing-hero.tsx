@@ -19,31 +19,34 @@ export function LandingHero() {
     <section
       className="relative overflow-hidden"
       style={{
-        minHeight: 720,
+        minHeight: "min(100vh, 820px)",
         padding: "80px 24px 100px",
       }}
     >
-      {/* Video background */}
+      {/* Video background — full-bleed, native resolution sweet spot */}
       <video
         autoPlay
         muted
         loop
         playsInline
         preload="auto"
-        className="absolute inset-0 z-0 h-full w-full object-cover"
-        poster=""
+        className="absolute inset-0 z-0 h-full w-full"
+        style={{
+          objectFit: "cover",
+          objectPosition: "center 35%",
+        }}
       >
         <source src="/festival-hero.mp4" type="video/mp4" />
       </video>
 
-      {/* Asymmetric dark wash for left-side legibility */}
+      {/* Soft asymmetric wash — readable but lets video breathe */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute top-0 bottom-0 left-0 z-[1] backdrop-blur-[2px]"
+        className="pointer-events-none absolute top-0 bottom-0 left-0 z-[1]"
         style={{
-          width: "60%",
+          width: "55%",
           background:
-            "linear-gradient(95deg, rgba(8,8,16,0.95) 0%, rgba(8,8,16,0.85) 50%, rgba(8,8,16,0.3) 90%, transparent 100%)",
+            "linear-gradient(95deg, rgba(8,8,16,0.78) 0%, rgba(8,8,16,0.55) 55%, rgba(8,8,16,0.15) 88%, transparent 100%)",
         }}
       />
       <div
@@ -51,7 +54,7 @@ export function LandingHero() {
         className="pointer-events-none absolute inset-0 z-[1]"
         style={{
           background:
-            "linear-gradient(95deg, rgba(8,8,16,0.5) 0%, rgba(8,8,16,0.4) 40%, rgba(8,8,16,0.55) 80%, rgba(8,8,16,0.7) 100%)",
+            "linear-gradient(95deg, rgba(8,8,16,0.25) 0%, rgba(8,8,16,0.12) 45%, rgba(8,8,16,0.2) 80%, rgba(8,8,16,0.4) 100%)",
         }}
       />
       {/* bottom fade into page */}
