@@ -92,7 +92,7 @@ export function LandingForOrganizers() {
             ))}
           </div>
           <Link
-            href="/docs"
+            href="/docs#apply"
             className="tap mt-8 inline-flex items-center gap-2 font-semibold"
             style={{
               height: 50,
@@ -191,9 +191,9 @@ export function LandingForOrganizers() {
             }}
           >
             {[
-              { event: "Lollapalooza", amount: 25, ago: "2 min" },
-              { event: "The Town",     amount: 18, ago: "14 min" },
-              { event: "Lollapalooza", amount: 25, ago: "32 min" },
+              { event: "Sunset Pass · #1247", amount: 25, ago: "2 min" },
+              { event: "Forest Fest · #0892", amount: 18, ago: "14 min" },
+              { event: "Sunset Pass · #1248", amount: 25, ago: "32 min" },
             ].map((r, i, arr) => (
               <div
                 key={i}

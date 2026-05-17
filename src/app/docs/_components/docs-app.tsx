@@ -28,9 +28,44 @@ type Section =
 
 type T = (k: keyof (typeof docsDict)["en"]) => string;
 
+const SECTIONS: readonly Section[] = [
+  "getting-started",
+  "apply",
+  "deploy-event",
+  "pricing-cap",
+  "royalty",
+  "checkin",
+  "refund",
+  "tax",
+];
+
+function isSection(value: string): value is Section {
+  return (SECTIONS as readonly string[]).includes(value);
+}
+
 export function DocsApp() {
   const t = useT(docsDict);
   const [section, setSection] = React.useState<Section>("getting-started");
+
+  // Sync from URL hash on mount and on hashchange (so /docs#apply opens
+  // the Apply section directly, and back/forward navigation works).
+  React.useEffect(() => {
+    function syncFromHash() {
+      const hash = window.location.hash.replace(/^#/, "");
+      if (hash && isSection(hash)) setSection(hash);
+    }
+    syncFromHash();
+    window.addEventListener("hashchange", syncFromHash);
+    return () => window.removeEventListener("hashchange", syncFromHash);
+  }, []);
+
+  // Push hash when user picks a sidebar item — keeps URL shareable.
+  function pickSection(s: Section) {
+    setSection(s);
+    if (typeof window !== "undefined") {
+      window.history.replaceState(null, "", `#${s}`);
+    }
+  }
 
   return (
     <div className="bg-night text-ink font-body min-h-dvh">
@@ -43,7 +78,7 @@ export function DocsApp() {
           minHeight: "calc(100vh - 64px)",
         }}
       >
-        <Sidebar t={t} active={section} onPick={setSection} />
+        <Sidebar t={t} active={section} onPick={pickSection} />
         <main className="min-w-0 px-14 py-15" style={{ padding: "60px 56px" }}>
           {section === "getting-started" && <DocGettingStarted t={t} />}
           {section === "apply"            && <DocApply t={t} />}
