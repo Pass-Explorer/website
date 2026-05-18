@@ -14,6 +14,7 @@ export const commonDict = {
     nav_status:       "Status",
 
     cta_sign_in:       "Sign in",
+    cta_host:          "Host events",
     cta_join_waitlist: "Join waitlist",
 
     footer_blurb:   "Festival ticket marketplace on Stellar. Built in Brazil, open to organizers worldwide.",
@@ -47,6 +48,7 @@ export const commonDict = {
     nav_status:       "Status",
 
     cta_sign_in:       "Entrar",
+    cta_host:          "Criar evento",
     cta_join_waitlist: "Lista de espera",
 
     footer_blurb:   "Marketplace de ingressos para festivais na Stellar. Feito no Brasil, aberto a organizadores no mundo todo.",

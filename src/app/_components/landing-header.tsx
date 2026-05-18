@@ -52,7 +52,8 @@ export function LandingHeader() {
           ))}
         </nav>
 
-        {/* Sign in ghost. opens the app where Privy handles auth */}
+        {/* Sign in ghost — fan entry (most common). Opens the app
+            where Privy/DevWallet handle auth. */}
         <a
           href={APP_URL}
           className="tap hidden items-center font-semibold uppercase md:inline-flex"
@@ -68,6 +69,27 @@ export function LandingHeader() {
           }}
         >
           {t("cta_sign_in")}
+        </a>
+
+        {/* Host events ghost — organizer entry. Drops the visitor at
+            the KYC apply flow with a faint gold border so it reads
+            as a related-but-distinct path from fan sign-in. Admin
+            stays unlinked from the public site (internal-only). */}
+        <a
+          href={`${APP_URL}/organizer/apply`}
+          className="tap hidden items-center font-semibold uppercase md:inline-flex"
+          style={{
+            height: 38,
+            padding: "0 16px",
+            background: "transparent",
+            color: "var(--gold)",
+            border: "1px solid rgba(232,184,75,0.4)",
+            borderRadius: 6,
+            fontSize: 12,
+            letterSpacing: "0.04em",
+          }}
+        >
+          {t("cta_host")}
         </a>
 
         {/* Join waitlist gold */}
