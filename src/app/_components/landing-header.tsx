@@ -1,5 +1,6 @@
 "use client";
 
+import * as React from "react";
 import Link from "next/link";
 
 import { Icon, LangSelector, Wordmark } from "@/components/primitives";
@@ -9,9 +10,14 @@ import { useT } from "@/lib/i18n";
 /**
  * LandingHeader - sticky top nav for the marketing site.
  *
- * Wordmark on the left, nav links + Sign in ghost + Join waitlist CTA +
- * language selector on the right. All copy + lang state lives in the
- * shared i18n context so the toggle flips the whole site.
+ * Layout:
+ *   Wordmark · [Festivais · Como funciona · FAQ] · [Entrar ⌄] · [Lista de espera] · [Lang]
+ *
+ * `Docs` lives in the footer — too B2B/technical for the front door.
+ *
+ * Entrar is a small dropdown with the two real personas the app
+ * supports publicly (fan + organizer). Admin is internal-only and
+ * never gets a public link.
  */
 
 const APP_URL =
@@ -37,7 +43,6 @@ export function LandingHeader() {
         <nav className="hidden items-center gap-8 md:flex">
           {[
             { label: t("nav_festivals"),    href: "/festivals" },
-            { label: t("nav_docs"),         href: "/docs"      },
             { label: t("nav_how_it_works"), href: "#how"       },
             { label: t("nav_faq"),          href: "/faq"       },
           ].map((l) => (
@@ -52,47 +57,15 @@ export function LandingHeader() {
           ))}
         </nav>
 
-        {/* Sign in ghost — fan entry (most common). Opens the app
-            where Privy/DevWallet handle auth. */}
-        <a
-          href={APP_URL}
-          className="tap hidden items-center font-semibold uppercase md:inline-flex"
-          style={{
-            height: 38,
-            padding: "0 16px",
-            background: "transparent",
-            color: "var(--ink)",
-            border: "1px solid var(--line-strong)",
-            borderRadius: 6,
-            fontSize: 12,
-            letterSpacing: "0.04em",
-          }}
-        >
-          {t("cta_sign_in")}
-        </a>
+        <EntrarMenu
+          label={t("cta_sign_in")}
+          fanLabel={t("cta_sign_in_fan")}
+          fanSub={t("cta_sign_in_fan_sub")}
+          hostLabel={t("cta_host")}
+          hostSub={t("cta_host_sub")}
+        />
 
-        {/* Host events ghost — organizer entry. Drops the visitor at
-            the KYC apply flow with a faint gold border so it reads
-            as a related-but-distinct path from fan sign-in. Admin
-            stays unlinked from the public site (internal-only). */}
-        <a
-          href={`${APP_URL}/organizer/apply`}
-          className="tap hidden items-center font-semibold uppercase md:inline-flex"
-          style={{
-            height: 38,
-            padding: "0 16px",
-            background: "transparent",
-            color: "var(--gold)",
-            border: "1px solid rgba(232,184,75,0.4)",
-            borderRadius: 6,
-            fontSize: 12,
-            letterSpacing: "0.04em",
-          }}
-        >
-          {t("cta_host")}
-        </a>
-
-        {/* Join waitlist gold */}
+        {/* Join waitlist gold — primary CTA, pre-launch focus */}
         <a
           href="#waitlist"
           className="tap inline-flex items-center gap-2 font-semibold uppercase"
@@ -113,5 +86,125 @@ export function LandingHeader() {
         <LangSelector />
       </div>
     </header>
+  );
+}
+
+interface EntrarMenuProps {
+  label: string;
+  fanLabel: string;
+  fanSub: string;
+  hostLabel: string;
+  hostSub: string;
+}
+
+/**
+ * Small custom dropdown — no library, just useState + click-outside.
+ * Two options corresponding to the only public personas the app has:
+ * fan (default mass-market entry) and organizer (KYC apply flow).
+ */
+function EntrarMenu({
+  label,
+  fanLabel,
+  fanSub,
+  hostLabel,
+  hostSub,
+}: EntrarMenuProps) {
+  const [open, setOpen] = React.useState(false);
+  const containerRef = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    if (!open) return;
+    function onClick(e: MouseEvent) {
+      if (!containerRef.current?.contains(e.target as Node)) setOpen(false);
+    }
+    function onKey(e: KeyboardEvent) {
+      if (e.key === "Escape") setOpen(false);
+    }
+    document.addEventListener("mousedown", onClick);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onClick);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [open]);
+
+  return (
+    <div ref={containerRef} className="relative hidden md:block">
+      <button
+        type="button"
+        onClick={() => setOpen((o) => !o)}
+        aria-haspopup="menu"
+        aria-expanded={open}
+        className="tap inline-flex items-center gap-1.5 font-semibold uppercase"
+        style={{
+          height: 38,
+          padding: "0 14px",
+          background: "transparent",
+          color: "var(--ink)",
+          border: "1px solid var(--line-strong)",
+          borderRadius: 6,
+          fontSize: 12,
+          letterSpacing: "0.04em",
+        }}
+      >
+        {label}
+        <Icon name="chevD" size={12} />
+      </button>
+
+      {open && (
+        <div
+          role="menu"
+          className="absolute right-0 top-[calc(100%+8px)] z-40 w-[280px] overflow-hidden"
+          style={{
+            background: "rgba(20,20,30,0.96)",
+            border: "1px solid var(--line-strong)",
+            borderRadius: 10,
+            boxShadow: "0 14px 40px rgba(0,0,0,0.55)",
+            backdropFilter: "blur(16px)",
+          }}
+        >
+          <a
+            href={APP_URL}
+            role="menuitem"
+            className="block transition-colors hover:bg-white/5"
+            style={{ padding: "14px 16px" }}
+            onClick={() => setOpen(false)}
+          >
+            <div
+              className="font-semibold"
+              style={{ fontSize: 13, color: "var(--ink)" }}
+            >
+              {fanLabel}
+            </div>
+            <div
+              className="mt-0.5"
+              style={{ fontSize: 11, color: "var(--ink-muted)" }}
+            >
+              {fanSub}
+            </div>
+          </a>
+          <a
+            href={`${APP_URL}/organizer/apply`}
+            role="menuitem"
+            className="block border-t transition-colors hover:bg-white/5"
+            style={{ padding: "14px 16px", borderColor: "var(--line)" }}
+            onClick={() => setOpen(false)}
+          >
+            <div
+              className="font-semibold"
+              style={{ fontSize: 13, color: "var(--gold)" }}
+            >
+              {hostLabel}
+            </div>
+            <div
+              className="mt-0.5"
+              style={{ fontSize: 11, color: "var(--ink-muted)" }}
+            >
+              {hostSub}
+            </div>
+          </a>
+        </div>
+      )}
+    </div>
   );
 }
