@@ -7,12 +7,18 @@ import { type Lang, useLang } from "@/lib/i18n";
 /**
  * LangSelector - flag-pill toggle for EN ↔ PT.
  *
- * Pair of flag buttons (US / BR SVG) inside a rounded pill. Inline SVG
- * flags instead of emoji because country-flag emoji don't render on
- * Windows or several Linux distros (fall back to "US"/"BR" boxes).
- * Active flag is full-color with a faint gold tint; inactive flags are
- * faded + grayscaled. Clicking either flag swaps the active language
- * via the shared `LangProvider` context.
+ * Responsive treatment:
+ *   - **mobile (< md):** compact 1-button swap that shows the OTHER
+ *     locale's flag. Tap toggles. Saves space in narrow headers and —
+ *     crucially — makes the language toggle reachable on phones where
+ *     the full pair previously got hidden entirely.
+ *   - **desktop (md+):** full pair with active gold tint, inactive
+ *     greyscaled.
+ *
+ * Inline SVG flags instead of emoji because country-flag emoji don't
+ * render on Windows or several Linux distros (fall back to "US"/"BR").
+ * Clicking either flag swaps the active language via the shared
+ * `LangProvider` context.
  *
  * Drop into any header that needs the language toggle (landing header,
  * page shell, docs header).
@@ -65,43 +71,72 @@ const LOCALE_LONG: Record<Lang, string> = {
 
 export function LangSelector() {
   const { lang, setLang } = useLang();
+  const otherLang: Lang = lang === "en" ? "pt" : "en";
+  const OtherFlag = FLAG_COMPONENT[otherLang];
+
   return (
-    <div
-      className="hidden md:inline-flex"
-      style={{
-        gap: 4,
-        padding: 3,
-        background: "rgba(255,255,255,0.04)",
-        border: "1px solid var(--line)",
-        borderRadius: 6,
-      }}
-    >
-      {(Object.keys(FLAG_COMPONENT) as Lang[]).map((id) => {
-        const Flag = FLAG_COMPONENT[id];
-        const active = lang === id;
-        return (
-          <button
-            key={id}
-            onClick={() => setLang(id)}
-            title={LOCALE_LONG[id]}
-            aria-label={LOCALE_LONG[id]}
-            aria-pressed={active}
-            className="cursor-pointer transition-all"
-            style={{
-              padding: "4px 8px",
-              borderRadius: 4,
-              background: active ? "rgba(232,184,75,0.14)" : "transparent",
-              opacity: active ? 1 : 0.55,
-              filter: active ? "none" : "grayscale(80%)",
-              display: "inline-flex",
-              alignItems: "center",
-              lineHeight: 1,
-            }}
-          >
-            <Flag />
-          </button>
-        );
-      })}
-    </div>
+    <>
+      {/* Mobile (< md): single swap button — shows the OTHER locale,
+          tap toggles. Compact 36px. Replaces the previous fully-hidden
+          treatment that left phone users without a language toggle. */}
+      <button
+        type="button"
+        onClick={() => setLang(otherLang)}
+        title={LOCALE_LONG[otherLang]}
+        aria-label={`Switch to ${LOCALE_LONG[otherLang]}`}
+        className="md:hidden grid size-9 place-items-center rounded-md transition-colors hover:bg-white/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+      >
+        <span
+          className="inline-flex"
+          style={{
+            borderRadius: 3,
+            overflow: "hidden",
+            lineHeight: 0,
+            boxShadow: "0 0 0 0.5px var(--line)",
+          }}
+        >
+          <OtherFlag />
+        </span>
+      </button>
+
+      {/* Desktop (md+): full pair with active state. */}
+      <div
+        className="hidden md:inline-flex"
+        style={{
+          gap: 4,
+          padding: 3,
+          background: "rgba(255,255,255,0.04)",
+          border: "1px solid var(--line)",
+          borderRadius: 6,
+        }}
+      >
+        {(Object.keys(FLAG_COMPONENT) as Lang[]).map((id) => {
+          const Flag = FLAG_COMPONENT[id];
+          const active = lang === id;
+          return (
+            <button
+              key={id}
+              onClick={() => setLang(id)}
+              title={LOCALE_LONG[id]}
+              aria-label={LOCALE_LONG[id]}
+              aria-pressed={active}
+              className="cursor-pointer transition-all"
+              style={{
+                padding: "4px 8px",
+                borderRadius: 4,
+                background: active ? "rgba(232,184,75,0.14)" : "transparent",
+                opacity: active ? 1 : 0.55,
+                filter: active ? "none" : "grayscale(80%)",
+                display: "inline-flex",
+                alignItems: "center",
+                lineHeight: 1,
+              }}
+            >
+              <Flag />
+            </button>
+          );
+        })}
+      </div>
+    </>
   );
 }
