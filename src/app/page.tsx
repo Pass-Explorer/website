@@ -93,7 +93,7 @@ function Pillars() {
   } as const;
 
   return (
-    <section className="bg-night" style={{ padding: "96px 32px" }}>
+    <section className="bg-night px-5 py-16 sm:px-8 sm:py-20 md:py-24">
       <div className="mx-auto" style={{ maxWidth: 1100 }}>
         <p
           className="eyebrow text-center"
@@ -240,9 +240,8 @@ function HowItWorks() {
   return (
     <section
       id="how"
-      className="bg-night-mid"
+      className="bg-night-mid px-5 py-16 sm:px-8 sm:py-20 md:py-24"
       style={{
-        padding: "96px 32px",
         borderTop: "0.5px solid var(--line)",
         borderBottom: "0.5px solid var(--line)",
       }}
@@ -271,16 +270,17 @@ function HowItWorks() {
           {t("how_title")}
         </h2>
         <div className="grid gap-0 md:grid-cols-5">
-          {steps.map((s, i, arr) => (
+          {steps.map((s, i, arr) => {
+            const isLast = i === arr.length - 1;
+            return (
             <div
               key={s.n}
-              className="px-7 py-7"
-              style={{
-                borderRight:
-                  i < arr.length - 1
-                    ? "1px solid var(--line)"
-                    : "none",
-              }}
+              className={`px-5 py-6 sm:px-7 sm:py-7 ${
+                isLast
+                  ? ""
+                  : "border-b md:border-r md:border-b-0"
+              }`}
+              style={{ borderColor: "var(--line)" }}
             >
               <p
                 className="display"
@@ -314,7 +314,8 @@ function HowItWorks() {
                 {s.body}
               </p>
             </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
@@ -334,15 +335,14 @@ function Stats() {
   ];
   return (
     <section
-      className="bg-night"
+      className="bg-night px-5 py-14 sm:px-8 sm:py-20 md:px-12"
       style={{
-        padding: "80px 48px",
         borderTop: "1px solid var(--line)",
         borderBottom: "1px solid var(--line)",
       }}
     >
       <div
-        className="mx-auto grid gap-8 md:grid-cols-3 lg:grid-cols-5"
+        className="mx-auto grid grid-cols-2 gap-6 sm:gap-8 md:grid-cols-3 lg:grid-cols-5"
         style={{ maxWidth: 1240 }}
       >
         {items.map((s) => (
@@ -350,7 +350,7 @@ function Stats() {
             <p
               className="display tabular-nums whitespace-nowrap"
               style={{
-                fontSize: 56,
+                fontSize: "clamp(2.25rem, 8vw, 3.5rem)",
                 lineHeight: 1,
                 color: s.c,
               }}
@@ -381,8 +381,7 @@ function WaitlistSection() {
   return (
     <section
       id="waitlist"
-      className="relative overflow-hidden"
-      style={{ padding: "140px 48px" }}
+      className="relative overflow-hidden px-5 py-20 sm:px-8 sm:py-28 md:px-12 md:py-[140px]"
     >
       <div
         aria-hidden="true"
@@ -402,7 +401,7 @@ function WaitlistSection() {
         <h2
           className="display mx-auto"
           style={{
-            fontSize: "clamp(3rem, 8vw, 6rem)",
+            fontSize: "clamp(2.25rem, 8vw, 6rem)",
             lineHeight: 0.92,
             maxWidth: 720,
             margin: 0,
@@ -484,15 +483,14 @@ function Footer() {
 
   return (
     <footer
-      className="border-t"
+      className="border-t px-5 pb-8 pt-12 sm:px-8 sm:pb-10 sm:pt-14 md:px-12 md:pb-10 md:pt-[60px]"
       style={{
         background: "var(--night)",
         borderColor: "var(--line)",
-        padding: "60px 48px 40px",
       }}
     >
       <div className="mx-auto" style={{ maxWidth: 1240 }}>
-        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1fr_1fr]">
+        <div className="grid grid-cols-2 gap-8 sm:gap-10 md:grid-cols-3 lg:grid-cols-[1.5fr_1fr_1fr_1fr_1fr]">
           <div>
             <Wordmark size={18} />
             <p
@@ -548,12 +546,11 @@ function Footer() {
         </div>
 
         <div
-          className="flex items-center justify-between pt-6"
+          className="mt-10 flex flex-col items-start justify-between gap-2 pt-6 sm:mt-14 sm:flex-row sm:items-center sm:gap-0 md:mt-[60px]"
           style={{
             borderTop: "1px solid var(--line)",
             color: "var(--ink-quiet)",
             fontSize: 11,
-            marginTop: 60,
           }}
         >
           <span>{c("footer_copy")}</span>

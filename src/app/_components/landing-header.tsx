@@ -28,18 +28,17 @@ export function LandingHeader() {
 
   return (
     <header
-      className="sticky top-0 z-30 flex items-center justify-between border-b backdrop-blur-md"
+      className="sticky top-0 z-30 flex items-center justify-between gap-3 border-b px-5 py-4 backdrop-blur-md sm:gap-6 sm:px-8 md:gap-8 md:px-12 md:py-5"
       style={{
-        padding: "20px 48px",
         background: "rgba(8,8,16,0.6)",
         borderColor: "var(--line)",
       }}
     >
-      <Link href="/" aria-label="Pass Explorer home">
+      <Link href="/" aria-label="Pass Explorer home" className="shrink-0">
         <Wordmark size={16} />
       </Link>
 
-      <div className="flex items-center gap-8">
+      <div className="flex shrink-0 items-center gap-3 sm:gap-5 md:gap-8">
         <nav className="hidden items-center gap-8 md:flex">
           {[
             { label: t("nav_festivals"),    href: "/festivals" },
@@ -65,22 +64,19 @@ export function LandingHeader() {
           hostSub={t("cta_host_sub")}
         />
 
-        {/* Join waitlist gold — primary CTA, pre-launch focus */}
+        {/* Join waitlist gold — primary CTA, pre-launch focus.
+            Mobile shows compact "Lista" (PT) / "Waitlist" (EN), desktop shows full label. */}
         <a
           href="#waitlist"
-          className="tap inline-flex items-center gap-2 font-semibold uppercase"
+          className="tap inline-flex h-9 shrink-0 items-center gap-1.5 whitespace-nowrap rounded-md px-3 text-[11px] font-semibold uppercase tracking-wider md:h-9 md:gap-2 md:px-4 md:text-xs"
           style={{
-            height: 38,
-            padding: "0 18px",
             background: "var(--gold)",
             color: "var(--night)",
-            borderRadius: 6,
-            fontSize: 12,
-            letterSpacing: "0.04em",
           }}
         >
-          {t("cta_join_waitlist")}
-          <Icon name="arrow" size={14} />
+          <span className="hidden sm:inline">{t("cta_join_waitlist")}</span>
+          <span className="sm:hidden">{t("cta_waitlist_short")}</span>
+          <Icon name="arrow" size={12} />
         </a>
 
         <LangSelector />

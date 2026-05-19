@@ -71,14 +71,14 @@ export function WaitlistForm() {
     >
       <input
         type="email"
+        name="email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         placeholder={t("waitlist_input")}
         required
         disabled={status === "submitting"}
-        className="flex-1 outline-none"
+        className="h-14 w-full outline-none sm:flex-1"
         style={{
-          height: 56,
           padding: "0 18px",
           background: "var(--night-card)",
           border: "1px solid var(--line-strong)",

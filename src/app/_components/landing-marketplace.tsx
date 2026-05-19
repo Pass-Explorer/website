@@ -103,8 +103,7 @@ export function LandingMarketplacePreview() {
   const t = useT(landingDict);
   return (
     <section
-      className="bg-night overflow-hidden"
-      style={{ padding: "120px 48px" }}
+      className="bg-night overflow-hidden px-5 py-16 sm:px-8 sm:py-20 md:px-12 md:py-28 lg:py-[120px]"
     >
       <div className="mx-auto" style={{ maxWidth: 1240 }}>
         <p

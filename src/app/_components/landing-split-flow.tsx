@@ -17,8 +17,7 @@ export function LandingSplitFlow() {
   const t = useT(landingDict);
   return (
     <section
-      className="bg-night relative overflow-hidden"
-      style={{ padding: "120px 24px" }}
+      className="bg-night relative overflow-hidden px-5 py-16 sm:px-8 sm:py-20 md:py-28 lg:py-[120px]"
     >
       {/* Backdrop wash */}
       <div
@@ -34,7 +33,7 @@ export function LandingSplitFlow() {
         className="relative mx-auto"
         style={{ maxWidth: 1240 }}
       >
-        <div className="mb-16 flex flex-wrap items-end justify-between gap-6">
+        <div className="mb-10 flex flex-wrap items-end justify-between gap-6 sm:mb-12 md:mb-16">
           <div>
             <p
               className="eyebrow mb-4"
@@ -45,7 +44,7 @@ export function LandingSplitFlow() {
             <h2
               className="display max-w-2xl"
               style={{
-                fontSize: "clamp(2.5rem, 5vw, 4rem)",
+                fontSize: "clamp(2rem, 5vw, 4rem)",
                 lineHeight: 0.95,
                 margin: 0,
               }}

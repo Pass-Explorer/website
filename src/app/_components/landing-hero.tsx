@@ -20,10 +20,9 @@ export function LandingHero() {
   const t = useT(landingDict);
   return (
     <section
-      className="relative overflow-hidden"
+      className="relative overflow-hidden px-5 py-14 sm:px-8 sm:py-20 md:px-12 md:py-24 lg:py-[100px]"
       style={{
         minHeight: "min(100vh, 820px)",
-        padding: "80px 24px 100px",
       }}
     >
       {/* Video background. full-bleed, native resolution sweet spot */}
@@ -101,21 +100,17 @@ export function LandingHero() {
         <div>
           {/* Tag */}
           <div
-            className="mb-7 inline-flex items-center gap-2"
+            className="mb-7 inline-flex items-center gap-2 rounded-full px-3 py-1.5 sm:px-3.5 sm:py-2"
             style={{
-              padding: "8px 14px",
               background: "rgba(232,184,75,0.1)",
               border: "1px solid rgba(232,184,75,0.3)",
-              borderRadius: 999,
             }}
           >
             <span className="pulse" style={{ color: "var(--gold)" }} />
             <span
-              className="font-bold uppercase"
+              className="font-bold uppercase whitespace-nowrap text-[10px] tracking-[0.08em] sm:text-[11px] sm:tracking-[0.14em]"
               style={{
-                fontSize: 11,
                 color: "var(--gold)",
-                letterSpacing: "0.14em",
               }}
             >
               {t("hero_tag")}
@@ -126,7 +121,7 @@ export function LandingHero() {
           <h1
             className="display m-0"
             style={{
-              fontSize: "clamp(3rem, 9vw, 6.5rem)",
+              fontSize: "clamp(2.5rem, 9vw, 6.5rem)",
               lineHeight: 0.92,
               letterSpacing: "0.005em",
             }}
@@ -209,7 +204,7 @@ export function LandingHero() {
 
           {/* Bullets */}
           <div
-            className="mt-9 flex flex-wrap gap-6"
+            className="mt-9 flex flex-wrap gap-x-5 gap-y-2 sm:gap-6"
             style={{ color: "var(--ink-muted)", fontSize: 11 }}
           >
             <span>{t("hero_b_pix")}</span>

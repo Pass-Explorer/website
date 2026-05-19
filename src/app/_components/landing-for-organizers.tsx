@@ -19,12 +19,11 @@ export function LandingForOrganizers() {
   const t = useT(landingDict);
   return (
     <section
-      className="bg-night-mid relative overflow-hidden"
-      style={{ padding: "120px 48px" }}
+      className="bg-night-mid relative overflow-hidden px-5 py-16 sm:px-8 sm:py-20 md:px-12 md:py-28 lg:py-[120px]"
     >
       <div
-        className="mx-auto grid items-center gap-12 lg:grid-cols-[1fr_1.2fr]"
-        style={{ maxWidth: 1240, gap: 80 }}
+        className="mx-auto grid items-center gap-12 md:gap-16 lg:grid-cols-[1fr_1.2fr] lg:gap-20"
+        style={{ maxWidth: 1240 }}
       >
         {/* Left: pitch */}
         <div>
