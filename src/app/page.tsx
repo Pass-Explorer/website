@@ -19,8 +19,12 @@ import { WaitlistForm } from "./_components/waitlist-form";
  *
  * Client component because every section consumes the i18n context for
  * PT/EN switching. Metadata stays in the root layout. Structure:
- * Header → Hero → Pillars → SplitFlow → HowItWorks → Marketplace →
- * ForOrganizers → Stats → Waitlist → Footer.
+ * Header → Hero → Pillars → HowItWorks → Marketplace → ForOrganizers →
+ * SplitFlow → Stats → Waitlist → Footer.
+ *
+ * SplitFlow sits after ForOrganizers on purpose. It's the proof of the
+ * royalty mechanic, which lands better once the visitor has already
+ * been pitched the organizer story than as the third section a fan hits.
  */
 
 export default function HomePage() {
@@ -29,10 +33,10 @@ export default function HomePage() {
       <LandingHeader />
       <LandingHero />
       <Pillars />
-      <LandingSplitFlow />
       <HowItWorks />
       <LandingMarketplacePreview />
       <LandingForOrganizers />
+      <LandingSplitFlow />
       <Stats />
       <WaitlistSection />
       <Footer />
